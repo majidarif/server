@@ -11,12 +11,12 @@
 set(EXECUTABLE_NAME ad)
 
 include_directories(
-	${CMAKE_SOURCE_DIR}/../../../dep/StormLib/src
+	${CMAKE_SOURCE_DIR}/dep/StormLib/src
 	${CMAKE_CURRENT_SOURCE_DIR}/loadlib
 )
 
 link_directories(
-	${CMAKE_SOURCE_DIR}/../../../dep/StormLib/src
+	${CMAKE_SOURCE_DIR}/dep/StormLib/src
 	${CMAKE_CURRENT_SOURCE_DIR}/loadlib
 )
 
