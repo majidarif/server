@@ -8,10 +8,13 @@
 # WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-cmake_minimum_required (VERSION 2.8)
+set(EXECUTABLE_NAME vmap-extractor)
 
-project (MANGOS_IOMAP_EXTRACTOR)
+link_directories(
+    ${LINK_DIRECTORIES}
+    ${CMAKE_SOURCE_DIR}/dep/StormLib/src
+)
 
-LINK_DIRECTORIES( ${LINK_DIRECTORIES} ${CMAKE_SOURCE_DIR}/../../dep/libmpq/libmpq/.libs/ )
-add_executable(vmapextractor adtfile.cpp  dbcfile.cpp gameobject_extract.cpp model.cpp  mpq_libmpq.cpp  vmapexport.cpp  wdtfile.cpp  wmo.cpp)
-target_link_libraries(vmapextractor libmpq.a bz2 z)
+add_executable(${EXECUTABLE_NAME} adtfile.cpp dbcfile.cpp gameobject_extract.cpp model.cpp vmapexport.cpp wdtfile.cpp wmo.cpp)
+target_link_libraries(${EXECUTABLE_NAME} storm bz2 z)
+install(TARGETS ${EXECUTABLE_NAME} DESTINATION ${BIN_DIR})

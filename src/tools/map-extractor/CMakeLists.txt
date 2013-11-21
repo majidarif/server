@@ -8,7 +8,7 @@
 # WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-set(EXECUTABLE_NAME ad)
+set(EXECUTABLE_NAME map-extractor)
 
 include_directories(
 	${CMAKE_SOURCE_DIR}/dep/StormLib/src
