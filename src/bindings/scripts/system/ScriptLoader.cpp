@@ -7,14 +7,6 @@
 // battlegrounds
 extern void AddSC_battleground();
 
-// custom
-
-// examples
-extern void AddSC_example_creature();
-extern void AddSC_example_escort();
-extern void AddSC_example_gossip_codebox();
-extern void AddSC_example_misc();
-
 // world
 extern void AddSC_areatrigger_scripts();
 extern void AddSC_bosses_emerald_dragons();
@@ -538,14 +530,6 @@ void AddScripts()
 {
     // battlegrounds
     AddSC_battleground();
-
-    // custom
-
-    // examples
-    AddSC_example_creature();
-    AddSC_example_escort();
-    AddSC_example_gossip_codebox();
-    AddSC_example_misc();
 
     // world
     AddSC_areatrigger_scripts();
