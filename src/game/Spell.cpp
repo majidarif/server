@@ -6867,6 +6867,35 @@ SpellCastResult Spell::CheckItems()
                     }
 
                     Powers power = Powers(spellEffect->EffectMiscValue);
+                    uint8 targetClass = m_targets.getUnitTarget()->getClass();
+                    /* Mana */
+                    if(power == POWER_MANA)
+                    {
+                        if (targetClass == CLASS_WARRIOR || targetClass == CLASS_ROGUE || targetClass == CLASS_DEATH_KNIGHT)
+                        {
+                            failReason = SPELL_FAILED_BAD_TARGETS;
+                            continue;
+                        }
+                    }
+                    /* Rage */
+                    else if (power == POWER_RAGE)
+                    {
+                        if(targetClass != CLASS_WARRIOR && targetClass != CLASS_DRUID)
+                        {
+                            failReason = SPELL_FAILED_BAD_TARGETS;
+                            continue;
+                        }
+                    }
+                    /* Energy */
+                    else if (power == POWER_ENERGY)
+                    {
+                        if(targetClass != CLASS_ROGUE && targetClass != CLASS_DRUID)
+                        {
+                            failReason = SPELL_FAILED_BAD_TARGETS;
+                            continue;
+                        }
+                    }
+
                     if (m_targets.getUnitTarget()->GetPower(power) == m_targets.getUnitTarget()->GetMaxPower(power))
                     {
                         failReason = SPELL_FAILED_ALREADY_AT_FULL_POWER;
