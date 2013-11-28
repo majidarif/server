@@ -29,8 +29,6 @@ set(EXECUTABLE_NAME mangosd)
 set(EXECUTABLE_SRCS
     CliRunnable.cpp
     CliRunnable.h
-    MaNGOSsoap.cpp
-    MaNGOSsoap.h
     Main.cpp
     Master.cpp
     Master.h
@@ -38,11 +36,11 @@ set(EXECUTABLE_SRCS
     RASocket.h
     WorldRunnable.cpp
     WorldRunnable.h
-    soapC.cpp
-    soapH.h
-    soapServer.cpp
-    soapStub.h
-   )
+)
+
+if(USE_SOAP)
+  set(EXECUTABLE_SRCS ${EXECUTABLE_SRCS} MaNGOSsoap.cpp MaNGOSsoap.h soapC.cpp soapH.h soapServer.cpp soapStub.h)
+endif()
 
 if(WIN32)
   # add resource file to windows build
@@ -51,7 +49,6 @@ endif()
 
 include_directories(
   ${CMAKE_SOURCE_DIR}/src/shared
-  ${CMAKE_SOURCE_DIR}/dep/include/gsoap
   ${CMAKE_SOURCE_DIR}/src/framework
   ${CMAKE_SOURCE_DIR}/src/game
   ${CMAKE_BINARY_DIR}
@@ -60,6 +57,10 @@ include_directories(
   ${MYSQL_INCLUDE_DIR}
   ${OPENSSL_INCLUDE_DIR}
 )
+
+if(USE_SOAP)
+  include_directories(${CMAKE_SOURCE_DIR}/dep/include/gsoap)
+endif()
 
 add_executable(${EXECUTABLE_NAME}
   ${EXECUTABLE_SRCS}
@@ -76,9 +77,12 @@ target_link_libraries(${EXECUTABLE_NAME}
   shared
   framework
   g3dlite
-  gsoap
   ${ACE_LIBRARIES}
 )
+
+if(USE_SOAP)
+  target_link_libraries(${EXECUTABLE_NAME} gsoap)
+endif()
 
 if(WIN32)
   target_link_libraries(${EXECUTABLE_NAME}

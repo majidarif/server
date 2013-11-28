@@ -44,8 +44,9 @@ if(PCHSupport_FOUND AND WIN32) # TODO: why only enable it on windows by default?
 else()
   option(PCH                "Use precompiled headers"               OFF)
 endif()
+option(USE_SOAP             "With SOAP"                             OFF)
+
 # TODO: options that should be checked/created:
-#option(SOAP                 "With SOAP"                             OFF)
 #option(CLI                  "With CLI"                              ON)
 #option(RA                   "With Remote Access"                    OFF)
 #option(SQL                  "Copy SQL files"                        OFF)
@@ -232,6 +233,13 @@ if(DEFINED INCLUDE_BINDINGS_DIR AND INCLUDE_BINDINGS_DIR)
   message(STATUS "Build script library  : Yes (using ${INCLUDE_BINDINGS_DIR})")
 else()
   message(STATUS "Build script library  : No")
+endif()
+
+if(USE_SOAP)
+  message(STATUS "Build with SOAP       : Yes")
+  add_definitions(-DENABLE_SOAP)
+else()
+  message(STATUS "Build with SOAP       : No (default)")
 endif()
 
 # if(CLI)
