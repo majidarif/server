@@ -24,13 +24,23 @@
 const char* szVMAPMagic = "VMAP_4.0";
 
 //=======================================================
+void Usage(char* prg)
+{
+    printf("Usage: %s [OPTION]\n\n", prg);
+    printf("Assemble vmaps from extracted client model information.\n");
+    printf("\n");
+    printf("Example:\n");
+    printf("- provide source and target path:\n");
+    printf("  %s Buildings vmaps\n", prg);
+}
+
 int main(int argc, char* argv[])
 {
     printf("mangos-three vmap (version %s) assembler\n\n", szVMAPMagic);
 
     if (argc != 3)
     {
-        std::cout << "usage: " << argv[0] << " <raw data dir> <vmap dest dir>" << std::endl;
+        Usage(argv[0]);
         return 1;
     }
 

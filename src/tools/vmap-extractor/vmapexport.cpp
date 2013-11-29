@@ -482,6 +482,22 @@ bool scan_patches(char* scanmatch, std::vector<std::string>& pArchiveNames)
     return(true);
 }
 
+void Usage(char* prg)
+{
+    printf("Usage: %s [OPTION]\n\n", prg);
+    printf("Extract client database fiels and generate map files.\n");
+    printf("   -h, --help            show the usage\n");
+    printf("   -d, --data <path>     search path for game client archives\n");
+    printf("   -s, --small           extract smaller vmaps by optimizing data. Reduces\n");
+    printf("                         size by ~ 500MB\n");
+    printf("   -l, --large           extract larger vmaps with full data. Increases\n");
+    printf("                         size by ~ 500MB\n");
+    printf("\n");
+    printf("Example:\n");
+    printf("- use data path and create larger vmaps:\n");
+    printf("  %s -l -d \"c:\\games\\game\"\n", prg);
+}
+
 bool processArgv(int argc, char** argv)
 {
     printf("mangos-three vmap (version %s) extractor\n\n", szRawVMAPMagic);
@@ -489,40 +505,40 @@ bool processArgv(int argc, char** argv)
     bool result = true;
     bool hasInputPathParam = false;
     bool preciseVectorData = false;
-
+    char* param = NULL;
     for (int i = 1; i < argc; ++i)
     {
-        if (strcmp("-s", argv[i]) == 0)
-        {
-            preciseVectorData = false;
-        }
-        else if (strcmp("-d", argv[i]) == 0)
-        {
-            if ((i + 1) < argc)
-            {
-                hasInputPathParam = true;
-                strcpy(input_path, argv[i + 1]);
-                if (input_path[strlen(input_path) - 1] != '\\' || input_path[strlen(input_path) - 1] != '/')
-                    strcat(input_path, "/");
-                ++i;
-            }
-            else
-            {
-                result = false;
-            }
-        }
-        else if (strcmp("-?", argv[1]) == 0)
+        if (strcmp(argv[i], "-h") == 0 || strcmp(argv[i], "--help") == 0 )
         {
             result = false;
+            break;
         }
-        else if (strcmp("-l", argv[i]) == 0)
+        else if (strcmp(argv[i], "-s") == 0 || strcmp(argv[i], "--small") == 0 )
         {
+            result = true;
+            preciseVectorData = false;
+        }
+        else if (strcmp(argv[i], "-l") == 0 || strcmp(argv[i], "--large") == 0 )
+        {
+            result = true;
             preciseVectorData = true;
         }
-        else if (strcmp("-b", argv[i]) == 0)
+        else if (strcmp(argv[i], "-d") == 0 || strcmp(argv[i], "--data") == 0 )
         {
-            if (i + 1 < argc)                            // all ok
-                CONF_TargetBuild = atoi(argv[i++ + 1]);
+            param = argv[++i];
+            if (!param)
+            {
+                result = false;
+                break;
+            }
+
+            result = true;
+            hasInputPathParam = true;
+            strcpy(input_path, param);
+            if (input_path[strlen(input_path) - 1] != '\\' || input_path[strlen(input_path) - 1] != '/')
+            {
+                strcat(input_path, "/");
+            }
         }
         else
         {
@@ -530,20 +546,11 @@ bool processArgv(int argc, char** argv)
             break;
         }
     }
+
     if (!result)
     {
-        printf("Extract for %s.\n", szRawVMAPMagic);
-        printf("%s [-?][-s][-l][-d <path>]\n", argv[0]);
-        printf("   -s : (default) small size (data size optimization), ~500MB less vmap data.\n");
-        printf("   -l : large size, ~500MB more vmap data. (might contain more details)\n");
-        printf("   -d <path>: Path to the vector data source folder.\n");
-        printf("   -b : target build (default %u)", CONF_TargetBuild);
-        printf("   -? : This message.\n");
+        Usage(argv[0]);
     }
-
-    if (!hasInputPathParam)
-        getGamePath();
-
     return result;
 }
 
@@ -559,6 +566,8 @@ bool processArgv(int argc, char** argv)
 
 int main(int argc, char** argv)
 {
+    printf("mangos-three vmap (version %s) extractor\n\n", szRawVMAPMagic);
+
     bool success = true;
 
     // Use command line arguments, when some
