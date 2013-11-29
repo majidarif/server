@@ -50,3 +50,8 @@ add_subdirectory(realmd)
 #-----------------------------------------------------------------------------
 # Build the mangos-three world server
 add_subdirectory(mangosd)
+
+
+#-----------------------------------------------------------------------------
+# Build the mangos-three script library
+add_subdirectory(bindings)

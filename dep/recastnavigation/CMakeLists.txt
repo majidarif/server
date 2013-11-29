@@ -1,5 +1,5 @@
 # mangos-three is a full featured server for World of Warcraft in its cataclysm
-# version, supporting clients for patch 4.3.4
+# version, supporting clients for patch 4.3.4.
 #
 # Copyright (C) 2005-2013 MaNGOS project <http://getmangos.com>
 #
@@ -27,13 +27,14 @@
 
 #-----------------------------------------------------------------------------
 # Platform specifics
-IF(WIN32 AND MSVC)
-    OPTION(USE_MSVC_FAST_FLOATINGPOINT "Use MSVC /fp:fast option" ON)
-    IF(USE_MSVC_FAST_FLOATINGPOINT)
-        ADD_DEFINITIONS(/fp:fast)
-    ENDIF(USE_MSVC_FAST_FLOATINGPOINT)
-    ADD_DEFINITIONS(/D _CRT_SECURE_NO_WARNINGS)
-ENDIF()
+#-----------------------------------------------------------------------------
+if(WIN32 AND MSVC)
+    option(USE_MSVC_FAST_FLOATINGPOINT "Use MSVC /fp:fast option" ON)
+    if(USE_MSVC_FAST_FLOATINGPOINT)
+        add_definitions(/fp:fast)
+    endif(USE_MSVC_FAST_FLOATINGPOINT)
+    add_definitions(/D _CRT_SECURE_NO_WARNINGS)
+endif()
 
 #-----------------------------------------------------------------------------
 # Add sources
@@ -42,4 +43,6 @@ add_subdirectory(Detour)
 # add_subdirectory(DetourCrowd)
 # add_subdirectory(DetourTileCache)
 add_subdirectory(Recast)
-# add_subdirectory(RecastDemo)
+if(WITH_RECAST_DEMO)
+    # add_subdirectory(RecastDemo)
+endif()
