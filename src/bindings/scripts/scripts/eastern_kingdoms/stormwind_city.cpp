@@ -30,7 +30,7 @@ npc_reginald_windsor
 EndContentData */
 
 #include "precompiled.h"
-#include "../world/world_map_scripts.h"
+#include "scripts/world/world_map_scripts.h"
 #include "escort_ai.h"
 
 /*######
