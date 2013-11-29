@@ -21,9 +21,13 @@
 
 #include "TileAssembler.h"
 
+const char* szVMAPMagic = "VMAP_4.0";
+
 //=======================================================
 int main(int argc, char* argv[])
 {
+    printf("mangos-three vmap (version %s) assembler\n\n", szVMAPMagic);
+
     if (argc != 3)
     {
         std::cout << "usage: " << argv[0] << " <raw data dir> <vmap dest dir>" << std::endl;
