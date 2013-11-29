@@ -16,10 +16,12 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#define _CRT_SECURE_NO_DEPRECATE
-
 #include "dbcfile.h"
+#undef min
+#undef max
 #include "loadlib/loadlib.h"
+
+#include <cstdio>
 
 DBCFile::DBCFile(const std::string& filename):
     filename(filename),
@@ -37,7 +39,17 @@ bool DBCFile::open()
     //if (!OpenNewestFile(filename.c_str(), &fileHandle))
     //    return false;
 
-    char header[4];
+    // Need some error checking, otherwise an unhandled exception error occurs
+    // if people screw with the data path.
+    if (f.isEof() == true)
+    {
+        f.close();
+        data = NULL;
+        printf("Could not open DBCFile %s.\n", filename.c_str());
+        return false;
+    }
+
+    unsigned char header[4];
     unsigned int na, nb, es, ss;
 
     if (!SFileReadFile(fileHandle, header, 4, NULL, NULL))              // Magic header

@@ -29,10 +29,9 @@
 
 #ifdef WIN32
 #include <winsock2.h>
-#include <mysql/mysql.h>
-#else
-#include <mysql.h>
 #endif
+
+#include <mysql.h>
 
 // MySQL prepared statement class
 class MANGOS_DLL_SPEC MySqlPreparedStatement : public SqlPreparedStatement

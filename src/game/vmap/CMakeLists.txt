@@ -1,7 +1,7 @@
 # mangos-three is a full featured server for World of Warcraft in its cataclysm
-# version, supporting clients for patch 4.3.4
+# version, supporting clients for patch 4.3.4.
 #
-# Copyright (C) 2005-2013 MaNGOS project <http://getmangos.com>
+# Copyright (C) 2005-2013  MaNGOS project <http://getmangos.com>
 #
 # ***** BEGIN GPL LICENSE BLOCK *****
 #
@@ -12,24 +12,43 @@
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #
 # ***** END GPL LICENSE BLOCK *****
 #
 # World of Warcraft, and all World of Warcraft or Warcraft art, images,
 # and lore are copyrighted by Blizzard Entertainment, Inc.
 
-#-----------------------------------------------------------------------------
-# Build the g3d lite library
-add_subdirectory(g3dlite)
+include(MacroMangosSourceGroup)
 
 #-----------------------------------------------------------------------------
-# Build the gsoap library
-if(WITH_MOD_SOAP)
-    add_subdirectory(gsoap)
-endif()
+# Define the vmap library
+file(GLOB sources *.cpp)
+file(GLOB headers *.h)
+
+set(vmap_LIB_SRCS ${sources} ${headers})
+
+mangos_source_group(${vmap_LIB_SRCS})
+
+include_directories(
+    ${ACE_INCLUDE_DIRS}
+    ${MYSQL_INCLUDE_DIR}
+    ${CMAKE_SOURCE_DIR}/dep/include/g3dlite/
+    ${CMAKE_SOURCE_DIR}/src/framework/
+    ${CMAKE_SOURCE_DIR}/src/shared/
+    ${CMAKE_SOURCE_DIR}/src/game/
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_BINARY_DIR}
+    ${CMAKE_BINARY_DIR}
+    ${CMAKE_BINARY_DIR}/src/shared/
+)
+
+#-----------------------------------------------------------------------------
+# Build the vmap library
+add_library(mangos-vmap STATIC ${vmap_LIB_SRCS})
+target_link_libraries(mangos-vmap mangos-shared mangos-framework g3dlite ${ACE_LIBRARIES} ${MYSQL_LIBRARIES})

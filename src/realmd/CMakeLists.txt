@@ -1,7 +1,7 @@
-# mangos-three is a full featured server for World of Warcraft in its cataclysm
-# version, supporting clients for patch 4.3.4
+# mangos-three is a full featured server for World of Warcraft in its vanilla
+# version, supporting clients for patch 4.3.4.
 #
-# Copyright (C) 2005-2013 MaNGOS project <http://getmangos.com>
+# Copyright (C) 2005-2013  MaNGOS project <http://getmangos.com>
 #
 # ***** BEGIN GPL LICENSE BLOCK *****
 #
@@ -12,93 +12,50 @@
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #
 # ***** END GPL LICENSE BLOCK *****
 #
 # World of Warcraft, and all World of Warcraft or Warcraft art, images,
 # and lore are copyrighted by Blizzard Entertainment, Inc.
 
-set(EXECUTABLE_NAME realmd)
+include(MacroMangosSourceGroup)
 
-set(EXECUTABLE_SRCS
-    AuthCodes.h
-    AuthSocket.cpp
-    AuthSocket.h
-    BufferedSocket.cpp
-    BufferedSocket.h
-    Main.cpp
-    PatchHandler.cpp
-    PatchHandler.h
-    RealmList.cpp
-    RealmList.h
-   )
+#-----------------------------------------------------------------------------
+# Define the realmd application
+file(GLOB sources *.cpp)
+file(GLOB headers *.h)
 
-if(WIN32)
-  # add resource file to windows build
-  set(EXECUTABLE_SRCS ${EXECUTABLE_SRCS} realmd.rc)
-endif()
+set(realmd_LIB_SRCS ${sources} ${headers})
+
+mangos_source_group(${realmd_LIB_SRCS})
 
 include_directories(
-  ${CMAKE_SOURCE_DIR}/src/shared
-  ${CMAKE_SOURCE_DIR}/src/framework
-  ${CMAKE_BINARY_DIR}
-  ${CMAKE_BINARY_DIR}/src/shared
-  ${MYSQL_INCLUDE_DIR}
-  ${ACE_INCLUDE_DIR}
+    ${ACE_INCLUDE_DIRS}
+    ${MYSQL_INCLUDE_DIR}
+    ${OPENSSL_INCLUDE_DIR}
+    ${CMAKE_SOURCE_DIR}/src/framework/
+    ${CMAKE_SOURCE_DIR}/src/shared/
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_BINARY_DIR}
+    ${CMAKE_BINARY_DIR}
+    ${CMAKE_BINARY_DIR}/src/shared/
 )
 
-add_executable(${EXECUTABLE_NAME}
-  ${EXECUTABLE_SRCS}
-)
+#-----------------------------------------------------------------------------
+# Build the realmd application
+add_executable(realmd ${realmd_LIB_SRCS})
+target_link_libraries(realmd mangos-framework mangos-shared ${ACE_LIBRARIES} ${MYSQL_LIBRARIES} ${OPENSSL_LIBRARIES})
+install(TARGETS realmd DESTINATION ${BIN_DIR})
 
-add_dependencies(${EXECUTABLE_NAME} revision.h)
+add_dependencies(realmd revision.h)
 
-target_link_libraries(${EXECUTABLE_NAME}
-  shared
-  framework
-  ${ACE_LIBRARIES}
-)
-
-if(WIN32)
-  target_link_libraries(${EXECUTABLE_NAME}
-    ${MYSQL_LIBRARY}
-    ${OPENSSL_LIBRARIES}
-  )
-  if(PLATFORM MATCHES X86)
-    target_link_libraries(${EXECUTABLE_NAME})
-  endif()
-endif()
-
-if(UNIX)
-  target_link_libraries(${EXECUTABLE_NAME}
-    ${MYSQL_LIBRARY}
-    ${OPENSSL_LIBRARIES}
-  )
-endif()
-
-set(EXECUTABLE_LINK_FLAGS "")
-
-if(UNIX)
-  set(EXECUTABLE_LINK_FLAGS "-pthread ${EXECUTABLE_LINK_FLAGS}")
-endif()
-
-if(APPLE)
-  set(EXECUTABLE_LINK_FLAGS "-framework Carbon ${EXECUTABLE_LINK_FLAGS}")
-endif()
-
-set_target_properties(${EXECUTABLE_NAME} PROPERTIES LINK_FLAGS
-  "${EXECUTABLE_LINK_FLAGS}"
-)
-
-install(TARGETS ${EXECUTABLE_NAME} DESTINATION ${BIN_DIR})
-install(FILES realmd.conf.dist.in DESTINATION ${CONF_DIR} RENAME realmd.conf.dist)
-
-if(WIN32 AND MSVC)
-  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/\${BUILD_TYPE}/${EXECUTABLE_NAME}.pdb DESTINATION ${BIN_DIR} CONFIGURATIONS Debug)
-endif()
+#-----------------------------------------------------------------------------
+# Build and install the realmd configuration
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/realmd.conf.dist.cmake ${CMAKE_CURRENT_BINARY_DIR}/realmd.conf.dist)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/realmd.conf.dist DESTINATION ${CONF_DIR})

@@ -25,19 +25,28 @@
 # and lore are copyrighted by Blizzard Entertainment, Inc.
 
 
-# Needs to link against mangos_worldd.lib
-if(WIN32)
-  link_directories(
-    ${CMAKE_BINARY_DIR}/src/mangosd/${CMAKE_CFG_INTDIR}
-  )
-  include_directories(
-    ${CMAKE_SOURCE_DIR}/dep/include # For Win32
-  )
+#-----------------------------------------------------------------------------
+# Build the mangos-three framework library
+add_subdirectory(framework)
+
+#-----------------------------------------------------------------------------
+# Build the mangos-three shared library
+add_subdirectory(shared)
+
+#-----------------------------------------------------------------------------
+# Build command line tools
+if(WITH_MAP_TOOLS)
+    add_subdirectory(tools)
 endif()
 
-add_subdirectory(framework)
-add_subdirectory(shared)
-add_subdirectory(realmd)
+#-----------------------------------------------------------------------------
+# Build the mangos-three game library
 add_subdirectory(game)
+
+#-----------------------------------------------------------------------------
+# Build the mangos-three realm authentication server
+add_subdirectory(realmd)
+
+#-----------------------------------------------------------------------------
+# Build the mangos-three world server
 add_subdirectory(mangosd)
-add_subdirectory(bindings)
