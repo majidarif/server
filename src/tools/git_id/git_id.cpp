@@ -54,8 +54,8 @@
 
 char remotes[NUM_REMOTES][MAX_REMOTE] =
 {
-    "git@github.com:mangoszero/server.git",
-    "git://github.com:mangoszero/server.git" // used for fetch if present
+    "git@github.com:mangosthree/server.git",
+    "git://github.com:mangosthree/server.git" // used for fetch if present
 };
 
 char remote_branch[MAX_REMOTE] = "master";
