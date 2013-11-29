@@ -26,7 +26,7 @@
 #endif
 
 #ifdef HAVE_ACE_STACK_TRACE_H
-#  include "ace/Stack_Trace.h"
+#  include <ace/Stack_Trace.h>
 #endif
 
 #ifdef HAVE_ACE_STACK_TRACE_H

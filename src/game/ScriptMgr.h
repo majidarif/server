@@ -23,7 +23,7 @@
 #include "Policies/Singleton.h"
 #include "ObjectGuid.h"
 #include "DBCEnums.h"
-#include "ace/Atomic_Op.h"
+#include <ace/Atomic_Op.h>
 
 struct AreaTriggerEntry;
 struct SpellEntry;
