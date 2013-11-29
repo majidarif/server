@@ -3,7 +3,7 @@ mangos-three, a World of Warcraft server for cataclysm WoW  [![Build status](htt
 *mangos-three* is open source, built in [C++][7], fast, runs on multiple platforms,
 can store game data in [MySQL][40] and [PostgreSQL][42]. It has optional support
 for SOAP, and aims to be 100% compatible with [World of Warcraft][2] in its
-vanilla versions, namely [patch 4.3.4][5] and [patch 1.12.2][6].
+cataclysm versions, namely [patch 4.3.4][5].
 
 If you like the first incarnation of [World of Warcraft][2], and still fancy
 [cataclysm WoW][4], you should try *mangos-three*. We provide an authentication
@@ -132,11 +132,10 @@ respects for all of the code used other than [OpenSSL][48].
       may also relate to the experimental state of the port.
 
 [1]: http://blizzard.com/ "Blizzard Entertainment Inc. · we love you!"
-[2]: http://blizzard.com/games/wow/ "World of Warcraft · Classic / Vanilla"
-[3]: http://wowpedia.org/Beta#World_of_Warcraft "World of Warcraft - Classic Beta"
-[4]: http://www.wowpedia.org/Patch_1.12.0 "cataclysm WoW · Patch 1.12.0 release notes"
-[5]: http://www.wowpedia.org/Patch_1.12.1 "cataclysm WoW · patch 4.3.4 release notes"
-[6]: http://www.wowpedia.org/Patch_1.12.2 "cataclysm WoW · Patch 1.12.2 release notes"
+[2]: http://blizzard.com/games/wow/ "World of Warcraft · Cataclysm"
+[3]: http://wowpedia.org/Beta#Cataclysm "World of Warcraft - Classic Beta"
+[4]: http://wowpedia.org/Patch_4.3.4 · Patch 4.3.4 release notes"
+
 [7]: http://www.cppreference.com/ "C / C++ reference"
 
 [10]: http://getmangos.com/ "mangos · project site"
