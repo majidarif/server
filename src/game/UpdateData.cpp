@@ -16,6 +16,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+#include <zlib.h>
 #include "Common.h"
 #include "UpdateData.h"
 #include "ByteBuffer.h"
@@ -24,7 +25,6 @@
 #include "Opcodes.h"
 #include "World.h"
 #include "ObjectGuid.h"
-#include <zlib/zlib.h>
 
 UpdateData::UpdateData(uint16 map) : m_blockCount(0), m_map(map)
 {

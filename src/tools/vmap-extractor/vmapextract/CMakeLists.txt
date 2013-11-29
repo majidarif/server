@@ -32,5 +32,5 @@ link_directories(
 )
 
 add_executable(${EXECUTABLE_NAME} adtfile.cpp dbcfile.cpp gameobject_extract.cpp model.cpp vmapexport.cpp wdtfile.cpp wmo.cpp)
-target_link_libraries(${EXECUTABLE_NAME} storm bz2 z)
+target_link_libraries(${EXECUTABLE_NAME} storm ${BZIP2_LIBRARIES} ${ZLIB_LIBRARIES})
 install(TARGETS ${EXECUTABLE_NAME} DESTINATION ${BIN_DIR})
