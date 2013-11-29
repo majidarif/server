@@ -136,7 +136,6 @@ option(WITH_POSTGRESQL      "Enable PostgreSQL database backend"                
 # mangos-three language bindings
 option(WITH_MOD_LUA         "Enable Lua scripting (requires Lua 5.1"                                        OFF)
 option(WITH_MOD_SCRIPTDEV2  "Enable the scripting library"                                                  OFF)
-mark_as_advanced(WITH_MOD_LUA)
 
 # Modifiers
 option(WITH_MOD_SOAP        "Enable SOAP bindings (export data e.g. for a website)"                         OFF)
@@ -158,6 +157,9 @@ if(NOT ${CMAKE_BUILD_TYPE} STREQUAL "Debug" AND WITH_DEBUG_OUTPUT)
     message(FATAL_ERROR "It is not recommeded to build mangos-three with debug output in a non-development release.")
 endif()
 
+if(WITH_MOD_LUA AND WITH_MOD_SCRIPTDEV2)
+    message(FATAL_ERROR "Lua and ScriptDev2 can not be used in parallel. Disable Lua or ScriptDev2.")
+endif()
 #-----------------------------------------------------------------------------
 # Initialize un-cached vars, avoid unused warning
 # linux only, not cached
@@ -472,9 +474,9 @@ if(WITH_POSTGRESQL)
     find_package(PostgreSQL REQUIRED)
 endif(WITH_POSTGRESQL)
 
-if(WITH_LUA)
+if(WITH_MOD_LUA)
     find_package(Lua51 REQUIRED)
-endif(WITH_LUA)
+endif(WITH_MOD_LUA)
 
 #-----------------------------------------------------------------------------
 # Extra compile flags
