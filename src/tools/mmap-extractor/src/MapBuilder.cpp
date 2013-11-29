@@ -16,14 +16,14 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+#include <DetourNavMeshBuilder.h>
+#include <DetourCommon.h>
+
 #include "MMapCommon.h"
 #include "MapBuilder.h"
 
 #include "MapTree.h"
 #include "ModelInstance.h"
-
-#include "DetourNavMeshBuilder.h"
-#include "DetourCommon.h"
 
 using namespace VMAP;
 

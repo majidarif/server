@@ -38,7 +38,6 @@ set(CMAKE_MODULE_PATH
 option(DEBUG                "Debug mode"                            OFF)
 option(TBB_USE_EXTERNAL     "Use external TBB"                      OFF)
 option(USE_STD_MALLOC       "Use standard malloc instead of TBB"    OFF)
-option(ACE_USE_EXTERNAL     "Use external ACE"                      OFF)
 if(PCHSupport_FOUND AND WIN32) # TODO: why only enable it on windows by default?
   option(PCH                "Use precompiled headers"               ON)
 else()
@@ -64,7 +63,6 @@ message(
                             CMakeLists.txt
     TBB_USE_EXTERNAL        Use external TBB
     USE_STD_MALLOC          Use standard malloc instead of TBB
-    ACE_USE_EXTERNAL        Use external ACE
   To set an option simply type -D<OPTION>=<VALUE> after 'cmake <srcs>'.
   Also, you can specify the generator with -G. see 'cmake --help' for more details
   For example: cmake .. -DDEBUG=1 -DCMAKE_INSTALL_PREFIX=/opt/mangos"
@@ -103,7 +101,7 @@ find_package(Git)
 # check if the platform supports precomiled headers
 find_package(PCHSupport)
 
-# TODO: remove this (refactor ACE & TBB CMake code)
+# TODO: remove this (refactor TBB CMake code)
 # VS100 uses MSBuild.exe instead of devenv.com, so force it to use devenv.com
 if(WIN32 AND MSVC_VERSION MATCHES 1600)
   find_package(VisualStudio2010)
@@ -133,24 +131,14 @@ set(CMAKE_INSTALL_NAME_DIR ${LIBS_DIR})
 set(CMAKE_BUILD_WITH_INSTALL_RPATH OFF)
 
 # Find needed packages and if necessery abort if something important is missing
-unset(ACE_INCLUDE_DIR CACHE)
-unset(ACE_LIBRARIES CACHE)
-unset(ACE_LIBRARIES_DIR CACHE)
-unset(ACE_INCLUDE_DIR)
-unset(ACE_LIBRARIES)
-unset(ACE_LIBRARIES_DIR)
-if(ACE_USE_EXTERNAL)
-  find_package(ACE)
-  if(NOT ACE_FOUND)
-    message(FATAL_ERROR
-      "This project requires ACE installed when ACE_USE_EXTERNAL is set. Please download the ACE Micro Release Kit from http://download.dre.vanderbilt.edu/ and install it. If this script didn't find ACE and it was correctly installed please set ACE_ROOT to the correct path."
-    )
-  endif()
-  if(EXISTS ${ACE_INCLUDE_DIR}/ace/Stack_Trace.h)
-    set(HAVE_ACE_STACK_TRACE_H ON) # config.h.cmake
-  endif()
-else()
-  include(cmake/ImportACE.cmake)
+find_package(ACE)
+if(NOT ACE_FOUND)
+  message(FATAL_ERROR
+    "This project requires ACE installed. Please download the ACE Micro Release Kit version 6.0.8 from http://download.dre.vanderbilt.edu/ and install it. If this script didn't find ACE and it was correctly installed please set ACE_ROOT to the correct path."
+)
+endif()
+if(EXISTS ${ACE_INCLUDE_DIR}/ace/Stack_Trace.h)
+  set(HAVE_ACE_STACK_TRACE_H ON) # config.h.cmake
 endif()
 
 if(NOT USE_STD_MALLOC)
@@ -172,23 +160,10 @@ if(NOT USE_STD_MALLOC)
   endif()
 endif()
 
-# Win32 delivered packages
-if(WIN32)
-  set(MYSQL_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/dep/include/mysql)
-  set(MYSQL_LIBRARY ${CMAKE_SOURCE_DIR}/dep/lib/${DEP_ARCH}_release/libmySQL.lib)
-  set(MYSQL_DEBUG_LIBRARY ${CMAKE_SOURCE_DIR}/dep/lib/${DEP_ARCH}_debug/libmySQL.lib)
-  set(OPENSSL_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/dep/include/openssl)
-  set(OPENSSL_LIBRARIES ${CMAKE_SOURCE_DIR}/dep/lib/${DEP_ARCH}_release/libeay32.lib)
-  set(OPENSSL_DEBUG_LIBRARIES ${CMAKE_SOURCE_DIR}/dep/lib/${DEP_ARCH}_debug/libeay32.lib)
-  # zlib is build
-endif()
-
-# *nix-specific packages
-if(UNIX)
-  find_package(MySQL REQUIRED)
-  find_package(OpenSSL REQUIRED)
-  find_package(ZLIB REQUIRED)
-endif()
+find_package(OpenSSL REQUIRED)
+find_package(BZip2 REQUIRED)
+find_package(ZLIB REQUIRED)
+find_package(MySQL REQUIRED)
 
 # Add uninstall script and target
 configure_file(
@@ -339,38 +314,6 @@ add_custom_target("revision.h" ALL
   DEPENDS genrev
 )
 
-if(WIN32)
-  install(
-    FILES
-      ${CMAKE_SOURCE_DIR}/dep/lib/${DEP_ARCH}_release/libeay32.dll
-      ${CMAKE_SOURCE_DIR}/dep/lib/${DEP_ARCH}_release/libmySQL.dll
-    DESTINATION ${LIBS_DIR}
-    CONFIGURATIONS Release
-  )
-  install(
-    FILES
-      ${CMAKE_SOURCE_DIR}/dep/lib/${DEP_ARCH}_debug/libeay32.dll
-      ${CMAKE_SOURCE_DIR}/dep/lib/${DEP_ARCH}_debug/libmySQL.dll
-    DESTINATION ${LIBS_DIR}
-    CONFIGURATIONS Debug
-  )
-  if(PLATFORM MATCHES X86)
-    # Copy dll's Windows needs
-    install(
-      FILES
-        ${CMAKE_SOURCE_DIR}/dep/lib/win32_release/dbghelp.dll
-      DESTINATION ${LIBS_DIR}
-      CONFIGURATIONS Release
-    )
-    install(
-      FILES
-        ${CMAKE_SOURCE_DIR}/dep/lib/win32_debug/dbghelp.dll
-      DESTINATION ${LIBS_DIR}
-      CONFIGURATIONS Debug
-    )
-  endif()
-endif()
-
 if(XCODE)
   if(PLATFORM MATCHES X86)
     set(CMAKE_OSX_ARCHITECTURES i386)
@@ -381,7 +324,7 @@ endif()
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 
-add_subdirectory(dep) # TODO: add vmap extractor build support
+add_subdirectory(dep)
 
 # Add definitions for all build types
 # Don't place this above 'dep' subdirectory! Because of defines build will crash.
