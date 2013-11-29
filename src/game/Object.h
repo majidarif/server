@@ -241,6 +241,9 @@ class MANGOS_DLL_SPEC Object
         void SetFlag(uint16 index, uint32 newFlag);
         void RemoveFlag(uint16 index, uint32 oldFlag);
 
+        void SetPlayerSpecificFlag(uint16 index, uint32 newFlag, Player* plr);
+        void RemovePlayerSpecificFlag(uint16 index, uint32 newFlag, Player* plr);
+
         void ToggleFlag(uint16 index, uint32 flag)
         {
             if (HasFlag(index, flag))
@@ -386,6 +389,7 @@ class MANGOS_DLL_SPEC Object
         };
 
         std::vector<bool> m_changedValues;
+        std::map<uint32, uint32> m_plrSpecificFlags;
 
         uint16 m_valuesCount;
 

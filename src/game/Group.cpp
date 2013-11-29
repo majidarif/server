@@ -1077,7 +1077,10 @@ void Group::SendUpdate()
         if (GetMembersCount() - 1)
         {
             data << uint8(m_lootMethod);                    // loot method
-            data << m_looterGuid;                           // looter guid
+            if (m_lootMethod == MASTER_LOOT)
+                data << m_looterGuid;                       // looter guid
+            else
+                data << uint64(0);
             data << uint8(m_lootThreshold);                 // loot threshold
             data << uint8(m_dungeonDifficulty);             // Dungeon Difficulty
             data << uint8(m_raidDifficulty);                // Raid Difficulty

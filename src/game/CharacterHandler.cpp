@@ -852,6 +852,9 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder* holder)
     // Handle Login-Achievements (should be handled after loading)
     pCurrChar->GetAchievementMgr().UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_ON_LOGIN, 1);
 
+    // Used for looting 
+    pCurrChar->lastTimeLooted = time(NULL);
+
     delete holder;
 }
 

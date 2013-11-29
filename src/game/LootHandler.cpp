@@ -306,6 +306,17 @@ void WorldSession::HandleLootOpcode(WorldPacket& recv_data)
     if (!_player->isAlive())
         return;
 
+    /* Make sure player is allowed to loot before sending them loot data */
+    if (Creature* my_creature = _player->GetMap()->GetCreature(guid))
+    {
+        /* If the player is NOT allowed to loot */
+        if (!_player->isAllowedToLoot(my_creature))
+        {
+            _player->SendLootRelease(guid);
+            return;
+        }
+    }
+
     GetPlayer()->SendLoot(guid, LOOT_CORPSE);
 }
 
@@ -498,10 +509,12 @@ void WorldSession::DoLootRelease(ObjectGuid lguid)
                 if (group->GetLooterGuid() == player->GetObjectGuid())
                     group->UpdateLooterGuid(pCreature);
 
+            /* This sets the lootable flag again and updates the creature so others see the loot */
+            pCreature->PrepareBodyLootState();
+
             if (loot->isLooted() && !pCreature->isAlive())
             {
                 // for example skinning after normal loot
-                pCreature->PrepareBodyLootState();
                 pCreature->AllLootRemovedFromCorpse();
             }
             break;

@@ -2887,68 +2887,134 @@ void Player::InitStatsForLevel(bool reapplyMods)
         pet->SynchronizeLevelWithOwner();
 }
 
+struct spell_data
+{
+    uint16 spell_id; // Sent together with unk2 for a total of 4 bytes per spell
+    uint16 on_cooldown;     // zero every time
+};
+
+struct spell_cooldown_data
+{
+    uint16 spell_id;          // ID of spell on cooldown
+    uint16 item_id;           // ID of item on cooldown (can be 0)
+    uint16 spell_category;    // Category of spell on cooldown (but not the category that IS on cooldown, just the category the spell belongs to)
+    uint32 spell_cd_ms;       // Amount of time in ms spell is on cooldown for
+    uint32 cat_cd_ms;         // Amount of time in ms that category is on cooldown for
+};
+
+/* Used during Player::SendInitialPacketsBeforeAddToMap */
 void Player::SendInitialSpells()
 {
     time_t curTime = time(NULL);
     time_t infTime = curTime + infinityCooldownDelayCheck;
 
-    uint16 spellCount = 0;
+    /* * * * * * * * * * * * * * * * *
+     * * START OF PACKET STRUCTURE * *
+     * * * * * * * * * * * * * * * * */
+    uint8 unk1 = 0; // Unknown (always 0)
+    uint16 spell_count = 0; // Number of spells to send
 
-    WorldPacket data(SMSG_INITIAL_SPELLS, (1 + 2 + 4 * m_spells.size() + 2 + m_spellCooldowns.size() * (2 + 2 + 2 + 4 + 4)));
-    data << uint8(0);
+    std::vector<spell_data> spells_to_send;
+    uint16 spell_cooldown_count = m_spellCooldowns.size();
+    std::vector<spell_cooldown_data> cooldowns_to_send;
 
-    size_t countPos = data.wpos();
-    data << uint16(spellCount);                             // spell count placeholder
+    /* * * * * * * * * * * * * * * * *
+     * *  END OF PACKET STRUCTURE  * *
+     * * * * * * * * * * * * * * * * */
 
+    /* For each spell the player knows */                             // spell count placeholder
     for (PlayerSpellMap::const_iterator itr = m_spells.begin(); itr != m_spells.end(); ++itr)
     {
+        /* If the spell is marked as removed, don't send it */
         if (itr->second.state == PLAYERSPELL_REMOVED)
             continue;
 
         if (!itr->second.active || itr->second.disabled)
             continue;
 
-        data << uint32(itr->first);
-        data << uint16(0);                                  // it's not slot id
+        /* Insert spell into vector for insertion into packet */
+        spell_data spell;
+        spell.spell_id = uint16(itr->first);
+        spell.on_cooldown = 0; // This will be set to 0xeeee later if it is on cooldown
+        spells_to_send.push_back(spell);
 
-        spellCount += 1;
+        /* Increase spell counter by 1 (sent in packet) */
+        spell_count += 1;
     }
 
-    data.put<uint16>(countPos, spellCount);                 // write real count value
-
-    uint16 spellCooldowns = m_spellCooldowns.size();
-    data << uint16(spellCooldowns);
+    /* For each spell the player has on cooldown */
     for (SpellCooldowns::const_iterator itr = m_spellCooldowns.begin(); itr != m_spellCooldowns.end(); ++itr)
     {
+        /* If the spell doesn't exist in the spellbook, just ignore it */
         SpellEntry const* sEntry = sSpellStore.LookupEntry(itr->first);
         if (!sEntry)
             continue;
 
-        data << uint32(itr->first);
+        spell_cooldown_data cooldown;
+        cooldown.spell_id = uint16(itr->first);
+        cooldown.item_id = uint16(itr->second.itemid);
+        cooldown.spell_category = uint16(sEntry->Category);
 
-        data << uint32(itr->second.itemid);                 // cast item id
-        data << uint16(sEntry->GetCategory());              // spell category
-
-        // send infinity cooldown in special format
+        /* if the spell is on an infinite cooldown, send it in a special form
+         * ... I think */
         if (itr->second.end >= infTime)
         {
-            data << uint32(1);                              // cooldown
-            data << uint32(0x80000000);                     // category cooldown
+            cooldown.spell_cd_ms = uint32(1);               // Cooldown
+            cooldown.cat_cd_ms = uint32(0x80000000);        // Category
             continue;
         }
 
         time_t cooldown = itr->second.end > curTime ? (itr->second.end - curTime) * IN_MILLISECONDS : 0;
 
+        /* This code looks wrong...
+         * TODO: Research whether this is the correct way to send category cooldowns */
         if(sEntry->GetCategory())                           // may be wrong, but anyway better than nothing...
         {
-            data << uint32(0);                              // cooldown
-            data << uint32(cooldown);                       // category cooldown
+            cooldown.spell_cd_ms = uint32(0);               // Spell CD in ms
+            cooldown.cat_cd_ms = uint32(cooldown_time);     // Category CD in ms
         }
         else
         {
-            data << uint32(cooldown);                       // cooldown
-            data << uint32(0);                              // category cooldown
+            cooldown.spell_cd_ms = uint32(cooldown_time);   // Cooldown time
+            cooldown.cat_cd_ms = uint32(0);                 // Cooldown category
         }
+        cooldowns_to_send.push_back(cooldown);
+    }
+
+    /* Set cooldown value to 0xeeee for all spells on cooldown */
+    for (int i = 0; i < spells_to_send.size(); ++i)
+        for (int i2 = 0; i2 < cooldowns_to_send.size(); ++i2)
+            if (spells_to_send[i].spell_id == cooldowns_to_send[i2].spell_id)
+                { spells_to_send[i].on_cooldown = 0xeeee; }
+
+    /* Finally, build the packet and write the data to it */
+    WorldPacket data(SMSG_INITIAL_SPELLS,
+                     (1 +                              // always 0
+                      2 +                             // Number of spells we are sending
+                      4 * m_spells.size() +           // 4 bytes per spell. 2 bytes for spell ID, 2 bytes are unknown (sent as 0)
+                      2 +                             // Number of spells on cooldown
+                      // Size data below is added together and multiplied by m_spellCooldowns.size()
+                      m_spellCooldowns.size() * (2 +  // ID of spell on cooldown
+                              2 + // Item ID of spell on cooldown
+                              2 + // Category of spell on cooldown
+                              4 + // Cooldown (time)
+                              4   // Cooldown (category)
+                      )));
+    data << unk1;
+    data << spell_count;
+    for (int i = 0; i < spells_to_send.size(); ++i)
+    {
+        data << spells_to_send[i].spell_id;
+        data << spells_to_send[i].on_cooldown;
+    }
+    data << spell_cooldown_count;
+    for (int i = 0; i < cooldowns_to_send.size(); ++i)
+    {
+        data << cooldowns_to_send[i].spell_id;
+        data << cooldowns_to_send[i].item_id;
+        data << cooldowns_to_send[i].spell_category;
+        data << cooldowns_to_send[i].spell_cd_ms;
+        data << cooldowns_to_send[i].cat_cd_ms;
     }
 
     GetSession()->SendPacket(&data);
@@ -5974,14 +6040,21 @@ void Player::SendInitialActionButtons() const
 {
     DETAIL_LOG("Initializing Action Buttons for '%u' spec '%u'", GetGUIDLow(), m_activeSpec);
 
+    /* Initiate packet with size 4 bytes per action button */
     WorldPacket data(SMSG_ACTION_BUTTONS, 1 + (MAX_ACTION_BUTTONS * 4));
     ActionButtonList const& currentActionButtonList = m_actionButtons[m_activeSpec];
+    /* For each possible action button the player could have */
     for (uint8 button = 0; button < MAX_ACTION_BUTTONS; ++button)
     {
+        /* Try and get each action button the player could have */
         ActionButtonList::const_iterator itr = currentActionButtonList.find(button);
+
+        /* If the button is valid and not deleted */
         if (itr != currentActionButtonList.end() && itr->second.uState != ACTIONBUTTON_DELETED)
+            /* Send the data */
             data << uint32(itr->second.packedData);
         else
+            /* Nothing to send, so just send 0 */
             data << uint32(0);
     }
     data << uint8(1);                                       // talent spec amount (in packet)
@@ -6880,6 +6953,7 @@ void Player::UpdateZone(uint32 newZone, uint32 newArea)
     if (!zone)
         return;
 
+    /* If we're moving into a different zone */
     if (m_zoneUpdateId != newZone)
     {
         // handle outdoor pvp zones
@@ -8405,6 +8479,12 @@ void Player::SendLoot(ObjectGuid guid, LootType loot_type)
         case LOOT_FISHINGHOLE:  loot_type = LOOT_FISHING; break;
         default: break;
     }
+
+    /* Avoid "That is still being rolled for" bug
+     * This is a hackfix, but needs more work on loot system to fix properly */
+    for (int i = 0; i < loot->items.size(); ++i)
+        if (!loot->items[i].is_blocked && loot->items[i].is_underthreshold == false)
+            { loot->items[i].is_underthreshold = true; }
 
     // need know merged fishing/corpse loot type for achievements
     loot->loot_type = loot_type;
@@ -16278,30 +16358,149 @@ bool Player::LoadFromDB(ObjectGuid guid, SqlQueryHolder* holder)
     return true;
 }
 
-bool Player::isAllowedToLoot(Creature* creature)
+bool Player::isTappedByMeOrMyGroup(Creature* creature)
 {
-    // never tapped by any (mob solo kill)
+    /* Nobody tapped the monster (solo kill by another NPC) */
     if (!creature->HasFlag(UNIT_DYNAMIC_FLAGS, UNIT_DYNFLAG_TAPPED))
-        return false;
+        { return false; }
 
+    /* If there is a loot recipient, assign it to recipient */
     if (Player* recipient = creature->GetLootRecipient())
     {
-        if (recipient == this)
-            return true;
-
-        if (Group* otherGroup = recipient->GetGroup())
+        /* See if we're in a group */
+        if (Group* plr_group = recipient->GetGroup())
         {
-            Group* thisGroup = GetGroup();
-            if (!thisGroup)
-                return false;
+            /* Recipient is in a group... but is it ours? */
+            if (Group* my_group = GetGroup())
+            {
+                /* Check groups are the same */
+                if (plr_group != my_group)
+                    { return false; } // Cheater, deny loot
+            }
+            else
+                { return false; } // We're not in a group, probably cheater
 
-            return thisGroup == otherGroup;
+            /* We're in the looters group, so mob is tapped by us */
+            return true;
         }
-        return false;
+        /* We're not in a group, check to make sure we're the recipient (prevent cheaters) */
+        else if (recipient == this)
+            { return true; }
+    }
+    else
+        /* Don't know what happened to the recipient, probably disconnected
+         * Either way, it isn't us, so mark as tapped */
+        { return false; }
+
+    return false;
+}
+
+/* Checks to see if the current player can loot the creature specified in arg1
+ * Called from Object::BuildValuesUpdate */
+bool Player::isAllowedToLoot(Creature* creature)
+{
+    /* Nobody tapped the monster (solo kill by another NPC) */
+    if (!creature->HasFlag(UNIT_DYNAMIC_FLAGS, UNIT_DYNFLAG_TAPPED))
+        { return false; }
+
+    /* If we there is a loot recipient, assign it to recipient */
+    if (Player* recipient = creature->GetLootRecipient())
+    {
+        /* See if we're in a group */
+        if (Group* plr_group = recipient->GetGroup())
+        {
+            /* Recipient is in a group... but is it ours? */
+            if (Group* my_group = GetGroup())
+            {
+                /* Check groups are the same */
+                if (plr_group != my_group)
+                    { return false; } // Cheater, deny loot
+            }
+            else
+                { return false; } // We're not in a group, probably cheater
+
+            /* We're in a group, get the loot type */
+            if (LootMethod loot_type = plr_group->GetLootMethod())
+            {
+                switch (loot_type)
+                {
+                        /* Free for all, let everyone loot it */
+                    case FREE_FOR_ALL:
+                        return true;
+
+                        /* Returns true for master looter, otherwise falls through to checks below */
+                    case MASTER_LOOT:
+                        /* Validate the group's looter's ObjectGuid against our own */
+                        if (plr_group->GetLooterGuid() == GetObjectGuid())
+                            { return true; }
+
+                        /* These 3 systems all use the same kind of check to display loot,
+                           which is what we're doing here. Threshold checks are done elsewhere. */
+                    case GROUP_LOOT:
+                    case ROUND_ROBIN:
+                    case NEED_BEFORE_GREED:
+                        /* This is set to true after the looter (chosen below) has closed their loot window
+                         * If this is true, allow everyone else in the group to loot the corpse */
+                        if (creature->hasBeenLootedOnce)
+                            { return true; }
+                        /* If the assigned looter's GUID is equal to ours */
+                        else if (creature->assignedLooter == GetGUIDLow())
+                            { return true; }
+                        /* If the creature already has an assigned looter and that looter isn't us */
+                        else if (creature->assignedLooter != 0)
+                            { return false; }
+
+                        /* If we've reached here, there is only one exclusive, undecided looter */
+
+                        /* This is the player that will be given permission to loot */
+                        Player* final_looter = recipient;
+
+                        /* Iterate through the valid party members */
+                        Group::MemberSlotList slots = plr_group->GetMemberSlots();
+                        for (Group::MemberSlotList::iterator itr = slots.begin(); itr != slots.end(); ++itr)
+                        {
+                            /* Get the player data */
+                            if (Player* grp_plr = sObjectMgr.GetPlayer(itr->guid))
+                            {
+                                /* Player is disconnected */
+                                if (!grp_plr->IsInWorld())
+                                    { continue; }
+
+                                /* Check if the last time the player looted is less than the current final looter
+                                 * If the value is lower, it means it happened longer ago */
+                                if (final_looter->lastTimeLooted > grp_plr->lastTimeLooted)
+                                    { final_looter = grp_plr; }
+                            }
+                        }
+
+                        /* We have our looter, update their loot time */
+                        final_looter->lastTimeLooted = time(NULL);
+
+                        /* Update the creature with the looter that has been assigned to them */
+                        creature->assignedLooter = final_looter->GetGUIDLow();
+
+                        /* Finally, return if we are the assigned looter */
+                        uint32 flguid = final_looter->GetGUIDLow();
+                        uint32 myguid = GetGUIDLow();
+                        bool is_same = (flguid == myguid);
+                        return is_same;
+
+                        break;
+                        /* End of switch statement */
+                }
+            }
+            else
+                { return false; } // Something went wrong, avoid crash
+        }
+        /* We're not in a group, check to make sure we're the recipient (prevent cheaters) */
+        else if (recipient == this)
+            { return true; }
     }
     else
         // prevent other players from looting if the recipient got disconnected
-        return !creature->HasLootRecipient();
+        { return !creature->HasLootRecipient(); }
+
+    return false;
 }
 
 void Player::_LoadActions(QueryResult* result)
