@@ -361,7 +361,7 @@ void SpellCastTargets::ReadAdditionalData(WorldPacket& data, uint8& cast_flags)
 Spell::Spell(Unit* caster, SpellEntry const* info, bool triggered, ObjectGuid originalCasterGUID, SpellEntry const* triggeredBy)
 {
     MANGOS_ASSERT(caster != NULL && info != NULL);
-    MANGOS_ASSERT(info == sSpellStore.LookupEntry(info->Id) && "`info` must be pointer to sSpellStore element");
+    MANGOS_ASSERT(info == sSpellStore.LookupEntry(info->Id));   // `info` must be pointer to sSpellStore element
 
     if (info->SpellDifficultyId && caster->IsInWorld() && caster->GetMap()->IsDungeon())
     {
