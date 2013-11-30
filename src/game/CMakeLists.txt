@@ -79,6 +79,7 @@ include_directories(
 add_library(mangos-game STATIC ${game_LIB_SRCS})
 target_link_libraries(mangos-game mangos-auctionhouse-bot mangos-battleground mangos-outdoor-pvp mangos-movement mangos-vmap mangos-shared mangos-framework Detour g3dlite ${ACE_LIBRARIES} ${MYSQL_LIBRARIES} ${OPENSSL_LIBRARIES} ${ZLIB_LIBRARIES})
 
+
 if(WITH_MOD_LUA AND LUA51_FOUND)
     list(APPEND sources
         ${CMAKE_CURRENT_SOURCE_DIR}/luaengine/LuaEngine.cpp
@@ -93,6 +94,20 @@ if(WITH_MOD_LUA AND LUA51_FOUND)
     )
 elseif(WITH_MOD_SCRIPTDEV2)
     set(BUILD_PROPERTIES "-DWITH_MOD_SCRIPTDEV2" )
+    set_target_properties(mangos-game PROPERTIES COMPILE_FLAGS ${BUILD_PROPERTIES})
+endif()
+
+set(BUILD_PROPERTIES "")
+if(${CMAKE_BUILD_TYPE} MATCHES Debug)
+    set(BUILD_PROPERTIES "${BUILD_PROPERTIES} -DMANGOS_DEBUG")
+endif()
+
+if(WITH_MOD_LUA AND LUA51_FOUND)
+    set(BUILD_PROPERTIES "${BUILD_PROPERTIES} -DWITH_MOD_LUA" )
+    set_target_properties(mangos-game PROPERTIES COMPILE_FLAGS ${BUILD_PROPERTIES})
+    target_link_libraries(mangos-game ${LUA_LIBRARIES})
+elseif(WITH_MOD_SCRIPTDEV2)
+    set(BUILD_PROPERTIES "${BUILD_PROPERTIES} -DWITH_MOD_SCRIPTDEV2" )
     set_target_properties(mangos-game PROPERTIES COMPILE_FLAGS ${BUILD_PROPERTIES})
 endif()
 
