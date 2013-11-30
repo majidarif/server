@@ -30,20 +30,21 @@
 #include <lua.hpp>
 
 #include "LuaIncludes.h"
+#include "Policies/Singleton.h"
 
 struct LoadedLuaScripts
 {
     std::set<std::string> luafiles;
 };
 
-class Lua_State
+class Metztli
 {
     private:
         lua_State *L;
     public:
-        Lua_State() : L(lua_open()) { }
+        Metztli() : L(lua_open()) { }
 
-        ~Lua_State()
+        ~Metztli()
         {
             lua_close(L);
         }
@@ -55,4 +56,5 @@ class Lua_State
         }
 };
 
+#define sMetztli MaNGOS::Singleton<Metztli>::Instance()
 #endif
