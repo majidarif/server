@@ -5,7 +5,7 @@
 #ifndef SC_PRECOMPILED_H
 #define SC_PRECOMPILED_H
 
-#include "../ScriptMgr.h"
+#include "ScriptDevMgr.h"
 #include "Object.h"
 #include "Unit.h"
 #include "Creature.h"
