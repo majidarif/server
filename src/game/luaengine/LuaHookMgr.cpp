@@ -22,4 +22,5 @@
  * and lore are copyrighted by Blizzard Entertainment, Inc.
  */
  
- #include "LuaHookMgr.h"
+#include "LuaHookMgr.h"
+#include "LuaIncludes.h"

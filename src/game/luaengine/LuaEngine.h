@@ -22,12 +22,14 @@
  * and lore are copyrighted by Blizzard Entertainment, Inc.
  */
 
-#ifndef MANGOS_LUA_H
-#define MANGOS_LUA_H
+#ifndef LUA_ENGINE_H
+#define LUA_ENGINE_H
 
 #include <string>
 #include <set>
 #include <lua.hpp>
+
+#include "LuaIncludes.h"
 
 struct LoadedLuaScripts
 {

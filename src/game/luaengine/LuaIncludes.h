@@ -21,6 +21,8 @@
  * World of Warcraft, and all World of Warcraft or Warcraft art, images,
  * and lore are copyrighted by Blizzard Entertainment, Inc.
  */
- 
- #include "LuaEngine.h"
- #include "LuaIncludes.h"
+
+#ifndef LUA_INCLUDES_H
+#define LUA_INCLUDES_H
+
+#endif
