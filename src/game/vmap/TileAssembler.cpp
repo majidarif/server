@@ -163,7 +163,7 @@ namespace VMAP
                 // write tile spawns
                 for (uint32 s = 0; s < nSpawns; ++s)
                 {
-                    if (s)
+                    if (s && tile != tileEntries.end())
                         ++tile;
                     const ModelSpawn& spawn2 = map_iter->second->UniqueEntries[tile->second];
                     success = success && ModelSpawn::writeToFile(tilefile, spawn2);
