@@ -80,11 +80,15 @@ add_library(mangos-game STATIC ${game_LIB_SRCS})
 target_link_libraries(mangos-game mangos-auctionhouse-bot mangos-battleground mangos-outdoor-pvp mangos-movement mangos-vmap mangos-shared mangos-framework Detour g3dlite ${ACE_LIBRARIES} ${MYSQL_LIBRARIES} ${OPENSSL_LIBRARIES} ${ZLIB_LIBRARIES})
 
 if(WITH_MOD_LUA AND LUA51_FOUND)
-    list(APPEND sources ${CMAKE_CURRENT_SOURCE_DIR}/luaengine/LuaEngine.cpp)
-    list(APPEND headers ${CMAKE_CURRENT_SOURCE_DIR}/luaengine/LuaEngine.h)
-    include_directories(
-        ${LUA_INCLUDE_DIR}
-        ${CMAKE_CURRENT_SOURCE_DIR}/luaengine/
+    list(APPEND sources
+        ${CMAKE_CURRENT_SOURCE_DIR}/luaengine/LuaEngine.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/luaengine/LuaHookMgr.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/luaengine/LuaFunctions.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/luaengine/LuaHooks.cpp
+    )
+    list(APPEND headers
+        ${CMAKE_CURRENT_SOURCE_DIR}/luaengine/LuaEngine.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/luaengine/LuaHookMgr.h
     )
 elseif(WITH_MOD_SCRIPTDEV2)
     set(BUILD_PROPERTIES "-DWITH_MOD_SCRIPTDEV2" )
