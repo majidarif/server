@@ -52,13 +52,11 @@ FileSystem& FileSystem::instance() {
     return *common;
 }
 
-
 void FileSystem::init() {
     if (common == NULL) {
         common = new FileSystem();
     }
 }
-
 
 void FileSystem::cleanup() {
     if (common != NULL) {
@@ -139,7 +137,6 @@ void FileSystem::Dir::computeZipListing(const std::string& zipfile, const std::s
     z = NULL;
 #endif /* G3DFIX: Use ZIP-library only if defined */
 }
-
 
 FileSystem::Dir& FileSystem::getContents(const std::string& path, bool forceUpdate) {
     const std::string& key = 
@@ -248,7 +245,6 @@ FileSystem::Dir& FileSystem::getContents(const std::string& path, bool forceUpda
     return dir;
 }
 
-
 bool FileSystem::_inZipfile(const std::string& path, std::string& z) {
     // Reject trivial cases before parsing
     if (path.find('.') == std::string::npos) {
@@ -286,7 +282,6 @@ bool FileSystem::_inZipfile(const std::string& path, std::string& z) {
     return false;
 }
 
-
 bool FileSystem::_isZipfile(const std::string& filename) {
     if (FilePath::ext(filename).empty()) {
         return false;
@@ -297,7 +292,12 @@ bool FileSystem::_isZipfile(const std::string& filename) {
         return false;
     }
     uint8 header[4];
-    fread(header, 4, 1, f);
+    size_t file_read = fread(header, 4, 1, f);
+    if (file_read <= 0)
+    {
+        fclose(f);
+        return false;
+    }
     
     const uint8 zipHeader[4] = {0x50, 0x4b, 0x03, 0x04};
     for (int i = 0; i < 4; ++i) {
@@ -310,7 +310,6 @@ bool FileSystem::_isZipfile(const std::string& filename) {
     fclose(f);
     return true;
 }
-
 
 FILE* FileSystem::_fopen(const char* filename, const char* mode) {
     for (const char* m = mode; *m != '\0'; ++m) {
