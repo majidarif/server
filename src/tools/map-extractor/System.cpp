@@ -56,42 +56,45 @@
 #define OPEN_FLAGS (O_RDONLY | O_BINARY)
 #endif
 
+/**
+ * @brief
+ *
+ */
 typedef struct
 {
-    char name[64];
-    uint32 id;
+    char name[64];                  /**< TODO */
+    uint32 id;                      /**< TODO */
 } map_id;
 
-map_id* map_ids;
-uint16* areas;
-uint16* LiqType;
-char output_path[128] = ".";
-char input_path[128] = ".";
-uint32 maxAreaId = 0;
-uint32 CONF_max_build = 0;
+map_id* map_ids;                    /**< TODO */
+uint16* areas;                      /**< TODO */
+uint16* LiqType;                    /**< TODO */
+char output_path[128] = ".";        /**< TODO */
+char input_path[128] = ".";         /**< TODO */
+uint32 maxAreaId = 0;               /**< TODO */
+uint32 CONF_max_build = 0;          /**< TODO */
 
-//**************************************************
-// Extractor options
-//**************************************************
+/**
+ * @brief Data types which can be extracted
+ *
+ */
 enum Extract
 {
     EXTRACT_MAP = 1,
     EXTRACT_DBC = 2
 };
 
-// Select data for extract
-int   CONF_extract = EXTRACT_MAP | EXTRACT_DBC;
-// This option allow limit minimum height to some value (Allow save some memory)
-// see mmap/Tilebuilder.h, INVALID_MAP_LIQ_HEIGHT
-bool  CONF_allow_height_limit = true;
-float CONF_use_minHeight = -500.0f;
+
+int   CONF_extract = EXTRACT_MAP | EXTRACT_DBC; /**< Select data for extract */
+bool  CONF_allow_height_limit       = true;     /**< Allows to limit minimum height */
+float CONF_use_minHeight            = -500.0f;  /**< Default minimum height */
 
 // This option allow use float to int conversion
-bool  CONF_allow_float_to_int      = true;
-float CONF_float_to_int8_limit     = 2.0f;      // Max accuracy = val/256
-float CONF_float_to_int16_limit    = 2048.0f;   // Max accuracy = val/65536
-float CONF_flat_height_delta_limit = 0.005f;    // If max - min less this value - surface is flat
-float CONF_flat_liquid_delta_limit = 0.001f;    // If max - min less this value - liquid surface is flat
+bool  CONF_allow_float_to_int      = true;      /**< Allows float to int conversion */
+float CONF_float_to_int8_limit     = 2.0f;      /**< Max accuracy = val/256 */
+float CONF_float_to_int16_limit    = 2048.0f;   /**< Max accuracy = val/65536 */
+float CONF_flat_height_delta_limit = 0.005f;    /**< If max - min less this value - surface is flat */
+float CONF_flat_liquid_delta_limit = 0.001f;    /**< If max - min less this value - liquid surface is flat */
 
 static char* const langs[] = {"enGB", "enUS", "deDE", "esES", "frFR", "koKR", "zhCN", "zhTW", "enCN", "enTW", "esMX", "ruRU" };
 #define LANG_COUNT 12
@@ -100,6 +103,11 @@ static char* const langs[] = {"enGB", "enUS", "deDE", "esES", "frFR", "koKR", "z
 #define EXPANSION_COUNT 3
 #define WORLD_COUNT 2
 
+/**
+ * @brief
+ *
+ * @param Path
+ */
 void CreateDir(const std::string& Path)
 {
 #ifdef WIN32
@@ -109,6 +117,12 @@ void CreateDir(const std::string& Path)
 #endif
 }
 
+/**
+ * @brief
+ *
+ * @param FileName
+ * @return bool
+ */
 bool FileExists(const char* FileName)
 {
     int fp = _open(FileName, OPEN_FLAGS);
@@ -121,6 +135,11 @@ bool FileExists(const char* FileName)
     return false;
 }
 
+/**
+ * @brief
+ *
+ * @param prg
+ */
 void Usage(char* prg)
 {
     printf("Usage: %s [OPTION]\n\n", prg);
@@ -139,6 +158,13 @@ void Usage(char* prg)
     exit(1);
 }
 
+/**
+ * @brief
+ *
+ * @param argc
+ * @param argv
+ * @return bool
+ */
 bool HandleArgs(int argc, char** argv)
 {
     char* param = NULL;
@@ -206,6 +232,13 @@ bool HandleArgs(int argc, char** argv)
     return true;
 }
 
+/**
+ * @brief
+ *
+ * @param mpqHandle
+ * @param filelist
+ * @return std::set
+ */
 void AppendDBCFileListTo(HANDLE mpqHandle, std::set<std::string>& filelist)
 {
     SFILE_FIND_DATA findFileData;
@@ -222,6 +255,13 @@ void AppendDBCFileListTo(HANDLE mpqHandle, std::set<std::string>& filelist)
     SFileFindClose(searchHandle);
 }
 
+/**
+ * @brief
+ *
+ * @param mpqHandle
+ * @param filelist
+ * @return std::set
+ */
 void AppendDB2FileListTo(HANDLE mpqHandle, std::set<std::string>& filelist)
 {
     SFILE_FIND_DATA findFileData;
@@ -238,6 +278,12 @@ void AppendDB2FileListTo(HANDLE mpqHandle, std::set<std::string>& filelist)
     SFileFindClose(searchHandle);
 }
 
+/**
+ * @brief
+ *
+ * @param locale
+ * @return uint32
+ */
 uint32 ReadBuild(int locale)
 {
     // include build info file also
@@ -292,6 +338,12 @@ uint32 ReadBuild(int locale)
     return build;
 }
 
+/**
+ * @brief
+ *
+ * @param locale
+ * @return uint32
+ */
 uint32 ReadMapDBC(int const locale)
 {
     HANDLE localeFile;
@@ -300,7 +352,7 @@ uint32 ReadMapDBC(int const locale)
     if (!SFileOpenArchive(localMPQ, 0, MPQ_OPEN_READ_ONLY, &localeFile))
         exit(1);
 
-    printf("Read Map.dbc file... ");
+    printf("Reading maps from Map.dbc... ");
 
     HANDLE dbcFile;
     if (!SFileOpenFileEx(localeFile, "DBFilesClient\\Map.dbc", SFILE_OPEN_PATCHED_FILE, &dbcFile))
@@ -312,7 +364,7 @@ uint32 ReadMapDBC(int const locale)
     DBCFile dbc(dbcFile);
     if (!dbc.open())
     {
-        printf("Fatal error: Invalid Map.dbc file format!\n");
+        printf("Fatal error: Could not read Map.dbc!\n");
         exit(1);
     }
 
@@ -323,10 +375,15 @@ uint32 ReadMapDBC(int const locale)
         map_ids[x].id = dbc.getRecord(x).getUInt(0);
         strcpy(map_ids[x].name, dbc.getRecord(x).getString(1));
     }
-    printf("Done! (%lu maps loaded)\n", map_count);
+    printf("Success! %lu maps loaded.\n", map_count);
     return map_count;
 }
 
+/**
+ * @brief
+ *
+ * @param locale
+ */
 void ReadAreaTableDBC(int const locale)
 {
     HANDLE localeFile;
@@ -335,7 +392,7 @@ void ReadAreaTableDBC(int const locale)
     if (!SFileOpenArchive(localMPQ, 0, MPQ_OPEN_READ_ONLY, &localeFile))
         exit(1);
 
-    printf("Read AreaTable.dbc file...");
+    printf("Reading areas from AreaTable.dbc ...");
 
     HANDLE dbcFile;
     if (!SFileOpenFileEx(localeFile, "DBFilesClient\\AreaTable.dbc", SFILE_OPEN_PATCHED_FILE, &dbcFile))
@@ -348,7 +405,7 @@ void ReadAreaTableDBC(int const locale)
 
     if (!dbc.open())
     {
-        printf("Fatal error: Invalid AreaTable.dbc file format!\n");
+        printf("Fatal error: Could not read AreaTable.dbc!\n");
         exit(1);
     }
 
@@ -362,9 +419,14 @@ void ReadAreaTableDBC(int const locale)
 
     maxAreaId = dbc.getMaxId();
 
-    printf("Done! (%lu areas loaded)\n", area_count);
+    printf("Success! %lu areas loaded.\n", area_count);
 }
 
+/**
+ * @brief
+ *
+ * @param locale
+ */
 void ReadLiquidTypeTableDBC(int const locale)
 {
     HANDLE localeFile;
@@ -373,7 +435,7 @@ void ReadLiquidTypeTableDBC(int const locale)
     if (!SFileOpenArchive(localMPQ, 0, MPQ_OPEN_READ_ONLY, &localeFile))
         exit(1);
 
-    printf("Read LiquidType.dbc file...");
+    printf("Reading liquid types from LiquidType.dbc...");
 
     HANDLE dbcFile;
     if (!SFileOpenFileEx(localeFile, "DBFilesClient\\LiquidType.dbc", SFILE_OPEN_PATCHED_FILE, &dbcFile))
@@ -385,7 +447,7 @@ void ReadLiquidTypeTableDBC(int const locale)
     DBCFile dbc(dbcFile);
     if (!dbc.open())
     {
-        printf("Fatal error: Invalid LiquidType.dbc file format!\n");
+        printf("Fatal error: Could not read LiquidType.dbc!\n");
         exit(1);
     }
 
@@ -397,7 +459,7 @@ void ReadLiquidTypeTableDBC(int const locale)
     for (uint32 x = 0; x < LiqType_count; ++x)
         LiqType[dbc.getRecord(x).getUInt(0)] = dbc.getRecord(x).getUInt(3);
 
-    printf("Done! (%lu LiqTypes loaded)\n", LiqType_count);
+    printf("Success! %lu liquid types loaded.\n", LiqType_count);
 }
 
 //
@@ -405,46 +467,60 @@ void ReadLiquidTypeTableDBC(int const locale)
 //
 
 // Map file format data
-static char const* MAP_MAGIC         = "MAPS";
-static char const* MAP_VERSION_MAGIC = "c1.3";
-static char const* MAP_AREA_MAGIC    = "AREA";
-static char const* MAP_HEIGHT_MAGIC  = "MHGT";
-static char const* MAP_LIQUID_MAGIC  = "MLIQ";
+// Map file format data
+static char const* MAP_MAGIC         = "MAPS"; /**< TODO */
+static char const* MAP_VERSION_MAGIC = "c1.3"; /**< TODO */
+static char const* MAP_AREA_MAGIC    = "AREA"; /**< TODO */
+static char const* MAP_HEIGHT_MAGIC  = "MHGT"; /**< TODO */
+static char const* MAP_LIQUID_MAGIC  = "MLIQ"; /**< TODO */
+
+/**
+ * @brief
+ *
+ */
 
 struct map_fileheader
 {
-    uint32 mapMagic;
-    uint32 versionMagic;
-    uint32 buildMagic;
-    uint32 areaMapOffset;
-    uint32 areaMapSize;
-    uint32 heightMapOffset;
-    uint32 heightMapSize;
-    uint32 liquidMapOffset;
-    uint32 liquidMapSize;
-    uint32 holesOffset;
-    uint32 holesSize;
+    uint32 mapMagic;        /**< TODO */
+    uint32 versionMagic;    /**< TODO */
+    uint32 buildMagic;      /**< TODO */
+    uint32 areaMapOffset;   /**< TODO */
+    uint32 areaMapSize;     /**< TODO */
+    uint32 heightMapOffset; /**< TODO */
+    uint32 heightMapSize;   /**< TODO */
+    uint32 liquidMapOffset; /**< TODO */
+    uint32 liquidMapSize;   /**< TODO */
+    uint32 holesOffset;     /**< TODO */
+    uint32 holesSize;       /**< TODO */
 };
 
 #define MAP_AREA_NO_AREA      0x0001
 
+/**
+ * @brief
+ *
+ */
 struct map_areaHeader
 {
-    uint32 fourcc;
-    uint16 flags;
-    uint16 gridArea;
+    uint32 fourcc;          /**< TODO */
+    uint16 flags;           /**< TODO */
+    uint16 gridArea;        /**< TODO */
 };
 
 #define MAP_HEIGHT_NO_HEIGHT  0x0001
 #define MAP_HEIGHT_AS_INT16   0x0002
 #define MAP_HEIGHT_AS_INT8    0x0004
 
+/**
+ * @brief
+ *
+ */
 struct map_heightHeader
 {
-    uint32 fourcc;
-    uint32 flags;
-    float  gridHeight;
-    float  gridMaxHeight;
+    uint32 fourcc;          /**< TODO */
+    uint32 flags;           /**< TODO */
+    float  gridHeight;      /**< TODO */
+    float  gridMaxHeight;   /**< TODO */
 };
 
 #define MAP_LIQUID_TYPE_NO_WATER    0x00
@@ -459,42 +535,68 @@ struct map_heightHeader
 #define MAP_LIQUID_NO_TYPE    0x0001
 #define MAP_LIQUID_NO_HEIGHT  0x0002
 
+/**
+ * @brief
+ *
+ */
 struct map_liquidHeader
 {
-    uint32 fourcc;
-    uint16 flags;
-    uint16 liquidType;
-    uint8  offsetX;
-    uint8  offsetY;
-    uint8  width;
-    uint8  height;
-    float  liquidLevel;
+    uint32 fourcc;          /**< TODO */
+    uint16 flags;           /**< TODO */
+    uint16 liquidType;      /**< TODO */
+    uint8  offsetX;         /**< TODO */
+    uint8  offsetY;         /**< TODO */
+    uint8  width;           /**< TODO */
+    uint8  height;          /**< TODO */
+    float  liquidLevel;     /**< TODO */
 };
 
+/**
+ * @brief
+ *
+ * @param maxDiff
+ * @return float
+ */
 float selectUInt8StepStore(float maxDiff)
 {
     return 255 / maxDiff;
 }
 
+/**
+ * @brief
+ *
+ * @param maxDiff
+ * @return float
+ */
 float selectUInt16StepStore(float maxDiff)
 {
     return 65535 / maxDiff;
 }
 // Temporary grid data store
-uint16 area_flags[ADT_CELLS_PER_GRID][ADT_CELLS_PER_GRID];
+uint16 area_flags[ADT_CELLS_PER_GRID][ADT_CELLS_PER_GRID];      /**< Temporary grid data store */
 
-float V8[ADT_GRID_SIZE][ADT_GRID_SIZE];
-float V9[ADT_GRID_SIZE + 1][ADT_GRID_SIZE + 1];
-uint16 uint16_V8[ADT_GRID_SIZE][ADT_GRID_SIZE];
-uint16 uint16_V9[ADT_GRID_SIZE + 1][ADT_GRID_SIZE + 1];
-uint8  uint8_V8[ADT_GRID_SIZE][ADT_GRID_SIZE];
-uint8  uint8_V9[ADT_GRID_SIZE + 1][ADT_GRID_SIZE + 1];
+float V8[ADT_GRID_SIZE][ADT_GRID_SIZE];                         /**< TODO */
+float V9[ADT_GRID_SIZE + 1][ADT_GRID_SIZE + 1];                 /**< TODO */
+uint16 uint16_V8[ADT_GRID_SIZE][ADT_GRID_SIZE];                 /**< TODO */
+uint16 uint16_V9[ADT_GRID_SIZE + 1][ADT_GRID_SIZE + 1];         /**< TODO */
+uint8  uint8_V8[ADT_GRID_SIZE][ADT_GRID_SIZE];                  /**< TODO */
+uint8  uint8_V9[ADT_GRID_SIZE + 1][ADT_GRID_SIZE + 1];          /**< TODO */
 
-uint16 liquid_entry[ADT_CELLS_PER_GRID][ADT_CELLS_PER_GRID];
-uint8 liquid_flags[ADT_CELLS_PER_GRID][ADT_CELLS_PER_GRID];
-bool  liquid_show[ADT_GRID_SIZE][ADT_GRID_SIZE];
-float liquid_height[ADT_GRID_SIZE + 1][ADT_GRID_SIZE + 1];
+uint16 liquid_entry[ADT_CELLS_PER_GRID][ADT_CELLS_PER_GRID];    /**< TODO */
+uint8 liquid_flags[ADT_CELLS_PER_GRID][ADT_CELLS_PER_GRID];     /**< TODO */
+bool  liquid_show[ADT_GRID_SIZE][ADT_GRID_SIZE];                /**< TODO */
+float liquid_height[ADT_GRID_SIZE + 1][ADT_GRID_SIZE + 1];      /**< TODO */
 
+/**
+ * @brief
+ *
+ * @param filename
+ * @param filename2
+ * @param cell_y
+ * @param cell_x
+ * @param build
+ * @return bool
+ */
 bool ConvertADT(char* filename, char* filename2, int cell_y, int cell_x, uint32 build)
 {
     ADT_file adt;
@@ -526,7 +628,7 @@ bool ConvertADT(char* filename, char* filename2, int cell_y, int cell_x, uint32 
                     area_flags[i][j] = areas[areaid];
                     continue;
                 }
-                printf("File: %s\nCan't find area flag for areaid %u [%d, %d].\n", filename, areaid, cell->ix, cell->iy);
+                printf("File: %s\nCan not find area flag for area %u [%d, %d].\n", filename, areaid, cell->ix, cell->iy);
             }
             area_flags[i][j] = 0xffff;
         }
@@ -786,7 +888,7 @@ bool ConvertADT(char* filename, char* filename2, int cell_y, int cell_x, uint32 
             }
 
             if (!count && liquid_flags[i][j])
-                fprintf(stderr, "Wrong liquid detect in MCLQ chunk");
+                fprintf(stderr, "Wrong liquid type detected in MCLQ chunk");
 
             for (int y = 0; y <= ADT_CELL_SIZE; y++)
             {
@@ -837,7 +939,7 @@ bool ConvertADT(char* filename, char* filename2, int cell_y, int cell_x, uint32 
                     case LIQUID_TYPE_MAGMA: liquid_flags[i][j] |= MAP_LIQUID_TYPE_MAGMA; break;
                     case LIQUID_TYPE_SLIME: liquid_flags[i][j] |= MAP_LIQUID_TYPE_SLIME; break;
                     default:
-                        printf("\nCan't find Liquid type %u for map %s\nchunk %d,%d\n", h->liquidType, filename, i, j);
+                        printf("\nCan not find liquid type %u for map %s\nchunk %d,%d\n", h->liquidType, filename, i, j);
                         break;
                 }
                 // Dark water detect
@@ -976,7 +1078,7 @@ bool ConvertADT(char* filename, char* filename2, int cell_y, int cell_x, uint32 
     FILE* output = fopen(filename2, "wb");
     if (!output)
     {
-        printf("Can't create the output file '%s'\n", filename2);
+        printf("Can not create the output file '%s'\n", filename2);
         return false;
     }
     fwrite(&map, sizeof(map), 1, output);
@@ -1030,6 +1132,12 @@ bool ConvertADT(char* filename, char* filename2, int cell_y, int cell_x, uint32 
     return true;
 }
 
+/**
+ * @brief
+ *
+ * @param build
+ * @param locale
+ */
 void ExtractMapsFromMpq(uint32 build, const int locale)
 {
     char mpq_filename[1024];
@@ -1047,7 +1155,7 @@ void ExtractMapsFromMpq(uint32 build, const int locale)
     path += "/maps/";
     CreateDir(path);
 
-    printf("Convert map files\n");
+    printf("Converting map files\n");
     for (uint32 z = 0; z < map_count; ++z)
     {
         printf("Extract %s (%d/%d)                  \n", map_ids[z].name, z + 1, map_count);
@@ -1055,7 +1163,10 @@ void ExtractMapsFromMpq(uint32 build, const int locale)
         sprintf(mpq_map_name, "World\\Maps\\%s\\%s.wdt", map_ids[z].name, map_ids[z].name);
         WDT_file wdt;
         if (!wdt.loadFile(mpq_map_name, false))
+        {
+            // printf("Error loading %s map WDT data\n", map_ids[z].name);
             continue;
+        }
 
         for (uint32 y = 0; y < WDT_MAP_SIZE; ++y)
         {
@@ -1076,9 +1187,15 @@ void ExtractMapsFromMpq(uint32 build, const int locale)
     delete [] map_ids;
 }
 
+/**
+ * @brief
+ *
+ * @param locale
+ * @param basicLocale
+ */
 void ExtractDBCFiles(int locale, bool basicLocale)
 {
-    printf("Extracting dbc files...\n");
+    printf("Extracting client database files...\n");
 
     std::set<std::string> dbcfiles;
 
@@ -1118,12 +1235,20 @@ void ExtractDBCFiles(int locale, bool basicLocale)
         if (ExtractFile(iter->c_str(), filename))
             ++count;
     }
-    printf("Extracted %u DBC/DB2 files\n\n", count);
+    printf("Extracted %u client database files\n\n", count);
 }
 
 typedef std::pair < std::string /*full_filename*/, char const* /*locale_prefix*/ > UpdatesPair;
 typedef std::map < int /*build*/, UpdatesPair > Updates;
 
+/**
+ * @brief
+ *
+ * @param subdir
+ * @param suffix
+ * @param section
+ * @param updates
+ */
 void AppendPatchMPQFilesToList(char const* subdir, char const* suffix, char const* section, Updates& updates)
 {
     char dirname[512];
@@ -1181,6 +1306,11 @@ void AppendPatchMPQFilesToList(char const* subdir, char const* suffix, char cons
 #endif
 }
 
+/**
+ * @brief
+ *
+ * @param locale
+ */
 void LoadLocaleMPQFiles(int const locale)
 {
     char filename[512];
@@ -1216,6 +1346,10 @@ void LoadLocaleMPQFiles(int const locale)
     }
 }
 
+/**
+ * @brief
+ *
+ */
 void LoadBaseMPQFiles()
 {
     char filename[512];
@@ -1267,6 +1401,13 @@ void LoadBaseMPQFiles()
     }
 }
 
+/**
+ * @brief
+ *
+ * @param argc
+ * @param arg
+ * @return int
+ */
 int main(int argc, char* arg[])
 {
     printf("mangos-three DBC & map (version %s) extractor\n\n", MAP_VERSION_MAGIC);
