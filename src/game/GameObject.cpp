@@ -531,7 +531,7 @@ void GameObject::SaveToDB()
     GameObjectData const* data = sObjectMgr.GetGOData(GetGUIDLow());
     if (!data)
     {
-        sLog.outError("GameObject::SaveToDB failed, cannot get gameobject data!");
+        sLog.outError("GameObject::SaveToDB failed, can not get gameobject data!");
         return;
     }
 

@@ -6127,7 +6127,7 @@ void Spell::EffectEnchantItemPerm(SpellEffectEntry const* effect)
         unitTarget = m_caster;
         DoCreateItem(effect, effect->EffectItemType);
         // Vellum target case: Target becomes additional reagent, new scroll item created instead in Spell::EffectEnchantItemPerm()
-        // cannot already delete in TakeReagents() unfortunately
+        // can not already delete in TakeReagents() unfortunately
         p_caster->DestroyItemCount(targetProto->ItemId, 1, true);
         return;
     }
@@ -9113,7 +9113,7 @@ void Spell::EffectScriptEffect(SpellEffectEntry const* effect)
                             target = m_caster;
                         }
 
-                        // Scorpid Sting - Attempts to Disarm the target for 10 sec. This effect cannot occur more than once per 1 minute.
+                        // Scorpid Sting - Attempts to Disarm the target for 10 sec. This effect can not occur more than once per 1 minute.
                         if (stingClassOptions->IsFitToFamilyMask(UI64LIT(0x0000000000008000)))
                             spellId = 53359;                // Chimera Shot - Scorpid
                         // ?? nothing say in spell desc (possibly need addition check)

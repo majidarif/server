@@ -115,7 +115,7 @@ namespace VMAP
             if (!mapfile)
             {
                 success = false;
-                printf("Cannot open %s\n", mapfilename.str().c_str());
+                printf("Can not open %s\n", mapfilename.str().c_str());
                 break;
             }
 

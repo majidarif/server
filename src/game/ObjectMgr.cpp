@@ -3499,7 +3499,7 @@ void ObjectMgr::LoadGroups()
 
             if (!group->LoadMemberFromDB(memberGuidlow, subgroup, assistent))
             {
-                sLog.outErrorDb("Incorrect entry in group_member table : member %s cannot be added to group (Id: %u)!",
+                sLog.outErrorDb("Incorrect entry in group_member table : member %s can not be added to group (Id: %u)!",
                                 memberGuid.GetString().c_str(), groupId);
                 CharacterDatabase.PExecute("DELETE FROM group_member WHERE memberGuid = '%u'", memberGuidlow);
             }
@@ -7671,7 +7671,7 @@ bool ObjectMgr::LoadMangosStrings(DatabaseType& db, char const* table, int32 min
 
         sLog.outString();
         if (min_value == MIN_MANGOS_STRING_ID)              // error only in case internal strings
-            sLog.outErrorDb(">> Loaded 0 mangos strings. DB table `%s` is empty. Cannot continue.", table);
+            sLog.outErrorDb(">> Loaded 0 mangos strings. DB table `%s` is empty. Can not continue.", table);
         else
             sLog.outString(">> Loaded 0 string templates. DB table `%s` is empty.", table);
 		return false;
@@ -9964,7 +9964,7 @@ bool DoDisplayText(WorldObject* source, int32 entry, Unit const* target /*=NULL*
                 source->MonsterWhisper(entry, target);
             else
             {
-                _DoStringError(entry, "DoDisplayText entry %i cannot whisper without target unit (TYPEID_PLAYER).", entry);
+                _DoStringError(entry, "DoDisplayText entry %i can not whisper without target unit (TYPEID_PLAYER).", entry);
                 return false;
             }
             break;
@@ -9975,7 +9975,7 @@ bool DoDisplayText(WorldObject* source, int32 entry, Unit const* target /*=NULL*
                 source->MonsterWhisper(entry, target, true);
             else
             {
-                _DoStringError(entry, "DoDisplayText entry %i cannot whisper without target unit (TYPEID_PLAYER).", entry);
+                _DoStringError(entry, "DoDisplayText entry %i can not whisper without target unit (TYPEID_PLAYER).", entry);
                 return false;
             }
             break;

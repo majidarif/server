@@ -4625,7 +4625,7 @@ void Player::BuildPlayerRepop()
     // there must be SMSG.STOP_MIRROR_TIMER
     // there we must send 888 opcode
 
-    // the player cannot have a corpse already, only bones which are not returned by GetCorpse
+    // the player can not have a corpse already, only bones which are not returned by GetCorpse
     if (GetCorpse())
     {
         sLog.outError("BuildPlayerRepop: player %s(%d) already has a corpse", GetName(), GetGUIDLow());
@@ -7548,7 +7548,7 @@ void Player::ApplyEquipSpell(SpellEntry const* spellInfo, Item* item, bool apply
 {
     if (apply)
     {
-        // Cannot be used in this stance/form
+        // Can not be used in this stance/form
         if (GetErrorAtShapeshiftedCast(spellInfo, GetShapeshiftForm()) != SPELL_CAST_OK)
             return;
 
@@ -7570,7 +7570,7 @@ void Player::ApplyEquipSpell(SpellEntry const* spellInfo, Item* item, bool apply
     {
         if (form_change)                                    // check aura compatibility
         {
-            // Cannot be used in this stance/form
+            // Can not be used in this stance/form
             if (GetErrorAtShapeshiftedCast(spellInfo, GetShapeshiftForm()) == SPELL_CAST_OK)
                 return;                                     // and remove only not compatible at form change
         }
@@ -21748,7 +21748,7 @@ void Player::ResurectUsingRequestData()
     if (m_resurrectGuid.IsPlayer())
         TeleportTo(m_resurrectMap, m_resurrectX, m_resurrectY, m_resurrectZ, GetOrientation());
 
-    // we cannot resurrect player when we triggered far teleport
+    // we can not resurrect player when we triggered far teleport
     // player will be resurrected upon teleportation
     if (IsBeingTeleportedFar())
     {
@@ -24437,7 +24437,7 @@ AreaLockStatus Player::GetAreaTriggerLockStatus(AreaTrigger const* at, Difficult
     // Map's state check
     if (map && map->IsDungeon())
     {
-        // cannot enter if the instance is full (player cap), GMs don't count
+        // can not enter if the instance is full (player cap), GMs don't count
         if (((DungeonMap*)map)->GetPlayersCountExceptGMs() >= ((DungeonMap*)map)->GetMaxPlayers())
             return AREA_LOCKSTATUS_INSTANCE_IS_FULL;
 

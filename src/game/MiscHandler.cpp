@@ -1386,7 +1386,7 @@ void WorldSession::HandleSetDungeonDifficultyOpcode(WorldPacket& recv_data)
     if (Difficulty(mode) == _player->GetDungeonDifficulty())
         return;
 
-    // cannot reset while in an instance
+    // can not reset while in an instance
     Map* map = _player->GetMap();
     if (map && map->IsDungeon())
     {
@@ -1431,7 +1431,7 @@ void WorldSession::HandleSetRaidDifficultyOpcode(WorldPacket& recv_data)
     if (Difficulty(mode) == _player->GetRaidDifficulty())
         return;
 
-    // cannot reset while in an instance
+    // can not reset while in an instance
     Map* map = _player->GetMap();
     if (map && map->IsDungeon())
     {

@@ -311,7 +311,7 @@ void BattleGround::Update(uint32 diff)
         //          this->AddToFreeBGObjectsQueue(); // not yet implemented
         //      should be used instead of current
         // ]]
-        // BattleGround Template instance cannot be updated, because it would be deleted
+        // BattleGround Template instance can not be updated, because it would be deleted
         if (!GetInvitedCount(HORDE) && !GetInvitedCount(ALLIANCE))
             delete this;
 
@@ -1373,7 +1373,7 @@ void BattleGround::UpdatePlayerScore(Player* Source, uint32 type, uint32 value)
     }
 }
 
-// some doors aren't despawned so we cannot handle their closing in gameobject::update()
+// some doors aren't despawned so we can not handle their closing in gameobject::update()
 // it would be nice to correctly implement GO_ACTIVATED state and open/close doors in gameobject code
 void BattleGround::DoorClose(ObjectGuid guid)
 {
@@ -1389,7 +1389,7 @@ void BattleGround::DoorClose(ObjectGuid guid)
         }
     }
     else
-        sLog.outError("BattleGround: Door %s not found (cannot close doors)", guid.GetString().c_str());
+        sLog.outError("BattleGround: Door %s not found (can not close doors)", guid.GetString().c_str());
 }
 
 void BattleGround::DoorOpen(ObjectGuid guid)

@@ -5053,7 +5053,7 @@ SpellCastResult Spell::CheckCast(bool strict)
         // Ignore form req aura
         if (!m_caster->HasAffectedAura(SPELL_AURA_MOD_IGNORE_SHAPESHIFT, m_spellInfo))
         {
-            // Cannot be used in this stance/form
+            // Can not be used in this stance/form
             SpellCastResult shapeError = GetErrorAtShapeshiftedCast(m_spellInfo, m_caster->GetShapeshiftForm());
             if (shapeError != SPELL_CAST_OK)
                 return shapeError;
@@ -7083,7 +7083,7 @@ SpellCastResult Spell::CheckItems()
                         return SPELL_FAILED_ERROR;
                     if (pEnchant->slot & ENCHANTMENT_CAN_SOULBOUND)
                         return SPELL_FAILED_NOT_TRADEABLE;
-                    // cannot replace vellum with scroll in trade slot
+                    // can not replace vellum with scroll in trade slot
                     if (isVellumTarget)
                         return SPELL_FAILED_ITEM_ENCHANT_TRADE_WINDOW;
                 }
