@@ -1750,7 +1750,7 @@ bool ScriptAction::HandleScriptStep()
                 pPlayer->RemoveFlag(PLAYER_FLAGS, PLAYER_FLAGS_XP_USER_DISABLED);
             break;
         }
-        case SCRIPT_COMMAND_TERMINATE_COND:
+        case SCRIPT_COMMAND_TERMINATE_COND:                 // 34
         {
             Player* player = NULL;
             WorldObject* second = pSource;
@@ -1789,6 +1789,8 @@ bool ScriptAction::HandleScriptStep()
             }
             return terminateResult;
         }
+        case SCRIPT_COMMAND_TURN_TO:                    // 35
+            break;
         default:
             sLog.outErrorDb(" DB-SCRIPTS: Process table `%s` id %u, command %u unknown command used.", m_table, m_script->id, m_script->command);
             break;

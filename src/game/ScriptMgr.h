@@ -100,6 +100,7 @@ enum ScriptCommand                                          // resSource, resTar
     SCRIPT_COMMAND_XP_USER                  = 33,           // source or target with Player, datalong = bool (0=off, 1=on)
     SCRIPT_COMMAND_TERMINATE_COND           = 34,           // datalong = condition_id, datalong2 = if != 0 then quest_id of quest that will be failed for player's group if the script is terminated
                                                             // data_flags & SCRIPT_FLAG_COMMAND_ADDITIONAL terminate when condition is false ELSE terminate when condition is true
+    SCRIPT_COMMAND_TURN_TO                  = 35,           // resSource = Unit, resTarget = Unit/none
 };
 
 #define MAX_TEXT_ID 4                                       // used for SCRIPT_COMMAND_TALK
@@ -322,6 +323,12 @@ struct ScriptInfo
             uint32 conditionId;                             // datalong
             uint32 failQuest;                               // datalong2
         } terminateCond;
+
+		struct                                              // SCRIPT_COMMAND_TURN_TO (35)
+        {
+            uint32 targetId;                                // datalong
+            uint32 empty1;                                  // datalong2
+        } turnTo;
 
         struct
         {
