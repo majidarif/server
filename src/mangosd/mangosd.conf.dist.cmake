@@ -731,7 +731,7 @@ LogColors = "13 7 11 9"
 #                 1 - recheck offhand slot weapon at talent reset also
 #
 #    PetUnsummonAtMount
-#        Persmanent pet will unsummoned at player mount
+#        Permanent pet will unsummoned at player mount
 #                 0 - unsummon only for flying mounts
 #        Default: 1 - unsummon for any mount
 #
@@ -1649,7 +1649,7 @@ Network.KickOnBadPacket = 0
 #
 ###################################################################################################################
 
-Console.Enable = 1
+Console.Enable = 0
 Ra.Enable = 0
 Ra.IP = 0.0.0.0
 Ra.Port = 3443
