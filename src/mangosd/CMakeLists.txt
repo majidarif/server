@@ -104,7 +104,6 @@ if(WIN32 AND WITH_MOD_SCRIPTDEV2)
         RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}
     )
 endif()
-
 add_dependencies(mangosd revision.h)
 
 #-----------------------------------------------------------------------------

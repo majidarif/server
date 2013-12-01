@@ -1,7 +1,7 @@
 # mangos-three is a full featured server for World of Warcraft in its cataclysm
-# version, supporting clients for patch 4.3.4
+# version, supporting clients for patch 4.3.4.
 #
-# Copyright (C) 2005-2013 MaNGOS project <http://getmangos.com>
+# Copyright (C) 2005-2013  MaNGOS project <http://getmangos.com>
 #
 # ***** BEGIN GPL LICENSE BLOCK *****
 #
@@ -12,12 +12,12 @@
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #
 # ***** END GPL LICENSE BLOCK *****
 #
@@ -37,7 +37,7 @@ mangos_source_group(${vmap_extractor_LIB_SRCS})
 
 include_directories(
     ${ZLIB_INCLUDE_DIR}
-    ${CMAKE_SOURCE_DIR}/dep/StormLib/src
+    ${CMAKE_SOURCE_DIR}/dep/libmpq/
     ${CMAKE_CURRENT_SOURCE_DIR}/loadlib/
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_BINARY_DIR}
@@ -46,7 +46,7 @@ include_directories(
 #-----------------------------------------------------------------------------
 # Build the vmap-extractor application
 add_executable(vmap-extractor ${vmap_extractor_LIB_SRCS})
-target_link_libraries(vmap-extractor storm ${BZIP2_LIBRARIES} ${ZLIB_LIBRARIES})
+target_link_libraries(vmap-extractor mpq ${BZIP2_LIBRARIES} ${ZLIB_LIBRARIES})
 install(TARGETS vmap-extractor DESTINATION ${BIN_DIR})
 
 if(WIN32)
@@ -54,4 +54,3 @@ if(WIN32)
     # set(BUILD_PROPERTIES "-DZLIB_WINAPI" )
     # set_target_properties(vmap-extractor PROPERTIES COMPILE_FLAGS ${BUILD_PROPERTIES})
 endif()
-

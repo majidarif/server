@@ -1,4 +1,4 @@
-# mangos-three is a full featured server for World of Warcraft in its vanilla
+# mangos-three is a full featured server for World of Warcraft in its cataclysm
 # version, supporting clients for patch 4.3.4.
 #
 # Copyright (C) 2005-2013  MaNGOS project <http://getmangos.com>
@@ -64,7 +64,6 @@ add_dependencies(realmd revision.h)
 
 #-----------------------------------------------------------------------------
 # Build and install the realmd configuration
-
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/realmd.conf.dist.cmake ${CMAKE_CURRENT_BINARY_DIR}/realmd.conf.dist)
 if(WIN32)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/realmd.conf.dist DESTINATION ${BIN_DIR})

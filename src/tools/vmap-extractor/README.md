@@ -1,4 +1,4 @@
-﻿vmap extractor
+vmap extractor
 --------------
 The *vmap extractor* will extract model information from the game client.
 
@@ -12,7 +12,7 @@ Instructions - Linux
 Use the created executable to extract model information. Change the data path if
 needed.
 
-    $ map-extractor -i /mnt/windows/games/world of warcraft/
+    $ vmap-extractor -d /mnt/windows/games/world of warcraft/
 
 Resulting files will be in `./Buildings`.
 
@@ -38,4 +38,3 @@ and generated output.
 
 
 [1]: http://blizzard.com/games/wow/ "World of Warcraft"
-

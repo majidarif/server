@@ -1,4 +1,4 @@
-﻿# mangos-three is a full featured server for World of Warcraft in its cataclysm
+# mangos-three is a full featured server for World of Warcraft in its cataclysm
 # version, supporting clients for patch 4.3.4.
 #
 # Copyright (C) 2005-2013  MaNGOS project <http://getmangos.com>

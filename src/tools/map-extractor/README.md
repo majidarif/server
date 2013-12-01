@@ -1,4 +1,4 @@
-﻿map extractor
+map extractor
 --------------
 The *map extractor* will extract map information from the game client.
 

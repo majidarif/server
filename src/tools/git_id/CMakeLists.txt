@@ -1,5 +1,5 @@
-# mangos-zero is a full featured server for World of Warcraft in its vanilla
-# version, supporting clients for patch 1.12.x.
+# mangos-zero is a full featured server for World of Warcraft in its cataclysm
+# version, supporting clients for patch 4.3.4.
 #
 # Copyright (C) 2005-2013  MaNGOS project <http://getmangos.com>
 #

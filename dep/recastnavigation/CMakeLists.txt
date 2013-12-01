@@ -1,7 +1,7 @@
 # mangos-three is a full featured server for World of Warcraft in its cataclysm
 # version, supporting clients for patch 4.3.4.
 #
-# Copyright (C) 2005-2013 MaNGOS project <http://getmangos.com>
+# Copyright (C) 2005-2013  MaNGOS project <http://getmangos.com>
 #
 # ***** BEGIN GPL LICENSE BLOCK *****
 #
@@ -12,22 +12,20 @@
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #
 # ***** END GPL LICENSE BLOCK *****
 #
 # World of Warcraft, and all World of Warcraft or Warcraft art, images,
 # and lore are copyrighted by Blizzard Entertainment, Inc.
 
-
 #-----------------------------------------------------------------------------
 # Platform specifics
-#-----------------------------------------------------------------------------
 if(WIN32 AND MSVC)
     option(USE_MSVC_FAST_FLOATINGPOINT "Use MSVC /fp:fast option" ON)
     mark_as_advanced(USE_MSVC_FAST_FLOATINGPOINT)
@@ -38,10 +36,7 @@ endif()
 
 #-----------------------------------------------------------------------------
 # Add sources
-# add_subdirectory(DebugUtils)
 add_subdirectory(Detour)
-# add_subdirectory(DetourCrowd)
-# add_subdirectory(DetourTileCache)
 add_subdirectory(Recast)
 if(WITH_RECAST_DEMO)
     add_subdirectory(DebugUtils)

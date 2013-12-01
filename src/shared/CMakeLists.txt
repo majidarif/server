@@ -140,10 +140,8 @@ set(shared_LIB_SRCS ${sources} ${headers})
 
 mangos_source_group(${shared_LIB_SRCS})
 
-
 include_directories(
     ${ACE_INCLUDE_DIRS}
-    ${MYSQL_INCLUDE_DIR}
     ${OPENSSL_INCLUDE_DIR}
     ${CMAKE_SOURCE_DIR}/dep/include/mersennetwister/
     ${CMAKE_SOURCE_DIR}/dep/include/utf8cpp/

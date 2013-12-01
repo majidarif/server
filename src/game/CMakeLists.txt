@@ -48,8 +48,266 @@ add_subdirectory(movement)
 
 #-----------------------------------------------------------------------------
 # Define the game library
-file(GLOB sources *.cpp)
-file(GLOB headers *.h)
+set(sources
+    AccountMgr.cpp
+    AddonHandler.cpp
+    AggressorAI.cpp
+    AuctionHouseHandler.cpp
+    AuctionHouseMgr.cpp
+    Bag.cpp
+    Camera.cpp
+    Channel.cpp
+    ChannelHandler.cpp
+    ChannelMgr.cpp
+    CharacterDatabaseCleaner.cpp
+    CharacterHandler.cpp
+    Chat.cpp
+    ChatHandler.cpp
+    CombatHandler.cpp
+    ConfusedMovementGenerator.cpp
+    Corpse.cpp
+    CreatureAI.cpp
+    CreatureAIRegistry.cpp
+    CreatureAISelector.cpp
+    Creature.cpp
+    CreatureEventAI.cpp
+    CreatureEventAIMgr.cpp
+    CreatureLinkingMgr.cpp
+    DBCStores.cpp
+    debugcmds.cpp
+    DuelHandler.cpp
+    DynamicObject.cpp
+    FleeingMovementGenerator.cpp
+    FollowerReference.cpp
+    GameEventMgr.cpp
+    GameObject.cpp
+    GMTicketHandler.cpp
+    GMTicketMgr.cpp
+    GossipDef.cpp
+    GridMap.cpp
+    GridNotifiers.cpp
+    GridStates.cpp
+    Group.cpp
+    GroupHandler.cpp
+    GroupReference.cpp
+    GuardAI.cpp
+    Guild.cpp
+    GuildHandler.cpp
+    GuildMgr.cpp
+    HomeMovementGenerator.cpp
+    HostileRefManager.cpp
+    IdleMovementGenerator.cpp
+    InstanceData.cpp
+    Item.cpp
+    ItemEnchantmentMgr.cpp
+    ItemHandler.cpp
+    Level0.cpp
+    Level1.cpp
+    Level2.cpp
+    Level3.cpp
+    LFGHandler.cpp
+    LootHandler.cpp
+    LootMgr.cpp
+    Mail.cpp
+    MailHandler.cpp
+    Map.cpp
+    MapManager.cpp
+    MapPersistentStateMgr.cpp
+    MassMailMgr.cpp
+    MiscHandler.cpp
+    MotionMaster.cpp
+    MoveMap.cpp
+    MovementGenerator.cpp
+    MovementHandler.cpp
+    NPCHandler.cpp
+    NullCreatureAI.cpp
+    ObjectAccessor.cpp
+    Object.cpp
+    ObjectGridLoader.cpp
+    ObjectGuid.cpp
+    ObjectMgr.cpp
+    ObjectPosSelector.cpp
+    Opcodes.cpp
+    PathFinder.cpp
+    PetAI.cpp
+    Pet.cpp
+    PetHandler.cpp
+    PetitionsHandler.cpp
+    Player.cpp
+    PlayerDump.cpp
+    PointMovementGenerator.cpp
+    PoolManager.cpp
+    QueryHandler.cpp
+    QuestDef.cpp
+    QuestHandler.cpp
+    RandomMovementGenerator.cpp
+    ReactorAI.cpp
+    ReputationMgr.cpp
+    ScriptMgr.cpp
+    SkillHandler.cpp
+    SocialMgr.cpp
+    SpellAuras.cpp
+    Spell.cpp
+    SpellEffects.cpp
+    SpellHandler.cpp
+    SpellMgr.cpp
+    SQLStorages.cpp
+    StatSystem.cpp
+    TargetedMovementGenerator.cpp
+    TaxiHandler.cpp
+    TemporarySummon.cpp
+    ThreatManager.cpp
+    TotemAI.cpp
+    Totem.cpp
+    TradeHandler.cpp
+    Transports.cpp
+    UnitAuraProcHandler.cpp
+    Unit.cpp
+    UpdateData.cpp
+    WaypointManager.cpp
+    WaypointMovementGenerator.cpp
+    Weather.cpp
+    World.cpp
+    WorldSession.cpp
+    WorldSocket.cpp
+    WorldSocketMgr.cpp
+)
+
+set(headers
+    AccountMgr.h
+    AddonHandler.h
+    AggressorAI.h
+    AuctionHouseMgr.h
+    Bag.h
+    Camera.h
+    Cell.h
+    CellImpl.h
+    Channel.h
+    ChannelMgr.h
+    CharacterDatabaseCleaner.h
+    Chat.h
+    ConfusedMovementGenerator.h
+    Corpse.h
+    CreatureAI.h
+    CreatureAIImpl.h
+    CreatureAIRegistry.h
+    CreatureAISelector.h
+    CreatureEventAI.h
+    CreatureEventAIMgr.h
+    Creature.h
+    CreatureLinkingMgr.h
+    DBCEnums.h
+    DBCfmt.h
+    DBCStores.h
+    DBCStructure.h
+    DynamicObject.h
+    FleeingMovementGenerator.h
+    FollowerReference.h
+    FollowerRefManager.h
+    Formulas.h
+    GameEventMgr.h
+    GameObject.h
+    GMTicketMgr.h
+    GossipDef.h
+    GridDefines.h
+    GridMap.h
+    GridNotifiers.h
+    GridNotifiersImpl.h
+    GridStates.h
+    Group.h
+    GroupReference.h
+    GroupRefManager.h
+    GuardAI.h
+    Guild.h
+    GuildMgr.h
+    HomeMovementGenerator.h
+    HostileRefManager.h
+    IdleMovementGenerator.h
+    InstanceData.h
+    ItemEnchantmentMgr.h
+    Item.h
+    ItemPrototype.h
+    Language.h
+    LFGHandler.h
+    LootMgr.h
+    Mail.h
+    Map.h
+    MapManager.h
+    MapPersistentStateMgr.h
+    MapReference.h
+    MapRefManager.h
+    MassMailMgr.h
+    MotionMaster.h
+    MoveMap.h
+    MoveMapSharedDefines.h
+    MovementGenerator.h
+    MovementGeneratorImpl.h
+    NPCHandler.h
+    NullCreatureAI.h
+    ObjectAccessor.h
+    ObjectGridLoader.h
+    ObjectGuid.h
+    Object.h
+    ObjectMgr.h
+    ObjectPosSelector.h
+    Opcodes.h
+    PathFinder.h
+    Path.h
+    PetAI.h
+    Pet.h
+    PlayerDump.h
+    Player.h
+    PointMovementGenerator.h
+    PoolManager.h
+    QuestDef.h
+    RandomMovementGenerator.h
+    ReactorAI.h
+    ReputationMgr.h
+    ScriptMgr.h
+    SharedDefines.h
+    SocialMgr.h
+    SpellAuraDefines.h
+    SpellAuras.h
+    Spell.h
+    SpellMgr.h
+    SQLStorages.h
+    TargetedMovementGenerator.h
+    TemporarySummon.h
+    ThreatManager.h
+    TotemAI.h
+    Totem.h
+    Transports.h
+    UnitEvents.h
+    Unit.h
+    UpdateData.h
+    UpdateFields.h
+    UpdateMask.h
+    WaypointManager.h
+    WaypointMovementGenerator.h
+    Weather.h
+    World.h
+    WorldSession.h
+    WorldSocket.h
+    WorldSocketMgr.h
+)
+
+if(WITH_MOD_LUA AND LUA51_FOUND)
+    list(APPEND sources
+        ${CMAKE_CURRENT_SOURCE_DIR}/luaengine/LuaEngine.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/luaengine/LuaHookMgr.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/luaengine/LuaFunctions.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/luaengine/LuaHooks.cpp
+    )
+    list(APPEND headers
+        ${CMAKE_CURRENT_SOURCE_DIR}/luaengine/LuaEngine.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/luaengine/LuaHookMgr.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/luaengine/LuaIncludes.h
+    )
+    include_directories(
+        ${LUA_INCLUDE_DIR}
+        ${CMAKE_CURRENT_SOURCE_DIR}/luaengine/
+    )
+endif()
 
 set(game_LIB_SRCS ${sources} ${headers})
 
@@ -78,24 +336,6 @@ include_directories(
 # Build the game library
 add_library(mangos-game STATIC ${game_LIB_SRCS})
 target_link_libraries(mangos-game mangos-auctionhouse-bot mangos-battleground mangos-outdoor-pvp mangos-movement mangos-vmap mangos-shared mangos-framework Detour g3dlite ${ACE_LIBRARIES} ${MYSQL_LIBRARIES} ${OPENSSL_LIBRARIES} ${ZLIB_LIBRARIES})
-
-
-if(WITH_MOD_LUA AND LUA51_FOUND)
-    list(APPEND sources
-        ${CMAKE_CURRENT_SOURCE_DIR}/luaengine/LuaEngine.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/luaengine/LuaHookMgr.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/luaengine/LuaFunctions.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/luaengine/LuaHooks.cpp
-    )
-    list(APPEND headers
-        ${CMAKE_CURRENT_SOURCE_DIR}/luaengine/LuaEngine.h
-        ${CMAKE_CURRENT_SOURCE_DIR}/luaengine/LuaHookMgr.h
-        ${CMAKE_CURRENT_SOURCE_DIR}/luaengine/LuaIncludes.h
-    )
-elseif(WITH_MOD_SCRIPTDEV2)
-    set(BUILD_PROPERTIES "-DWITH_MOD_SCRIPTDEV2" )
-    set_target_properties(mangos-game PROPERTIES COMPILE_FLAGS ${BUILD_PROPERTIES})
-endif()
 
 set(BUILD_PROPERTIES "")
 if(${CMAKE_BUILD_TYPE} MATCHES Debug)

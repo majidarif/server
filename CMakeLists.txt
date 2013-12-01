@@ -1,7 +1,7 @@
 # mangos-three is a full featured server for World of Warcraft in its cataclysm
-# version, supporting clients for patch 4.3.4
+# version, supporting clients for patch 4.3.4.
 #
-# Copyright (C) 2005-2013 MaNGOS project <http://getmangos.com>
+# Copyright (C) 2005-2013  MaNGOS project <http://getmangos.com>
 #
 # ***** BEGIN GPL LICENSE BLOCK *****
 #
@@ -12,12 +12,12 @@
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #
 # ***** END GPL LICENSE BLOCK *****
 #
@@ -134,7 +134,7 @@ option(WITH_MYSQL           "Enable MySQL database backend"                     
 option(WITH_POSTGRESQL      "Enable PostgreSQL database backend"                                            OFF)
 
 # mangos-three language bindings
-option(WITH_MOD_LUA         "Enable Lua scripting (requires Lua 5.1"                                        OFF)
+option(WITH_MOD_LUA         "Enable Lua scripting (requires Lua 5.1)"                                       OFF)
 option(WITH_MOD_SCRIPTDEV2  "Enable the scripting library"                                                  ON)
 
 # Modifiers
@@ -160,6 +160,7 @@ endif()
 if(WITH_MOD_LUA AND WITH_MOD_SCRIPTDEV2)
     message(FATAL_ERROR "Lua and ScriptDev2 can not be used in parallel. Disable Lua or ScriptDev2.")
 endif()
+
 #-----------------------------------------------------------------------------
 # Initialize un-cached vars, avoid unused warning
 # linux only, not cached
@@ -287,9 +288,8 @@ elseif(WIN32)
         # Setup 32bit windows systems
             if(MSVC11)
                 message(STATUS "Visual C++ 2012 detected.")
-                set(LIBDIR ${CMAKE_SOURCE_DIR}/../lib/windows_vc11)
             else()
-                set(LIBDIR ${CMAKE_SOURCE_DIR}/../lib/windows)
+                message(STATUS "Visual C++ detected.")
             endif()
         endif()
     endif()
