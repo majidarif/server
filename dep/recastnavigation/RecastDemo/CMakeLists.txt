@@ -1,7 +1,7 @@
 # mangos-three is a full featured server for World of Warcraft in its cataclysm
 # version, supporting clients for patch 4.3.4.
 #
-# Copyright (C) 2005-2013 MaNGOS project <http://getmangos.com>
+# Copyright (C) 2005-2013  MaNGOS project <http://getmangos.com>
 #
 # ***** BEGIN GPL LICENSE BLOCK *****
 #
@@ -12,38 +12,49 @@
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #
 # ***** END GPL LICENSE BLOCK *****
 #
 # World of Warcraft, and all World of Warcraft or Warcraft art, images,
 # and lore are copyrighted by Blizzard Entertainment, Inc.
 
+include(MacroMangosSourceGroup)
 
 #-----------------------------------------------------------------------------
-# Platform specifics
-#-----------------------------------------------------------------------------
-if(WIN32 AND MSVC)
-    option(USE_MSVC_FAST_FLOATINGPOINT "Use MSVC /fp:fast option" ON)
-    mark_as_advanced(USE_MSVC_FAST_FLOATINGPOINT)
-    if(USE_MSVC_FAST_FLOATINGPOINT)
-        add_definitions(/fp:fast)
-    endif(USE_MSVC_FAST_FLOATINGPOINT)
-endif()
+# Define the RecastDemo dependencies
+find_package(OpenGL REQUIRED)
+find_package(SDL REQUIRED)
 
 #-----------------------------------------------------------------------------
-# Add sources
-# add_subdirectory(DebugUtils)
-add_subdirectory(Detour)
-# add_subdirectory(DetourCrowd)
-# add_subdirectory(DetourTileCache)
-add_subdirectory(Recast)
-if(WITH_RECAST_DEMO)
-    add_subdirectory(DebugUtils)
-    add_subdirectory(RecastDemo)
+# Define the RecastDemo executable
+file(GLOB sources Source/*.cpp)
+file(GLOB headers Include/*.h)
+
+set(RecastDemo_LIB_SRCS ${sources} ${headers})
+
+mangos_source_group(${RecastDemo_LIB_SRCS})
+
+include_directories(
+    ${SDL_INCLUDE_DIR}
+    ${OPENGL_INCLUDE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/Contrib
+    ${CMAKE_CURRENT_SOURCE_DIR}/Include
+    ${CMAKE_CURRENT_SOURCE_DIR}/../DebugUtils/Include/
+    ${CMAKE_CURRENT_SOURCE_DIR}/../Detour/Include/
+    ${CMAKE_CURRENT_SOURCE_DIR}/../Recast/Include/
+)
+
+#-----------------------------------------------------------------------------
+# Build the RecastDemo executable
+if(WIN32)
+    add_executable(RecastDemo WIN32 ${RecastDemo_LIB_SRCS})
+else()
+    add_executable(RecastDemo ${RecastDemo_LIB_SRCS})
 endif()
+target_link_libraries(RecastDemo DebugUtils Detour Recast ${SDL_LIBRARY} ${OPENGL_LIBRARIES})
