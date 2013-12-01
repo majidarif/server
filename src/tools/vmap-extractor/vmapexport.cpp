@@ -495,7 +495,7 @@ void Usage(char* prg)
     printf("\n");
     printf("Example:\n");
     printf("- use data path and create larger vmaps:\n");
-    printf("  %s -l -d \"c:\\games\\game\"\n", prg);
+    printf("  %s -l -d \"c:\\games\\world of warcraft\"\n", prg);
 }
 
 bool processArgv(int argc, char** argv)
