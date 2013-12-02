@@ -221,7 +221,8 @@ extern void AddSC_culling_of_stratholme();                  // COT, culling_of_s
 extern void AddSC_instance_culling_of_stratholme();
 extern void AddSC_dire_maul();                              // dire_maul
 extern void AddSC_instance_dire_maul();
-extern void AddSC_boss_noxxion();                           // maraudon
+extern void AddSC_maraudon();                               // maraudon
+extern void AddSC_boss_noxxion();
 extern void AddSC_boss_onyxia();                            // onyxias_lair
 extern void AddSC_instance_onyxias_lair();
 extern void AddSC_razorfen_downs();                         // razorfen_downs
@@ -730,7 +731,8 @@ void AddScripts()
     AddSC_instance_culling_of_stratholme();
     AddSC_dire_maul();                                      // dire_maul
     AddSC_instance_dire_maul();
-    AddSC_boss_noxxion();                                   // maraudon
+    AddSC_maraudon();                                       // maraudon
+    AddSC_boss_noxxion();
     AddSC_boss_onyxia();                                    // onyxias_lair
     AddSC_instance_onyxias_lair();
     AddSC_razorfen_downs();                                 // razorfen_downs

@@ -82,22 +82,29 @@ set(sources_eastern_kingdoms
     scripts/eastern_kingdoms/alterac_mountains.cpp
     scripts/eastern_kingdoms/arathi_highlands.cpp
     scripts/eastern_kingdoms/blasted_lands.cpp
-    scripts/eastern_kingdoms/boss_kazzak.cpp
     scripts/eastern_kingdoms/burning_steppes.cpp
     scripts/eastern_kingdoms/dun_morogh.cpp
     scripts/eastern_kingdoms/eastern_plaguelands.cpp
     scripts/eastern_kingdoms/elwynn_forest.cpp
+    scripts/eastern_kingdoms/eversong_woods.cpp
+    scripts/eastern_kingdoms/ghostlands.cpp
+    scripts/eastern_kingdoms/gilneas.cpp
+    scripts/eastern_kingdoms/gilneas_city.cpp
     scripts/eastern_kingdoms/hinterlands.cpp
     scripts/eastern_kingdoms/ironforge.cpp
+    scripts/eastern_kingdoms/isle_of_queldanas.cpp
     scripts/eastern_kingdoms/loch_modan.cpp
     scripts/eastern_kingdoms/redridge_mountains.cpp
     scripts/eastern_kingdoms/searing_gorge.cpp
+    scripts/eastern_kingdoms/silvermoon_city.cpp
     scripts/eastern_kingdoms/silverpine_forest.cpp
     scripts/eastern_kingdoms/stormwind_city.cpp
     scripts/eastern_kingdoms/stranglethorn_vale.cpp
     scripts/eastern_kingdoms/swamp_of_sorrows.cpp
     scripts/eastern_kingdoms/tirisfal_glades.cpp
+    scripts/eastern_kingdoms/twilight_highlands.cpp
     scripts/eastern_kingdoms/undercity.cpp
+    scripts/eastern_kingdoms/vashjir.cpp
     scripts/eastern_kingdoms/western_plaguelands.cpp
     scripts/eastern_kingdoms/westfall.cpp
     scripts/eastern_kingdoms/wetlands.cpp
@@ -106,6 +113,8 @@ set(sources_eastern_kingdoms
 set(sources_kalimdor
     scripts/kalimdor/ashenvale.cpp
     scripts/kalimdor/azshara.cpp
+    scripts/kalimdor/azuremyst_isle.cpp
+    scripts/kalimdor/bloodmyst_isle.cpp
     scripts/kalimdor/boss_azuregos.cpp
     scripts/kalimdor/darkshore.cpp
     scripts/kalimdor/desolace.cpp
@@ -113,7 +122,9 @@ set(sources_kalimdor
     scripts/kalimdor/dustwallow_marsh.cpp
     scripts/kalimdor/felwood.cpp
     scripts/kalimdor/feralas.cpp
+    scripts/kalimdor/molten_front.cpp
     scripts/kalimdor/moonglade.cpp
+    scripts/kalimdor/mount_hyjal.cpp
     scripts/kalimdor/mulgore.cpp
     scripts/kalimdor/orgrimmar.cpp
     scripts/kalimdor/silithus.cpp
@@ -123,26 +134,74 @@ set(sources_kalimdor
     scripts/kalimdor/the_barrens.cpp
     scripts/kalimdor/thousand_needles.cpp
     scripts/kalimdor/thunder_bluff.cpp
+    scripts/kalimdor/uldum.cpp
     scripts/kalimdor/ungoro_crater.cpp
     scripts/kalimdor/winterspring.cpp
 )
 
+set(sources_maelstorm
+    scripts/maelstorm/deepholm.cpp
+    scripts/maelstorm/kezan.cpp
+    scripts/maelstorm/lost_isles.cpp
+)
+
+set(sources_northrend
+    scripts/northrend/borean_tundra.cpp
+    scripts/northrend/dalaran.cpp
+    scripts/northrend/dragonblight.cpp
+    scripts/northrend/grizzly_hills.cpp
+    scripts/northrend/howling_fjord.cpp
+    scripts/northrend/icecrown.cpp
+    scripts/northrend/sholazar_basin.cpp
+    scripts/northrend/storm_peaks.cpp
+    scripts/northrend/zuldrak.cpp
+)
+
+set(sources_outland
+    scripts/outland/blades_edge_mountains.cpp
+    scripts/outland/boss_doomlord_kazzak.cpp
+    scripts/outland/boss_doomwalker.cpp
+    scripts/outland/hellfire_peninsula.cpp
+    scripts/outland/netherstorm.cpp
+    scripts/outland/shadowmoon_valley.cpp
+    scripts/outland/shattrath_city.cpp
+    scripts/outland/terokkar_forest.cpp
+    scripts/outland/zangarmarsh.cpp
+)
+
+set(sources_scarlet_enclave
+    scripts/eastern_kingdoms/scarlet_envlave/ebon_hold.cpp
+    scripts/eastern_kingdoms/scarlet_envlave/world_map_ebon_hold.cpp
+    scripts/eastern_kingdoms/scarlet_envlave/world_map_ebon_hold.h
+)
+
+set(sources_instance_ek_brc
+    scripts/eastern_kingdoms/blackrock_mountain/blackrock_caverns/boss_beauty.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackrock_caverns/boss_corla.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackrock_caverns/boss_karsh_steelbender.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackrock_caverns/boss_lord_obsidius.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackrock_caverns/boss_romogg.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackrock_caverns/instance_blackrock_caverns.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackrock_caverns/blackrock_caverns.h
+)
+
 set(sources_instance_ek_brd
-    scripts/eastern_kingdoms/blackrock_depths/blackrock_depths.cpp
-    scripts/eastern_kingdoms/blackrock_depths/boss_ambassador_flamelash.cpp
-    scripts/eastern_kingdoms/blackrock_depths/boss_emperor_dagran_thaurissan.cpp
-    scripts/eastern_kingdoms/blackrock_depths/boss_general_angerforge.cpp
-    scripts/eastern_kingdoms/blackrock_depths/boss_high_interrogator_gerstahn.cpp
-    scripts/eastern_kingdoms/blackrock_depths/instance_blackrock_depths.cpp
-    scripts/eastern_kingdoms/blackrock_depths/blackrock_depths.h
+    scripts/eastern_kingdoms/blackrock_mountain/blackrock_depths/boss_ambassador_flamelash.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackrock_depths/boss_coren_direbrew.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackrock_depths/boss_emperor_dagran_thaurissan.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackrock_depths/boss_general_angerforge.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackrock_depths/boss_high_interrogator_gerstahn.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackrock_depths/instance_blackrock_depths.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackrock_depths/blackrock_depths.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackrock_depths/blackrock_depths.h
 )
 
 set(sources_instance_ek_brs
-    scripts/eastern_kingdoms/blackrock_spire/boss_gyth.cpp
-    scripts/eastern_kingdoms/blackrock_spire/boss_overlord_wyrmthalak.cpp
-    scripts/eastern_kingdoms/blackrock_spire/boss_pyroguard_emberseer.cpp
-    scripts/eastern_kingdoms/blackrock_spire/instance_blackrock_spire.cpp
-    scripts/eastern_kingdoms/blackrock_spire/blackrock_spire.h
+    scripts/eastern_kingdoms/blackrock_mountain/blackrock_spire/boss_gyth.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackrock_spire/boss_overlord_wyrmthalak.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackrock_spire/boss_pyroguard_emberseer.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackrock_spire/instance_blackrock_spire.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackrock_spire/blackrock_spire.h
 )
 
 set(sources_instance_ek_tdm
@@ -159,8 +218,28 @@ set(sources_instance_ek_gno
     scripts/eastern_kingdoms/gnomeregan/gnomeregan.h
 )
 
+set(sources_instance_ek_gb
+    scripts/eastern_kingdoms/grim_batol/boss_drahga_shadowburner.cpp
+    scripts/eastern_kingdoms/grim_batol/boss_erudax.cpp
+    scripts/eastern_kingdoms/grim_batol/boss_forgemaster_throngus.cpp
+    scripts/eastern_kingdoms/grim_batol/boss_general_umbriss.cpp
+    scripts/eastern_kingdoms/grim_batol/instance_grim_batol.cpp
+    scripts/eastern_kingdoms/grim_batol/grim_batol.h
+)
+
+set(sources_instance_ek_mgt(
+    scripts/eastern_kingdoms/magisters_terrace/boss_felblood_kaelthas.cpp
+    scripts/eastern_kingdoms/magisters_terrace/boss_priestess_delrissa.cpp
+    scripts/eastern_kingdoms/magisters_terrace/boss_selin_fireheart.cpp
+    scripts/eastern_kingdoms/magisters_terrace/boss_vexallus.cpp
+    scripts/eastern_kingdoms/magisters_terrace/instance_magisters_terrace.cpp
+    scripts/eastern_kingdoms/magisters_terrace/magisters_terrace.cpp
+    scripts/eastern_kingdoms/magisters_terrace/magisters_terrace.h
+)
+
 set(sources_instance_ek_sm
     scripts/eastern_kingdoms/scarlet_monastery/boss_arcanist_doan.cpp
+    scripts/eastern_kingdoms/scarlet_monastery/boss_headless_horseman.cpp
     scripts/eastern_kingdoms/scarlet_monastery/boss_herod.cpp
     scripts/eastern_kingdoms/scarlet_monastery/boss_mograine_and_whitemane.cpp
     scripts/eastern_kingdoms/scarlet_monastery/instance_scarlet_monastery.cpp
@@ -175,6 +254,7 @@ set(sources_instance_ek_scholo
 )
 
 set(sources_instance_ek_sfk
+    scripts/eastern_kingdoms/shadowfang_keep/boss_hummel.cpp
     scripts/eastern_kingdoms/shadowfang_keep/instance_shadowfang_keep.cpp
     scripts/eastern_kingdoms/shadowfang_keep/shadowfang_keep.cpp
     scripts/eastern_kingdoms/shadowfang_keep/shadowfang_keep.h
@@ -185,6 +265,7 @@ set(sources_instance_ek_strat
     scripts/eastern_kingdoms/stratholme/boss_cannon_master_willey.cpp
     scripts/eastern_kingdoms/stratholme/boss_dathrohan_balnazzar.cpp
     scripts/eastern_kingdoms/stratholme/boss_maleki_the_pallid.cpp
+    scripts/eastern_kingdoms/stratholme/boss_order_of_silver_hand.cpp
     scripts/eastern_kingdoms/stratholme/instance_stratholme.cpp
     scripts/eastern_kingdoms/stratholme/stratholme.cpp
     scripts/eastern_kingdoms/stratholme/stratholme.h
@@ -196,6 +277,15 @@ set(sources_instance_ek_st
     scripts/eastern_kingdoms/sunken_temple/sunken_temple.h
 )
 
+set(sources_instance_ek_tott
+    scripts/eastern_kingdoms/throne_of_the_tides/boss_commander_ulthok.cpp
+    scripts/eastern_kingdoms/throne_of_the_tides/boss_erunak_and_ghursha.cpp
+    scripts/eastern_kingdoms/throne_of_the_tides/boss_lady_nazjar.cpp
+    scripts/eastern_kingdoms/throne_of_the_tides/boss_ozumat.cpp
+    scripts/eastern_kingdoms/throne_of_the_tides/instance_throne_of_the_tides.cpp
+    scripts/eastern_kingdoms/throne_of_the_tides/throne_of_the_tides.h
+)
+
 set(sources_instance_ek_uld
     scripts/eastern_kingdoms/uldaman/boss_archaedas.cpp
     scripts/eastern_kingdoms/uldaman/instance_uldaman.cpp
@@ -203,20 +293,48 @@ set(sources_instance_ek_uld
     scripts/eastern_kingdoms/uldaman/uldaman.h
 )
 
+set(sources_raid_ek_kz
+    scripts/eastern_kingdoms/karazhan/boss_curator.cpp
+    scripts/eastern_kingdoms/karazhan/boss_maiden_of_virtue.cpp
+    scripts/eastern_kingdoms/karazhan/boss_midnight.cpp
+    scripts/eastern_kingdoms/karazhan/boss_moroes.cpp
+    scripts/eastern_kingdoms/karazhan/boss_netherspite.cpp
+    scripts/eastern_kingdoms/karazhan/boss_nightbane.cpp
+    scripts/eastern_kingdoms/karazhan/boss_prince_malchezaar.cpp
+    scripts/eastern_kingdoms/karazhan/boss_shade_of_aran.cpp
+    scripts/eastern_kingdoms/karazhan/boss_terestian_illhoof.cpp
+    scripts/eastern_kingdoms/karazhan/bosses_opera.cpp
+    scripts/eastern_kingdoms/karazhan/chess_event.cpp
+    scripts/eastern_kingdoms/karazhan/instance_karazhan.cpp
+    scripts/eastern_kingdoms/karazhan/karazhan.cpp
+    scripts/eastern_kingdoms/karazhan/karazhan.h
+)
+
 set(sources_raid_ek_mc
-    scripts/eastern_kingdoms/molten_core/boss_baron_geddon.cpp
-    scripts/eastern_kingdoms/molten_core/boss_garr.cpp
-    scripts/eastern_kingdoms/molten_core/boss_gehennas.cpp
-    scripts/eastern_kingdoms/molten_core/boss_golemagg.cpp
-    scripts/eastern_kingdoms/molten_core/boss_lucifron.cpp
-    scripts/eastern_kingdoms/molten_core/boss_magmadar.cpp
-    scripts/eastern_kingdoms/molten_core/boss_majordomo_executus.cpp
-    scripts/eastern_kingdoms/molten_core/boss_ragnaros.cpp
-    scripts/eastern_kingdoms/molten_core/boss_shazzrah.cpp
-    scripts/eastern_kingdoms/molten_core/boss_sulfuron_harbinger.cpp
-    scripts/eastern_kingdoms/molten_core/instance_molten_core.cpp
-    scripts/eastern_kingdoms/molten_core/molten_core.cpp
-    scripts/eastern_kingdoms/molten_core/molten_core.h
+    scripts/eastern_kingdoms/blackrock_mountain/molten_core/boss_baron_geddon.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/molten_core/boss_garr.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/molten_core/boss_gehennas.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/molten_core/boss_golemagg.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/molten_core/boss_lucifron.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/molten_core/boss_magmadar.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/molten_core/boss_majordomo_executus.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/molten_core/boss_ragnaros.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/molten_core/boss_shazzrah.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/molten_core/boss_sulfuron_harbinger.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/molten_core/instance_molten_core.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/molten_core/molten_core.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/molten_core/molten_core.h
+)
+
+set(sources_raid_ek_bwd
+    scripts/eastern_kingdoms/blackrock_mountain/blackwing_descent/boss_atramedes.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackwing_descent/boss_chimaeron.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackwing_descent/boss_magmaw.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackwing_descent/boss_maloriak.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackwing_descent/boss_nefarian_descent.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackwing_descent/omnotron_defense.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackwing_descent/instance_blackwing_descent.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackwing_descent/blackwing_descent.h.cpp
 )
 
 set(sources_raid_ek_bwl
@@ -233,24 +351,16 @@ set(sources_raid_ek_bwl
     scripts/eastern_kingdoms/blackwing_lair/blackwing_lair.h
 )
 
-set(sources_raid_ek_naxx
-    scripts/eastern_kingdoms/naxxramas/boss_anubrekhan.cpp
-    scripts/eastern_kingdoms/naxxramas/boss_faerlina.cpp
-    scripts/eastern_kingdoms/naxxramas/boss_four_horsemen.cpp
-    scripts/eastern_kingdoms/naxxramas/boss_gluth.cpp
-    scripts/eastern_kingdoms/naxxramas/boss_gothik.cpp
-    scripts/eastern_kingdoms/naxxramas/boss_grobbulus.cpp
-    scripts/eastern_kingdoms/naxxramas/boss_heigan.cpp
-    scripts/eastern_kingdoms/naxxramas/boss_kelthuzad.cpp
-    scripts/eastern_kingdoms/naxxramas/boss_loatheb.cpp
-    scripts/eastern_kingdoms/naxxramas/boss_maexxna.cpp
-    scripts/eastern_kingdoms/naxxramas/boss_noth.cpp
-    scripts/eastern_kingdoms/naxxramas/boss_patchwerk.cpp
-    scripts/eastern_kingdoms/naxxramas/boss_razuvious.cpp
-    scripts/eastern_kingdoms/naxxramas/boss_sapphiron.cpp
-    scripts/eastern_kingdoms/naxxramas/boss_thaddius.cpp
-    scripts/eastern_kingdoms/naxxramas/instance_naxxramas.cpp
-    scripts/eastern_kingdoms/naxxramas/naxxramas.h
+set(sources_raid_ek_za
+    scripts/eastern_kingdoms/zulaman/boss_akilzon.cpp
+    scripts/eastern_kingdoms/zulaman/boss_halazzi.cpp
+    scripts/eastern_kingdoms/zulaman/boss_janalai.cpp
+    scripts/eastern_kingdoms/zulaman/boss_malacrass.cpp
+    scripts/eastern_kingdoms/zulaman/boss_nalorakk.cpp
+    scripts/eastern_kingdoms/zulaman/boss_zuljin.cpp
+    scripts/eastern_kingdoms/zulaman/instance_zulaman.cpp
+    scripts/eastern_kingdoms/zulaman/zulaman.cpp
+    scripts/eastern_kingdoms/zulaman/zulaman.h
 )
 
 set(sources_raid_ek_zg
@@ -268,9 +378,35 @@ set(sources_raid_ek_zg
     scripts/eastern_kingdoms/zulgurub/zulgurub.h
 )
 
+set(sources_raid_ek_swp
+    scripts/eastern_kingdoms/sunwell_plateu/boss_brutallus.cpp
+    scripts/eastern_kingdoms/sunwell_plateu/boss_eredar_twins.cpp
+    scripts/eastern_kingdoms/sunwell_plateu/boss_felmyst.cpp
+    scripts/eastern_kingdoms/sunwell_plateu/boss_kalecgos.cpp
+    scripts/eastern_kingdoms/sunwell_plateu/boss_kiljaeden.cpp
+    scripts/eastern_kingdoms/sunwell_plateu/boss_muru.cpp
+    scripts/eastern_kingdoms/sunwell_plateu/instance_sunwell_plateau.cpp
+    scripts/eastern_kingdoms/sunwell_plateu/sunwell_plateau.h
+)
+
 set(sources_instance_k_bdf
     scripts/kalimdor/blackfathom_deeps/blackfathom_deeps.h
     scripts/kalimdor/blackfathom_deeps/instance_blackfathom_deeps.cpp
+)
+
+set(sources_instance_k_cos
+    scripts/kalimdor/caverns_of_time/culling_of_stratholme/culling_of_stratholme.cpp
+    scripts/kalimdor/caverns_of_time/culling_of_stratholme/instance_culling_of_stratholme.cpp
+    scripts/kalimdor/caverns_of_time/culling_of_stratholme/culling_of_stratholme.h
+)
+
+set(sources_instance_k_dp
+    scripts/kalimdor/caverns_of_time/dark_portal/boss_aeonus.cpp
+    scripts/kalimdor/caverns_of_time/dark_portal/boss_chrono_lord_deja.cpp
+    scripts/kalimdor/caverns_of_time/dark_portal/boss_temporus.cpp
+    scripts/kalimdor/caverns_of_time/dark_portal/dark_portal.cpp
+    scripts/kalimdor/caverns_of_time/dark_portal/instance_dark_portal.cpp
+    scripts/kalimdor/caverns_of_time/dark_portal/dark_portal.h
 )
 
 set(sources_instance_k_dm
@@ -279,15 +415,43 @@ set(sources_instance_k_dm
     scripts/kalimdor/dire_maul/instance_dire_maul.cpp
 )
 
+set(sources_instance_k_et
+    scripts/kalimdor/caverns_of_time/end_time/end_of_time.cpp
+    scripts/kalimdor/caverns_of_time/end_time/instance_end_of_time.cpp
+    scripts/kalimdor/caverns_of_time/end_time/end_of_time.h
+)
+
+set(sources_instance_k_hot
+    scripts/kalimdor/caverns_of_time/hour_of_twilight/boss_archbishop_benedictus.cpp
+    scripts/kalimdor/caverns_of_time/hour_of_twilight/boss_arcurion.cpp
+    scripts/kalimdor/caverns_of_time/hour_of_twilight/boss_asira_dawnslayer.cpp
+    scripts/kalimdor/caverns_of_time/hour_of_twilight/instance_hour_of_twilight.cpp
+    scripts/kalimdor/caverns_of_time/hour_of_twilight/hour_of_twilight.h
+)
+
+set(sources_instance_k_lcot
+    scripts/kalimdor/lost_city_of_tolvir/boss_general_husam.cpp
+    scripts/kalimdor/lost_city_of_tolvir/boss_lockmaw.cpp
+    scripts/kalimdor/lost_city_of_tolvir/boss_prophet_barim.cpp
+    scripts/kalimdor/lost_city_of_tolvir/boss_siamat.cpp
+    scripts/kalimdor/lost_city_of_tolvir/instance_lost_city_of_tolvir.cpp
+    scripts/kalimdor/lost_city_of_tolvir/lost_city_of_tolvir.h
+)
+
 set(sources_instance_k_mara
     scripts/kalimdor/maraudon/boss_noxxion.cpp
     scripts/kalimdor/maraudon/maraudon.cpp
     scripts/kalimdor/maraudon/maraudon.h
 )
 
+set(sources_instance_k_ohf
+    scripts/kalimdor/caverns_of_time/old_hillsbrad/instance_old_hillsbrad.cpp
+    scripts/kalimdor/caverns_of_time/old_hillsbrad/old_hillsbrad.cpp
+    scripts/kalimdor/caverns_of_time/old_hillsbrad/old_hillsbrad.h
+)
+
 set(sources_instance_k_rfd
     scripts/kalimdor/razorfen_downs/razorfen_downs.cpp
-    scripts/kalimdor/razorfen_downs/razorfen_downs.h
 )
 
 set(sources_instance_k_rfk
@@ -302,11 +466,53 @@ set(sources_instance_k_wc
     scripts/kalimdor/wailing_caverns/wailing_caverns.h
 )
 
+set(sources_instance_k_woe
+    scripts/kalimdor/caverns_of_time/well_of_eternity/boss_mannoroth_and_varothen.cpp
+    scripts/kalimdor/caverns_of_time/well_of_eternity/boss_perotharn.cpp
+    scripts/kalimdor/caverns_of_time/well_of_eternity/boss_queen_azshara.cpp
+    scripts/kalimdor/caverns_of_time/well_of_eternity/instance_well_of_eternity.cpp
+    scripts/kalimdor/caverns_of_time/well_of_eternity/well_of_eternity.h
+)
+
 set(sources_instance_k_zf
     scripts/kalimdor/zulfarrak/boss_zumrah.cpp
     scripts/kalimdor/zulfarrak/instance_zulfarrak.cpp
     scripts/kalimdor/zulfarrak/zulfarrak.cpp
     scripts/kalimdor/zulfarrak/zulfarrak.h
+)
+
+set(sources_raid_k_fl
+    scripts/kalimdor/firelands/boss_alysrazor.cpp
+    scripts/kalimdor/firelands/boss_baleroc.cpp
+    scripts/kalimdor/firelands/boss_bethtilac.cpp
+    scripts/kalimdor/firelands/boss_lord_rhyolith.cpp
+    scripts/kalimdor/firelands/boss_majordomo_staghelm.cpp
+    scripts/kalimdor/firelands/boss_ragnaros_firelands.cpp
+    scripts/kalimdor/firelands/boss_shannox.cpp
+    scripts/kalimdor/firelands/instance_firelands.cpp
+    scripts/kalimdor/firelands/firelands.h
+)
+
+set(sources_raid_k_ds
+    scripts/kalimdor/caverns_of_time/dragon_soul/boss_deathwing.cpp
+    scripts/kalimdor/caverns_of_time/dragon_soul/boss_hagara.cpp
+    scripts/kalimdor/caverns_of_time/dragon_soul/boss_yorsahj.cpp
+    scripts/kalimdor/caverns_of_time/dragon_soul/boss_morchok.cpp
+    scripts/kalimdor/caverns_of_time/dragon_soul/boss_ultraxion.cpp
+    scripts/kalimdor/caverns_of_time/dragon_soul/boss_warlord_zonozz.cpp
+    scripts/kalimdor/caverns_of_time/dragon_soul/boss_warmaster_blackhorn.cpp
+    scripts/kalimdor/caverns_of_time/dragon_soul/dragon_soul.cpp
+    scripts/kalimdor/caverns_of_time/dragon_soul/instance_dragon_soul.cpp
+    scripts/kalimdor/caverns_of_time/dragon_soul/dragon_soul.h
+)
+
+set(sources_raid_k_hyjal
+    scripts/kalimdor/caverns_of_time/hyjal_summit/boss_archimonde.cpp
+    scripts/kalimdor/caverns_of_time/hyjal_summit/hyjal.cpp
+    scripts/kalimdor/caverns_of_time/hyjal_summit/hyjalAI.cpp
+    scripts/kalimdor/caverns_of_time/hyjal_summit/instance_hyjal.cpp
+    scripts/kalimdor/caverns_of_time/hyjal_summit/hyjal.h
+    scripts/kalimdor/caverns_of_time/hyjal_summit/hyjalAI.h
 )
 
 set(sources_raid_k_ony
@@ -342,36 +548,298 @@ set(sources_raid_k_taq
     scripts/kalimdor/temple_of_ahnqiraj/temple_of_ahnqiraj.h
 )
 
+set(sources_raid_k_totfw
+    scripts/kalimdor/throne_of_the_four_winds/boss_alakir.cpp
+    scripts/kalimdor/throne_of_the_four_winds/conclave_of_the_wind.cpp
+    scripts/kalimdor/throne_of_the_four_winds/instance_throne_of_the_four_winds.cpp
+    scripts/kalimdor/throne_of_the_four_winds/throne_of_the_four_winds.h
+)
+
+set(sources_raid_k_vp
+    scripts/kalimdor/vortex_pinnacle/boss_altairus.cpp
+    scripts/kalimdor/vortex_pinnacle/boss_asaad.cpp
+    scripts/kalimdor/vortex_pinnacle/boss_grand_vizier_ertan.cpp
+    scripts/kalimdor/vortex_pinnacle/instance_vortex_pinnacle.cpp
+    scripts/kalimdor/vortex_pinnacle/vortex_pinnacle.h
+)
+
+set(sources_instance_m_sc
+    scripts/maelstorm/stonecore/boss_corborus.cpp
+    scripts/maelstorm/stonecore/boss_ozruk.cpp
+    scripts/maelstorm/stonecore/boss_priestess_azil.cpp
+    scripts/maelstorm/stonecore/boss_slabhide.cpp
+    scripts/maelstorm/stonecore/instance_stonecore.cpp
+    scripts/maelstorm/stonecore/stonecore.h
+)
+
+set(sources_instance_n_ah
+    scripts/northrend/azjol_nerub/ahnkahet/boss_amanitar.cpp
+    scripts/northrend/azjol_nerub/ahnkahet/boss_jedoga.cpp
+    scripts/northrend/azjol_nerub/ahnkahet/boss_nadox.cpp
+    scripts/northrend/azjol_nerub/ahnkahet/boss_taldaram.cpp
+    scripts/northrend/azjol_nerub/ahnkahet/boss_volazj.cpp
+    scripts/northrend/azjol_nerub/ahnkahet/instance_ahnkahet.cpp
+    scripts/northrend/azjol_nerub/ahnkahet/ahnkahet.h
+)
+
+set(sources_instance_n_an
+    scripts/northrend/azjol_nerub/azjol_nerub/boss_anubarak.cpp
+    scripts/northrend/azjol_nerub/azjol_nerub/boss_hadronox.cpp
+    scripts/northrend/azjol_nerub/azjol_nerub/boss_krikthir.cpp
+    scripts/northrend/azjol_nerub/azjol_nerub/instance_azjol_nerub.cpp
+    scripts/northrend/azjol_nerub/azjol_nerub/azjol_nerub.h
+)
+
+set(sources_instance_n_dk
+    scripts/northrend/draktharon_keep/boss_novos.cpp
+    scripts/northrend/draktharon_keep/boss_tharonja.cpp
+    scripts/northrend/draktharon_keep/boss_trollgore.cpp
+    scripts/northrend/draktharon_keep/instance_draktharon_keep.cpp
+    scripts/northrend/draktharon_keep/draktharon_keep.h
+)
+
+set(sources_instance_n_fos
+    scripts/northrend/icecrown_citadel/frozen_halls/forge_of_souls/boss_bronjahm.cpp
+    scripts/northrend/icecrown_citadel/frozen_halls/forge_of_souls/boss_devourer_of_souls.cpp
+    scripts/northrend/icecrown_citadel/frozen_halls/forge_of_souls/instance_forge_of_souls.cpp
+    scripts/northrend/icecrown_citadel/frozen_halls/forge_of_souls/forge_of_souls.h
+)
+
+set(sources_instance_n_gundrak
+    scripts/northrend/gundrak/boss_colossus.cpp
+    scripts/northrend/gundrak/boss_eck.cpp
+    scripts/northrend/gundrak/boss_galdarah.cpp
+    scripts/northrend/gundrak/boss_moorabi.cpp
+    scripts/northrend/gundrak/boss_sladran.cpp
+    scripts/northrend/gundrak/instance_gundrak.cpp
+    scripts/northrend/gundrak/gundrak.h
+)
+
+set(sources_instance_n_nexus
+    scripts/northrend/nexus/nexus/boss_anomalus.cpp
+    scripts/northrend/nexus/nexus/boss_keristrasza.cpp
+    scripts/northrend/nexus/nexus/boss_ormorok.cpp
+    scripts/northrend/nexus/nexus/boss_telestra.cpp
+    scripts/northrend/nexus/nexus/instance_nexus.cpp
+    scripts/northrend/nexus/nexus/nexus.h
+)
+
+set(sources_instance_n_hor
+    scripts/northrend/icecrown_citadel/frozen_halls/halls_of_reflection/boss_falric.cpp
+    scripts/northrend/icecrown_citadel/frozen_halls/halls_of_reflection/boss_lich_king.cpp
+    scripts/northrend/icecrown_citadel/frozen_halls/halls_of_reflection/boss_marwyn.cpp
+    scripts/northrend/icecrown_citadel/frozen_halls/halls_of_reflection/halls_of_reflection.cpp
+    scripts/northrend/icecrown_citadel/frozen_halls/halls_of_reflection/instance_halls_of_reflection.cpp
+    scripts/northrend/icecrown_citadel/frozen_halls/halls_of_reflection/halls_of_reflection.h
+)
+
+set(sources_instance_n_oculus
+    scripts/northrend/nexus/oculus/boss_eregos.cpp
+    scripts/northrend/nexus/oculus/boss_urom.cpp
+    scripts/northrend/nexus/oculus/boss_varos.cpp
+    scripts/northrend/nexus/oculus/instance_oculus.cpp
+    scripts/northrend/nexus/oculus/oculus.cpp
+    scripts/northrend/nexus/oculus/oculus.h
+)
+
+set(sources_instance_n_pos
+    scripts/northrend/icecrown_citadel/frozen_halls/pit_of_saron/boss_forgemaster_garfrost.cpp
+    scripts/northrend/icecrown_citadel/frozen_halls/pit_of_saron/boss_krick_and_ick.cpp
+    scripts/northrend/icecrown_citadel/frozen_halls/pit_of_saron/boss_scourgelord_tyrannus.cpp
+    scripts/northrend/icecrown_citadel/frozen_halls/pit_of_saron/instance_pit_of_saron.cpp
+    scripts/northrend/icecrown_citadel/frozen_halls/pit_of_saron/pit_of_saron.cpp
+    scripts/northrend/icecrown_citadel/frozen_halls/pit_of_saron/pit_of_saron.h
+)
+
+set(sources_instance_n_totchamp
+    scripts/northrend/crusaders_coliseum/trial_of_the_champion/boss_grand_champions.cpp
+    scripts/northrend/crusaders_coliseum/trial_of_the_champion/instance_trial_of_the_champion.cpp
+    scripts/northrend/crusaders_coliseum/trial_of_the_champion/trial_of_the_champion.cpp
+    scripts/northrend/crusaders_coliseum/trial_of_the_champion/trial_of_the_champion.h
+)
+
+set(sources_instance_n_hol
+    scripts/northrend/ulduar/halls_of_lightning/boss_bjarngrim.cpp
+    scripts/northrend/ulduar/halls_of_lightning/boss_ionar.cpp
+    scripts/northrend/ulduar/halls_of_lightning/boss_loken.cpp
+    scripts/northrend/ulduar/halls_of_lightning/boss_volkhan.cpp
+    scripts/northrend/ulduar/halls_of_lightning/instance_halls_of_lightning.cpp
+    scripts/northrend/ulduar/halls_of_lightning/halls_of_lightning.h
+)
+
+set(sources_instance_n_hos
+    scripts/northrend/ulduar/halls_of_stone/boss_maiden_of_grief.cpp
+    scripts/northrend/ulduar/halls_of_stone/boss_sjonnir.cpp
+    scripts/northrend/ulduar/halls_of_stone/halls_of_stone.cpp
+    scripts/northrend/ulduar/halls_of_stone/instance_halls_of_stone.cpp
+    scripts/northrend/ulduar/halls_of_stone/halls_of_stone.h
+)
+
+set(sources_raid_n_eot
+    scripts/northrend/nexus/eye_of_eternity/boss_malygos.cpp
+    scripts/northrend/nexus/eye_of_eternity/instance_eye_of_eternity.cpp
+    scripts/northrend/nexus/eye_of_eternity/eye_of_eternity.h
+)
+
+set(sources_instance_n_hos
+    scripts/northrend/ulduar/halls_of_stone/boss_maiden_of_grief.cpp
+)
+
+set(sources_raid_n_icc
+    scripts/northrend/icecrown_citadel/icecrown_citadel/blood_prince_council.cpp
+    scripts/northrend/icecrown_citadel/icecrown_citadel/boss_blood_queen_lanathel.cpp
+    scripts/northrend/icecrown_citadel/icecrown_citadel/boss_deathbringer_saurfang.cpp
+    scripts/northrend/icecrown_citadel/icecrown_citadel/boss_festergut.cpp
+    scripts/northrend/icecrown_citadel/icecrown_citadel/boss_lady_deathwhisper.cpp
+    scripts/northrend/icecrown_citadel/icecrown_citadel/boss_lord_marrowgar.cpp
+    scripts/northrend/icecrown_citadel/icecrown_citadel/boss_professor_putricide.cpp
+    scripts/northrend/icecrown_citadel/icecrown_citadel/boss_rotface.cpp
+    scripts/northrend/icecrown_citadel/icecrown_citadel/boss_sindragosa.cpp
+    scripts/northrend/icecrown_citadel/icecrown_citadel/boss_the_lich_king.cpp
+    scripts/northrend/icecrown_citadel/icecrown_citadel/boss_valithria_dreamwalker.cpp
+    scripts/northrend/icecrown_citadel/icecrown_citadel/gunship_battle.cpp
+    scripts/northrend/icecrown_citadel/icecrown_citadel/instance_icecrown_citadel.cpp
+    scripts/northrend/icecrown_citadel/icecrown_citadel/icecrown_citadel.h
+)
+
+set(sources_raid_n_naxx
+    scripts/northrend/naxxramas/boss_anubrekhan.cpp
+    scripts/northrend/naxxramas/boss_faerlina.cpp
+    scripts/northrend/naxxramas/boss_four_horsemen.cpp
+    scripts/northrend/naxxramas/boss_gluth.cpp
+    scripts/northrend/naxxramas/boss_gothik.cpp
+    scripts/northrend/naxxramas/boss_grobbulus.cpp
+    scripts/northrend/naxxramas/boss_heigan.cpp
+    scripts/northrend/naxxramas/boss_kelthuzad.cpp
+    scripts/northrend/naxxramas/boss_loatheb.cpp
+    scripts/northrend/naxxramas/boss_maexxna.cpp
+    scripts/northrend/naxxramas/boss_noth.cpp
+    scripts/northrend/naxxramas/boss_patchwerk.cpp
+    scripts/northrend/naxxramas/boss_razuvious.cpp
+    scripts/northrend/naxxramas/boss_sapphiron.cpp
+    scripts/northrend/naxxramas/boss_thaddius.cpp
+    scripts/northrend/naxxramas/instance_naxxramas.cpp
+    scripts/northrend/naxxramas/naxxramas.h
+)
+
+set(sources_raid_n_os
+    scripts/northrend/obsidian_sanctum/boss_sartharion.cpp
+    scripts/northrend/obsidian_sanctum/instance_obsidian_sanctum.cpp
+    scripts/northrend/obsidian_sanctum/obsidian_sanctum.h
+)
+
+set(sources_raid_n_rs
+    scripts/northrend/ruby_sanctum/boss_baltharus.cpp
+    scripts/northrend/ruby_sanctum/boss_halion.cpp
+    scripts/northrend/ruby_sanctum/boss_saviana.cpp
+    scripts/northrend/ruby_sanctum/boss_zarithrian.cpp
+    scripts/northrend/ruby_sanctum/instance_ruby_sanctum.cpp
+    scripts/northrend/ruby_sanctum/ruby_sanctum.h
+)
+
+set(sources_raid_n_totcrus
+    scripts/northrend/crusaders_coliseum/trial_of_the_crusader/boss_anubarak_trial.cpp
+    scripts/northrend/crusaders_coliseum/trial_of_the_crusader/boss_faction_champions.cpp
+    scripts/northrend/crusaders_coliseum/trial_of_the_crusader/boss_jaraxxus.cpp
+    scripts/northrend/crusaders_coliseum/trial_of_the_crusader/boss_northrend_beasts.cpp
+    scripts/northrend/crusaders_coliseum/trial_of_the_crusader/boss_twin_valkyr.cpp
+    scripts/northrend/crusaders_coliseum/trial_of_the_crusader/instance_trial_of_the_crusader.cpp
+    scripts/northrend/crusaders_coliseum/trial_of_the_crusader/trial_of_the_crusader.cpp
+    scripts/northrend/crusaders_coliseum/trial_of_the_crusader/trial_of_the_crusader.h
+)
+
+set(sources_raid_n_ulduar
+    scripts/northrend/ulduar/ulduar/assembly_of_iron.cpp
+    scripts/northrend/ulduar/ulduar/boss_algalon.cpp
+    scripts/northrend/ulduar/ulduar/boss_auriaya.cpp
+    scripts/northrend/ulduar/ulduar/boss_flame_leviathan.cpp
+    scripts/northrend/ulduar/ulduar/boss_freya.cpp
+    scripts/northrend/ulduar/ulduar/boss_general_vezax.cpp
+    scripts/northrend/ulduar/ulduar/boss_hodir.cpp
+    scripts/northrend/ulduar/ulduar/boss_ignis.cpp
+    scripts/northrend/ulduar/ulduar/boss_yogg_saron.cpp
+    scripts/northrend/ulduar/ulduar/boss_kologarn.cpp
+    scripts/northrend/ulduar/ulduar/boss_mimiron.cpp
+    scripts/northrend/ulduar/ulduar/boss_razorscale.cpp
+    scripts/northrend/ulduar/ulduar/boss_thorim.cpp
+    scripts/northrend/ulduar/ulduar/boss_xt_002.cpp
+    scripts/northrend/ulduar/ulduar/instance_ulduar.cpp
+    scripts/northrend/ulduar/ulduar/ulduar.cpp
+    scripts/northrend/ulduar/ulduar/ulduar.h
+)
+
 set(mangosscript_LIB_SRCS
     ${sources}
     ${sources_battlegrounds}
     ${sources_world}
     ${sources_eastern_kingdoms}
     ${sources_kalimdor}
+    ${sources_maelstorm}
+    ${sources_northrend}
+    ${sources_outland}
+	${sources_scarlet_enclave}
+	${sources_instance_ek_brc}
     ${sources_instance_ek_brd}
     ${sources_instance_ek_brs}
     ${sources_instance_ek_tdm}
     ${sources_instance_ek_gno}
+	${sources_instance_ek_gb}
+	${sources_instance_ek_mgt}
     ${sources_instance_ek_sm}
     ${sources_instance_ek_scholo}
     ${sources_instance_ek_sfk}
     ${sources_instance_ek_strat}
     ${sources_instance_ek_st}
+	${sources_instance_ek_tott}
     ${sources_instance_ek_uld}
+    ${sources_raid_ek_kz}
     ${sources_raid_ek_mc}
+	${sources_raid_ek_bwd}
     ${sources_raid_ek_bwl}
-    ${sources_raid_ek_naxx}
+	${sources_raid_ek_za}
     ${sources_raid_ek_zg}
+    ${sources_raid_ek_swp}
     ${sources_instance_k_bdf}
+    ${sources_instance_k_cos}
+    ${sources_instance_k_dp}
     ${sources_instance_k_dm}
+    ${sources_instance_k_hot}
+    ${sources_instance_k_lcot}
     ${sources_instance_k_mara}
+    ${sources_instance_k_ohf}
     ${sources_instance_k_rfd}
     ${sources_instance_k_rfk}
     ${sources_instance_k_wc}
+    ${sources_instance_k_woe}
     ${sources_instance_k_zf}
+    ${sources_raid_k_fl}
+    ${sources_raid_k_ds}
+    ${sources_raid_k_hyjal}
     ${sources_raid_k_ony}
     ${sources_raid_k_raq}
     ${sources_raid_k_taq}
+    ${sources_raid_k_totfw}
+    ${sources_raid_k_vp}
+    ${sources_instance_m_sc}
+    ${sources_instance_n_ah}
+    ${sources_instance_n_an}
+    ${sources_instance_n_dk}
+    ${sources_instance_n_fos}
+    ${sources_instance_n_gundrak}
+    ${sources_instance_n_nexus}
+    ${sources_instance_n_hor}
+    ${sources_instance_n_oculus}
+    ${sources_instance_n_pos}
+    ${sources_instance_n_totchamp}
+    ${sources_instance_n_hol}
+    ${sources_instance_n_hos}
+    ${sources_raid_n_eot}
+    ${sources_raid_n_icc}
+    ${sources_raid_n_naxx}
+    ${sources_raid_n_os}
+    ${sources_raid_n_rs}
+    ${sources_raid_n_totcrus}
+    ${sources_raid_n_ulduar}
 )
 
 mangos_source_group(${mangosscript_LIB_SRCS})
