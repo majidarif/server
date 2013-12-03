@@ -22,7 +22,7 @@ SDCategory: Azjol'Nerub
 EndScriptData */
 
 #include "precompiled.h"
-#include "azjol-nerub.h"
+#include "azjol_nerub.h"
 
 enum
 {

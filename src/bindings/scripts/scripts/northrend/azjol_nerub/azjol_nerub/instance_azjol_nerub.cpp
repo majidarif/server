@@ -22,7 +22,7 @@ SDCategory: Azjol-Nerub
 EndScriptData */
 
 #include "precompiled.h"
-#include "azjol-nerub.h"
+#include "azjol_nerub.h"
 
 instance_azjol_nerub::instance_azjol_nerub(Map* pMap) : ScriptedInstance(pMap),
     m_uiWatcherTimer(0),

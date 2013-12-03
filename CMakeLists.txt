@@ -121,7 +121,7 @@ set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib CACHE INTERNAL "" FORCE)
 # Set default config options
 
 # mangos-three internal features
-option(WITH_DEBUG_OUTPUT    "Enable mangos-three debug output (only enable for development)"                 OFF)
+option(WITH_DEBUG_OUTPUT    "Enable mangos-three debug output (only enable for development)"                OFF)
 option(WITH_GIT_ID          "Build git database update helper"                                              OFF)
 mark_as_advanced(WITH_GIT_ID)
 
@@ -306,7 +306,7 @@ elseif(WIN32)
             add_definitions(/D_ALLOW_KEYWORD_MACROS)
         endif()
 
-        set(CMAKE_CXX_FLAGS "/nologo /J /Gd /EHsc" CACHE STRING "MSVC MT C++ flags " FORCE)
+        set(CMAKE_CXX_FLAGS "/nologo /J /Gd /EHsc /MD" CACHE STRING "MSVC MT C++ flags " FORCE)
         set(CMAKE_C_FLAGS   "/nologo /J /Gd"       CACHE STRING "MSVC MT C++ flags " FORCE)
 
         if(CMAKE_CL_64)
