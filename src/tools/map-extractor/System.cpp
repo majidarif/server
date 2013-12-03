@@ -1465,7 +1465,7 @@ void LoadBaseMPQFiles()
 
 		if (!SFileOpenArchive(filename, 0, MPQ_OPEN_READ_ONLY, &worldMpqHandle))
         {
-            if (GetLastError() != ERROR_PATH_NOT_FOUND)
+            if (GetLastError() != ERROR_FILE_NOT_FOUND)
                 _tprintf(_T("Cannot open patch archive %s\n"), filename);
             else
                 _tprintf(_T("Not found %s\n"), filename);
@@ -1488,7 +1488,7 @@ void LoadBaseMPQFiles()
 
 		if (!SFileOpenArchive(filename, 0, MPQ_OPEN_READ_ONLY, &worldMpqHandle))
         {
-            if (GetLastError() != ERROR_PATH_NOT_FOUND)
+            if (GetLastError() != ERROR_FILE_NOT_FOUND)
                 printf(_T("Cannot open patch archive %s\n"), filename);
             else
                 printf(_T("Not found %s\n"), filename);
