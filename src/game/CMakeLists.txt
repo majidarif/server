@@ -50,11 +50,15 @@ add_subdirectory(movement)
 # Define the game library
 set(sources
     AccountMgr.cpp
-    AddonHandler.cpp
+	AchievementMgr.cpp
     AggressorAI.cpp
+	ArenaTeam.cpp
+	ArenaTeamHandler.cpp
     AuctionHouseHandler.cpp
     AuctionHouseMgr.cpp
     Bag.cpp
+	Calendar.cpp
+	CalendarHandler.cpp
     Camera.cpp
     Channel.cpp
     ChannelHandler.cpp
@@ -66,17 +70,19 @@ set(sources
     CombatHandler.cpp
     ConfusedMovementGenerator.cpp
     Corpse.cpp
+    Creature.cpp
     CreatureAI.cpp
     CreatureAIRegistry.cpp
     CreatureAISelector.cpp
-    Creature.cpp
     CreatureEventAI.cpp
     CreatureEventAIMgr.cpp
     CreatureLinkingMgr.cpp
+	DB2Stores.cpp
     DBCStores.cpp
+	DBCStructure.cpp
     debugcmds.cpp
-    DuelHandler.cpp
     DynamicObject.cpp
+    DuelHandler.cpp
     FleeingMovementGenerator.cpp
     FollowerReference.cpp
     GameEventMgr.cpp
@@ -121,16 +127,17 @@ set(sources
     MovementHandler.cpp
     NPCHandler.cpp
     NullCreatureAI.cpp
-    ObjectAccessor.cpp
     Object.cpp
+    ObjectAccessor.cpp
     ObjectGridLoader.cpp
     ObjectGuid.cpp
     ObjectMgr.cpp
     ObjectPosSelector.cpp
     Opcodes.cpp
     PathFinder.cpp
-    PetAI.cpp
+#    pchdef.cpp
     Pet.cpp
+    PetAI.cpp
     PetHandler.cpp
     PetitionsHandler.cpp
     Player.cpp
@@ -144,10 +151,12 @@ set(sources
     ReactorAI.cpp
     ReputationMgr.cpp
     ScriptMgr.cpp
+	SkillDiscovery.cpp
+	SkillExtraItems.cpp
     SkillHandler.cpp
     SocialMgr.cpp
-    SpellAuras.cpp
     Spell.cpp
+    SpellAuras.cpp
     SpellEffects.cpp
     SpellHandler.cpp
     SpellMgr.cpp
@@ -157,13 +166,17 @@ set(sources
     TaxiHandler.cpp
     TemporarySummon.cpp
     ThreatManager.cpp
-    TotemAI.cpp
     Totem.cpp
+    TotemAI.cpp
     TradeHandler.cpp
     Transports.cpp
-    UnitAuraProcHandler.cpp
+	TransportSystem.cpp
     Unit.cpp
+    UnitAuraProcHandler.cpp
     UpdateData.cpp
+	Vehicle.cpp
+	VehicleHandler.cpp
+	VoiceChatHandler.cpp
     WaypointManager.cpp
     WaypointMovementGenerator.cpp
     Weather.cpp
@@ -175,10 +188,12 @@ set(sources
 
 set(headers
     AccountMgr.h
-    AddonHandler.h
+	AchievementMgr.h
     AggressorAI.h
+	ArenaTeam.h
     AuctionHouseMgr.h
     Bag.h
+	Calendar.h
     Camera.h
     Cell.h
     CellImpl.h
@@ -188,14 +203,17 @@ set(headers
     Chat.h
     ConfusedMovementGenerator.h
     Corpse.h
+    Creature.h
     CreatureAI.h
     CreatureAIImpl.h
     CreatureAIRegistry.h
     CreatureAISelector.h
     CreatureEventAI.h
     CreatureEventAIMgr.h
-    Creature.h
     CreatureLinkingMgr.h
+	DB2fmt.h
+	DB2Stores.h
+	DB2Structure.h
     DBCEnums.h
     DBCfmt.h
     DBCStores.h
@@ -224,11 +242,10 @@ set(headers
     HostileRefManager.h
     IdleMovementGenerator.h
     InstanceData.h
-    ItemEnchantmentMgr.h
     Item.h
+    ItemEnchantmentMgr.h
     ItemPrototype.h
     Language.h
-    LFGHandler.h
     LootMgr.h
     Mail.h
     Map.h
@@ -244,19 +261,20 @@ set(headers
     MovementGeneratorImpl.h
     NPCHandler.h
     NullCreatureAI.h
+    Object.h
     ObjectAccessor.h
     ObjectGridLoader.h
     ObjectGuid.h
-    Object.h
     ObjectMgr.h
     ObjectPosSelector.h
     Opcodes.h
-    PathFinder.h
     Path.h
-    PetAI.h
+    PathFinder.h
+#	pchdef.h
     Pet.h
-    PlayerDump.h
+    PetAI.h
     Player.h
+    PlayerDump.h
     PointMovementGenerator.h
     PoolManager.h
     QuestDef.h
@@ -265,23 +283,28 @@ set(headers
     ReputationMgr.h
     ScriptMgr.h
     SharedDefines.h
+	SkillDiscovery.h
+	SkillExtraItems.h
     SocialMgr.h
     SpellAuraDefines.h
+	Spell.h
+	SpellAuraDefines.h
     SpellAuras.h
-    Spell.h
     SpellMgr.h
     SQLStorages.h
     TargetedMovementGenerator.h
     TemporarySummon.h
     ThreatManager.h
-    TotemAI.h
     Totem.h
+    TotemAI.h
     Transports.h
-    UnitEvents.h
+	TransportSystem.h
     Unit.h
+    UnitEvents.h
     UpdateData.h
     UpdateFields.h
     UpdateMask.h
+	Vehicle.h
     WaypointManager.h
     WaypointMovementGenerator.h
     Weather.h
