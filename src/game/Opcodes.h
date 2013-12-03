@@ -1164,8 +1164,8 @@ enum Opcodes
     SMSG_CALENDAR_SEND_NUM_PENDING                        = 0x0C17, // 4.3.4 15595
     CMSG_SAVE_DANCE                                       = 0x144A,
     SMSG_NOTIFY_DANCE                                     = 0x144B,
-    CMSG_PLAY_DANCE                                       = 0x144C,
-    SMSG_PLAY_DANCE                                       = 0x144D,
+    CMSG_PLAY_DANCE                                       = 0x6914,	// 4.3.4 15595
+    SMSG_PLAY_DANCE                                       = 0x4704,	// 4.3.4 15595
     CMSG_LOAD_DANCES                                      = 0x144E,
     CMSG_STOP_DANCE                                       = 0x144F,
     SMSG_STOP_DANCE                                       = 0x1450,
