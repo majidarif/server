@@ -155,7 +155,7 @@ class FileLoader
          * @param log
          * @return bool
          */
-		bool FileLoader::loadFile(HANDLE mpq, char* filename, bool log = true);
+		bool loadFile(HANDLE mpq, char* filename, bool log = true);
         /**
          * @brief
          *
