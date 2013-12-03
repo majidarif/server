@@ -35,6 +35,12 @@ set(vmap_extractor_LIB_SRCS ${sources} ${headers})
 
 mangos_source_group(${vmap_extractor_LIB_SRCS})
 
+if( NOT WIN32 )
+  add_definitions("-Wall")
+  add_definitions("-ggdb")
+  add_definitions("-O3")
+endif()
+
 include_directories(
     ${CMAKE_SOURCE_DIR}/dep/StormLib/src
     ${ZLIB_INCLUDE_DIR}

@@ -19,13 +19,7 @@
 #ifndef LOAD_LIB_H
 #define LOAD_LIB_H
 
-#ifdef _DLL
-#undef _DLL
-#endif
-
-#include <string>
 #include "StormLib.h"
-#include <deque>
 
 #ifdef WIN32
 typedef __int64            int64;
@@ -93,15 +87,6 @@ typedef uint16_t           uint16;
 typedef uint8_t            uint8;
 #endif
 
-typedef std::deque<HANDLE> ArchiveSet;
-typedef std::pair<ArchiveSet::const_iterator, ArchiveSet::const_iterator> ArchiveSetBounds;
-
-bool OpenArchive(char const* mpqFileName, HANDLE* mpqHandlePtr = NULL);
-bool OpenNewestFile(char const* filename, HANDLE* fileHandlerPtr);
-ArchiveSetBounds GetArchivesBounds();
-bool ExtractFile(char const* mpq_name, std::string const& filename);
-void CloseArchives();
-
 #define FILE_FORMAT_VERSION    18
 
 /**
@@ -165,11 +150,12 @@ class FileLoader
         /**
          * @brief
          *
+		 * @param mpq
          * @param filename
          * @param log
          * @return bool
          */
-        bool loadFile(char* filename, bool log = true);
+		bool FileLoader::loadFile(HANDLE mpq, char* filename, bool log = true);
         /**
          * @brief
          *

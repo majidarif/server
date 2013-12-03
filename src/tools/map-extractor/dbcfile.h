@@ -20,12 +20,12 @@
 #define DBCFILE_H
 #include <cassert>
 #include <string>
+#include "StormLib.h"
 
 #ifdef _DLL
 #undef _DLL
 #endif
 
-#include "StormLib.h"
 
 /**
  * @brief
