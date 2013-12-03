@@ -31,13 +31,15 @@ include(MacroMangosSourceGroup)
 set(sources
     Auth/AuthCrypt.cpp
     Auth/BigNumber.cpp
-    Auth/Hmac.cpp
+    Auth/HMACSHA1.cpp
+    Auth/SARC4.cpp
     Auth/Sha1.cpp
     Auth/md5.c
 
     Config/Config.cpp
 
     Database/Database.cpp
+    Database/DB2FileLoader.cpp
     Database/DBCFileLoader.cpp
     Database/Field.cpp
     Database/SqlDelayThread.cpp
@@ -55,8 +57,9 @@ set(sources
 set(headers
     Auth/AuthCrypt.h
     Auth/BigNumber.h
-    Auth/Hmac.h
+    Auth/HMACSHA1.h
     Auth/md5.h
+	Auth/SARC4.h
     Auth/Sha1.h
 
     Config/Config.h
@@ -64,6 +67,8 @@ set(headers
     Database/Database.h
     Database/DatabaseEnv.h
     Database/DatabaseImpl.h
+    Database/DB2FileLoader.h
+    Database/DB2Store.h
     Database/DBCFileLoader.h
     Database/DBCStore.h
     Database/Field.h
