@@ -52,13 +52,15 @@ add_executable(map-extractor
 	${map_extractor_LIB_SRCS}
 )
 
+add_dependencies(map-extractor storm)
+
+
 target_link_libraries(map-extractor
 	storm
 	mangos-loadlib
 	${ZLIB_LIBRARIES}
 )
 
-add_dependencies(map-extractor storm)
 
 if( UNIX )
   install(TARGETS map-extractor DESTINATION "${BIN_DIR}")

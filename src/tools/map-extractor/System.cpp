@@ -1410,7 +1410,7 @@ void LoadLocaleMPQFiles(int const locale)
 
 	if (!SFileOpenArchive(filename, 0, MPQ_OPEN_READ_ONLY, &LocaleMpq))
 	{
-		if (GetLastError() != ERROR_PATH_NOT_FOUND)
+		if (GetLastError() != ERROR_FILE_NOT_FOUND)
 		{
 			_tprintf(_T("\nLoading %s locale MPQs\n"), LocalesT[locale]);
 			_tprintf(_T("Cannot open archive %s\n"), filename);
