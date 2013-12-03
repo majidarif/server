@@ -37,7 +37,7 @@ mangos_source_group(${vmap_extractor_LIB_SRCS})
 
 include_directories(
     ${ZLIB_INCLUDE_DIR}
-    ${CMAKE_SOURCE_DIR}/dep/libmpq/
+    ${CMAKE_SOURCE_DIR}/dep/StormLib/
     ${CMAKE_CURRENT_SOURCE_DIR}/loadlib/
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_BINARY_DIR}
@@ -46,7 +46,7 @@ include_directories(
 #-----------------------------------------------------------------------------
 # Build the vmap-extractor application
 add_executable(vmap-extractor ${vmap_extractor_LIB_SRCS})
-target_link_libraries(vmap-extractor mpq ${BZIP2_LIBRARIES} ${ZLIB_LIBRARIES})
+target_link_libraries(vmap-extractor StormLib ${BZIP2_LIBRARIES} ${ZLIB_LIBRARIES})
 install(TARGETS vmap-extractor DESTINATION ${BIN_DIR})
 
 if(WIN32)
