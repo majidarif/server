@@ -227,7 +227,7 @@ set(sources_instance_ek_gb
     scripts/eastern_kingdoms/grim_batol/grim_batol.h
 )
 
-set(sources_instance_ek_mgt(
+set(sources_instance_ek_mgt
     scripts/eastern_kingdoms/magisters_terrace/boss_felblood_kaelthas.cpp
     scripts/eastern_kingdoms/magisters_terrace/boss_priestess_delrissa.cpp
     scripts/eastern_kingdoms/magisters_terrace/boss_selin_fireheart.cpp
