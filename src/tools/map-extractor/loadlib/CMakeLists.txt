@@ -36,6 +36,8 @@ set(loadlib_LIB_SRCS ${sources} ${headers})
 mangos_source_group(${loadlib_LIB_SRCS})
 
 include_directories(
+    ${CMAKE_SOURCE_DIR}/dep/StormLib
+    ${CMAKE_SOURCE_DIR}/dep/StormLib/src
     ${ZLIB_INCLUDE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/../
     ${CMAKE_CURRENT_SOURCE_DIR}
@@ -45,7 +47,7 @@ include_directories(
 #-----------------------------------------------------------------------------
 # Build the loadlib library
 add_library(mangos-loadlib STATIC ${loadlib_LIB_SRCS})
-target_link_libraries(mangos-loadlib ${ZLIB_LIBRARIES})
+target_link_libraries(mangos-loadlib storm ${ZLIB_LIBRARIES})
 
 if(WIN32)
     # Disabled for now. GnuWin32-zlib does not need this

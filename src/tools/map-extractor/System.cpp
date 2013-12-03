@@ -1412,7 +1412,7 @@ int main(int argc, char* arg[])
 {
     printf("mangos-three DBC & map (version %s) extractor\n\n", MAP_VERSION_MAGIC);
 
-    if (!HandleArgs(argc, argv))
+    if (!HandleArgs(argc, arg))
     {
         return 1;
     }

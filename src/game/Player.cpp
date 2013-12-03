@@ -2953,7 +2953,7 @@ void Player::SendInitialSpells()
         spell_cooldown_data cooldown;
         cooldown.spell_id = uint16(itr->first);
         cooldown.item_id = uint16(itr->second.itemid);
-        cooldown.spell_category = uint16(sEntry->Category);
+        cooldown.spell_category = uint16(sEntry->GetCategory());
 
         /* if the spell is on an infinite cooldown, send it in a special form
          * ... I think */
@@ -2964,7 +2964,7 @@ void Player::SendInitialSpells()
             continue;
         }
 
-        time_t cooldown = itr->second.end > curTime ? (itr->second.end - curTime) * IN_MILLISECONDS : 0;
+        time_t cooldown_time = itr->second.end > curTime ? (itr->second.end - curTime) * IN_MILLISECONDS : 0;
 
         /* This code looks wrong...
          * TODO: Research whether this is the correct way to send category cooldowns */
