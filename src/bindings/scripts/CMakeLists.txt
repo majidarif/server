@@ -140,9 +140,9 @@ set(sources_kalimdor
 )
 
 set(sources_maelstorm
-    scripts/maelstorm/deepholm.cpp
-    scripts/maelstorm/kezan.cpp
-    scripts/maelstorm/lost_isles.cpp
+    scripts/maelstrom/deepholm.cpp
+    scripts/maelstrom/kezan.cpp
+    scripts/maelstrom/lost_isles.cpp
 )
 
 set(sources_northrend
@@ -170,9 +170,9 @@ set(sources_outland
 )
 
 set(sources_scarlet_enclave
-    scripts/eastern_kingdoms/scarlet_envlave/ebon_hold.cpp
-    scripts/eastern_kingdoms/scarlet_envlave/world_map_ebon_hold.cpp
-    scripts/eastern_kingdoms/scarlet_envlave/world_map_ebon_hold.h
+    scripts/eastern_kingdoms/scarlet_enclave/ebon_hold.cpp
+    scripts/eastern_kingdoms/scarlet_enclave/world_map_ebon_hold.cpp
+    scripts/eastern_kingdoms/scarlet_enclave/world_map_ebon_hold.h
 )
 
 set(sources_instance_ek_brc
@@ -334,21 +334,21 @@ set(sources_raid_ek_bwd
     scripts/eastern_kingdoms/blackrock_mountain/blackwing_descent/boss_nefarian_descent.cpp
     scripts/eastern_kingdoms/blackrock_mountain/blackwing_descent/omnotron_defense.cpp
     scripts/eastern_kingdoms/blackrock_mountain/blackwing_descent/instance_blackwing_descent.cpp
-    scripts/eastern_kingdoms/blackrock_mountain/blackwing_descent/blackwing_descent.h.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackwing_descent/blackwing_descent.h
 )
 
 set(sources_raid_ek_bwl
-    scripts/eastern_kingdoms/blackwing_lair/boss_broodlord_lashlayer.cpp
-    scripts/eastern_kingdoms/blackwing_lair/boss_chromaggus.cpp
-    scripts/eastern_kingdoms/blackwing_lair/boss_ebonroc.cpp
-    scripts/eastern_kingdoms/blackwing_lair/boss_firemaw.cpp
-    scripts/eastern_kingdoms/blackwing_lair/boss_flamegor.cpp
-    scripts/eastern_kingdoms/blackwing_lair/boss_nefarian.cpp
-    scripts/eastern_kingdoms/blackwing_lair/boss_razorgore.cpp
-    scripts/eastern_kingdoms/blackwing_lair/boss_vaelastrasz.cpp
-    scripts/eastern_kingdoms/blackwing_lair/boss_victor_nefarius.cpp
-    scripts/eastern_kingdoms/blackwing_lair/instance_blackwing_lair.cpp
-    scripts/eastern_kingdoms/blackwing_lair/blackwing_lair.h
+    scripts/eastern_kingdoms/blackrock_mountain/blackwing_lair/boss_broodlord_lashlayer.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackwing_lair/boss_chromaggus.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackwing_lair/boss_ebonroc.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackwing_lair/boss_firemaw.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackwing_lair/boss_flamegor.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackwing_lair/boss_nefarian.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackwing_lair/boss_razorgore.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackwing_lair/boss_vaelastrasz.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackwing_lair/boss_victor_nefarius.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackwing_lair/instance_blackwing_lair.cpp
+    scripts/eastern_kingdoms/blackrock_mountain/blackwing_lair/blackwing_lair.h
 )
 
 set(sources_raid_ek_za
@@ -379,14 +379,14 @@ set(sources_raid_ek_zg
 )
 
 set(sources_raid_ek_swp
-    scripts/eastern_kingdoms/sunwell_plateu/boss_brutallus.cpp
-    scripts/eastern_kingdoms/sunwell_plateu/boss_eredar_twins.cpp
-    scripts/eastern_kingdoms/sunwell_plateu/boss_felmyst.cpp
-    scripts/eastern_kingdoms/sunwell_plateu/boss_kalecgos.cpp
-    scripts/eastern_kingdoms/sunwell_plateu/boss_kiljaeden.cpp
-    scripts/eastern_kingdoms/sunwell_plateu/boss_muru.cpp
-    scripts/eastern_kingdoms/sunwell_plateu/instance_sunwell_plateau.cpp
-    scripts/eastern_kingdoms/sunwell_plateu/sunwell_plateau.h
+    scripts/eastern_kingdoms/sunwell_plateau/boss_brutallus.cpp
+    scripts/eastern_kingdoms/sunwell_plateau/boss_eredar_twins.cpp
+    scripts/eastern_kingdoms/sunwell_plateau/boss_felmyst.cpp
+    scripts/eastern_kingdoms/sunwell_plateau/boss_kalecgos.cpp
+    scripts/eastern_kingdoms/sunwell_plateau/boss_kiljaeden.cpp
+    scripts/eastern_kingdoms/sunwell_plateau/boss_muru.cpp
+    scripts/eastern_kingdoms/sunwell_plateau/instance_sunwell_plateau.cpp
+    scripts/eastern_kingdoms/sunwell_plateau/sunwell_plateau.h
 )
 
 set(sources_instance_k_bdf
@@ -564,12 +564,12 @@ set(sources_raid_k_vp
 )
 
 set(sources_instance_m_sc
-    scripts/maelstorm/stonecore/boss_corborus.cpp
-    scripts/maelstorm/stonecore/boss_ozruk.cpp
-    scripts/maelstorm/stonecore/boss_priestess_azil.cpp
-    scripts/maelstorm/stonecore/boss_slabhide.cpp
-    scripts/maelstorm/stonecore/instance_stonecore.cpp
-    scripts/maelstorm/stonecore/stonecore.h
+    scripts/maelstrom/stonecore/boss_corborus.cpp
+    scripts/maelstrom/stonecore/boss_ozruk.cpp
+    scripts/maelstrom/stonecore/boss_priestess_azil.cpp
+    scripts/maelstrom/stonecore/boss_slabhide.cpp
+    scripts/maelstrom/stonecore/instance_stonecore.cpp
+    scripts/maelstrom/stonecore/stonecore.h
 )
 
 set(sources_instance_n_ah
@@ -676,21 +676,21 @@ set(sources_instance_n_hos
 )
 
 set(sources_instance_n_uk
-    scripts/northrend/ulduar/utgarde_keep/boss_ingvar.cpp
-    scripts/northrend/ulduar/utgarde_keep/boss_keleseth.cpp
-    scripts/northrend/ulduar/utgarde_keep/boss_skarvald_and_dalronn.cpp
-    scripts/northrend/ulduar/utgarde_keep/utgarde_keep.cpp
-    scripts/northrend/ulduar/utgarde_keep/instance_utgarde_keep.cpp
-    scripts/northrend/ulduar/utgarde_keep/utgarde_keep.h
+    scripts/northrend/utgarde_keep/utgarde_keep/boss_ingvar.cpp
+    scripts/northrend/utgarde_keep/utgarde_keep/boss_keleseth.cpp
+    scripts/northrend/utgarde_keep/utgarde_keep/boss_skarvald_and_dalronn.cpp
+    scripts/northrend/utgarde_keep/utgarde_keep/utgarde_keep.cpp
+    scripts/northrend/utgarde_keep/utgarde_keep/instance_utgarde_keep.cpp
+    scripts/northrend/utgarde_keep/utgarde_keep/utgarde_keep.h
 )
 
 set(sources_instance_n_up
-    scripts/northrend/ulduar/utgarde_pinnacle/boss_gortok.cpp
-    scripts/northrend/ulduar/utgarde_pinnacle/boss_ymiron.cpp
-    scripts/northrend/ulduar/utgarde_pinnacle/boss_skadi.cpp
-    scripts/northrend/ulduar/utgarde_pinnacle/boss_svala.cpp
-    scripts/northrend/ulduar/utgarde_pinnacle/instance_utgarde_pinnacle.cpp
-    scripts/northrend/ulduar/utgarde_pinnacle/utgarde_pinnacle.h
+    scripts/northrend/utgarde_keep/utgarde_pinnacle/boss_gortok.cpp
+    scripts/northrend/utgarde_keep/utgarde_pinnacle/boss_ymiron.cpp
+    scripts/northrend/utgarde_keep/utgarde_pinnacle/boss_skadi.cpp
+    scripts/northrend/utgarde_keep/utgarde_pinnacle/boss_svala.cpp
+    scripts/northrend/utgarde_keep/utgarde_pinnacle/instance_utgarde_pinnacle.cpp
+    scripts/northrend/utgarde_keep/utgarde_pinnacle/utgarde_pinnacle.h
 )
 
 set(sources_instance_n_vh
@@ -857,10 +857,10 @@ set(sources_instance_out_hsh
 )
 
 set(sources_instance_out_mecha
-    scripts/outland/tempest_keep/mechanar/boss_nethermancer_sepethrea.cpp
-    scripts/outland/tempest_keep/mechanar/boss_pathaleon_the_calculator.cpp
-    scripts/outland/tempest_keep/mechanar/instance_mechanar.cpp
-    scripts/outland/tempest_keep/mechanar/mechanar.h
+    scripts/outland/tempest_keep/the_mechanar/boss_nethermancer_sepethrea.cpp
+    scripts/outland/tempest_keep/the_mechanar/boss_pathaleon_the_calculator.cpp
+    scripts/outland/tempest_keep/the_mechanar/instance_mechanar.cpp
+    scripts/outland/tempest_keep/the_mechanar/mechanar.h
 )
 
 set(sources_instance_out_sl
