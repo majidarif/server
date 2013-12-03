@@ -27,7 +27,7 @@
 #-----------------------------------------------------------------------------
 # Build internal libmpq
 if(WITH_MAP_TOOLS)
-    add_subdirectory(libmpq)
+    add_subdirectory(StormLib)
 endif()
 
 #-----------------------------------------------------------------------------
