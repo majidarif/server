@@ -40,7 +40,6 @@ set(map_extractor_LIB_SRCS ${sources} ${headers})
 mangos_source_group(${map_extractor_LIB_SRCS})
 
 include_directories(
-    ${CMAKE_SOURCE_DIR}/dep/StormLib
     ${CMAKE_SOURCE_DIR}/dep/StormLib/src
     ${ZLIB_INCLUDE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}
@@ -50,6 +49,18 @@ include_directories(
 
 #-----------------------------------------------------------------------------
 # Build the map-extractor application
-add_executable(map-extractor ${map_extractor_LIB_SRCS})
-target_link_libraries(map-extractor storm mangos-loadlib ${ZLIB_LIBRARIES})
+add_executable(
+	map-extractor
+	${map_extractor_LIB_SRCS}
+)
+
+target_link_libraries(
+	map-extractor
+	mangos-loadlib
+	${ZLIB_LIBRARIES}
+	storm
+)
+
+add_dependencies(map-extractor storm)
+
 install(TARGETS map-extractor DESTINATION ${BIN_DIR})

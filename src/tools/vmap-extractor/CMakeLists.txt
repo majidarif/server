@@ -36,7 +36,6 @@ set(vmap_extractor_LIB_SRCS ${sources} ${headers})
 mangos_source_group(${vmap_extractor_LIB_SRCS})
 
 include_directories(
-    ${CMAKE_SOURCE_DIR}/dep/StormLib
     ${CMAKE_SOURCE_DIR}/dep/StormLib/src
     ${ZLIB_INCLUDE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/loadlib/
