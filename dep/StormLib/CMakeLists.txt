@@ -212,33 +212,55 @@ set(TOMMATH_FILES
            src/libtommath/bn_s_mp_sub.c
 )
 
-set(TEST_SRC_FILES
-            test/Test.cpp
+set(ZLIB_BZIP2_FILES
+           src/bzip2/blocksort.c
+           src/bzip2/bzlib.c
+           src/bzip2/compress.c
+           src/bzip2/crctable.c
+           src/bzip2/decompress.c
+           src/bzip2/huffman.c
+           src/bzip2/randtable.c
+           src/zlib/adler32.c
+           src/zlib/compress2.c
+           src/zlib/crc32.c
+           src/zlib/deflate.c
+           src/zlib/inffast.c
+           src/zlib/inflate.c
+           src/zlib/inftrees.c
+           src/zlib/trees.c
+           src/zlib/zutil.c
 )
+
+# set(TEST_SRC_FILES
+#            test/Test.cpp
+# )
 
 add_definitions(-D_7ZIP_ST -DBZ_STRICT_ANSI)
 
 if(WIN32)
     if(MSVC)
-		add_definitions(-D_7ZIP_ST -DWIN32)
-		file(GLOB win_headers ${CMAKE_CURRENT_SOURCE_DIR}/win/)
-		set(${SRC_FILES} ${SRC_FILES} ${win_headers})
+        message(STATUS "Using MSVC")
+        add_definitions(-D_7ZIP_ST -DWIN32)
+    else()
+        message(STATUS "Using mingw")
     endif()
-    set(SRC_ADDITIONAL_FILES ${ZLIB_LIBRARIES} ${BZIB2_LIBRARIES} ${TOMCRYPT_FILES} ${TOMMATH_FILES})
+    set(SRC_ADDITIONAL_FILES ${ZLIB_BZIP2_FILES} ${TOMCRYPT_FILES} ${TOMMATH_FILES})
     set(LINK_LIBS wininet)
 endif()
 
 if(APPLE)
+    message(STATUS "Using Mac OS X port")
     set(LINK_LIBS z bz2)
     set(SRC_ADDITIONAL_FILES ${TOMCRYPT_FILES} ${TOMMATH_FILES})
 endif()
 
 if (${CMAKE_SYSTEM_NAME} STREQUAL Linux)
+    message(STATUS "Using Linux port")
     option(WITH_LIBTOMCRYPT "Use system LibTomCrypt library" OFF)
     if(WITH_LIBTOMCRYPT)
-        set(LINK_LIBS ${ZLIB_LIBRARIES} ${BZIB2_LIBRARIES} tomcrypt)
+        set(LINK_LIBS z bz2 tomcrypt)
     else()
-        set(LINK_LIBS ${ZLIB_LIBRARIES} ${BZIB2_LIBRARIES})
+        set(LINK_LIBS z bz2)
         set(SRC_ADDITIONAL_FILES ${TOMCRYPT_FILES} ${TOMMATH_FILES})
     endif()
 endif()
@@ -246,13 +268,27 @@ endif()
 add_library(storm STATIC ${SRC_FILES} ${SRC_ADDITIONAL_FILES})
 target_link_libraries(storm ${LINK_LIBS})
 
-target_link_libraries(storm ${LINK_LIBS})
+# option(WITH_TEST "Compile Test application" OFF)
+# if(WITH_TEST)
+#      add_executable(storm_test ${TEST_SRC_FILES})
+#      target_link_libraries(storm_test storm)
+# endif()
+
+if(APPLE)
+    set_target_properties(storm PROPERTIES FRAMEWORK true)
+    set_target_properties(storm PROPERTIES PUBLIC_HEADER "src/StormLib.h src/StormPort.h")
+    set_target_properties(storm PROPERTIES LINK_FLAGS "-framework Carbon")
+endif()
 
 if(UNIX)
     set_target_properties(storm PROPERTIES VERSION 8.20.0)
     set_target_properties(storm PROPERTIES SOVERSION 8.20)
 endif()
 
+# On Win32, build StormLib.dll since we don't want to clash with Storm.dll
 if(WIN32)
-	set_target_properties(storm PROPERTIES OUTPUT_NAME StormLib)
+    set_target_properties(storm PROPERTIES OUTPUT_NAME StormLib)
 endif()
+
+install(TARGETS storm RUNTIME DESTINATION bin LIBRARY DESTINATION lib ARCHIVE DESTINATION lib FRAMEWORK DESTINATION /Library/Frameworks)
+install(FILES src/StormLib.h src/StormPort.h DESTINATION include)
