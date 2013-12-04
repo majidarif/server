@@ -601,9 +601,12 @@ void AddScripts()
     AddSC_boss_ragnaros();
     AddSC_instance_molten_core();
     AddSC_molten_core();
-    AddSC_deadmines();                                      // deadmines
-    AddSC_boss_mr_smite();
-    AddSC_instance_deadmines();
+	AddSC_boss_admiral_ripsnarl();                  		// deadmines
+	AddSC_boss_cookie();
+	AddSC_boss_foe_reaper_5000();
+	AddSC_boss_glubtok();
+	AddSC_boss_helix_gearbreaker();
+	AddSC_instance_deadmines();
     AddSC_gnomeregan();                                     // gnomeregan
     AddSC_boss_thermaplugg();
     AddSC_instance_gnomeregan();
