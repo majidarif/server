@@ -15,35 +15,14 @@
  */
 
 /* ScriptData
-SDName: Deadmines
-SD%Complete: 100
-SDComment: Contains GO for Iron Clad door event
+SDName: boss_cookie
+SD%Complete: 0
+SDComment: Placeholder
 SDCategory: Deadmines
 EndScriptData */
 
 #include "precompiled.h"
-#include "deadmines.h"
 
-bool GOUse_go_defias_cannon(Player* /*pPlayer*/, GameObject* pGo)
+void AddSC_boss_cookie()
 {
-    ScriptedInstance* pInstance = (ScriptedInstance*)pGo->GetInstanceData();
-
-    if (!pInstance)
-        return false;
-
-    if (pInstance->GetData(TYPE_IRON_CLAD_DOOR) == DONE)
-        return false;
-
-    pInstance->SetData(TYPE_IRON_CLAD_DOOR, DONE);
-    return false;
-}
-
-void AddSC_deadmines()
-{
-    Script* pNewScript;
-
-    pNewScript = new Script;
-    pNewScript->Name = "go_defias_cannon";
-    pNewScript->pGOUse = &GOUse_go_defias_cannon;
-    pNewScript->RegisterSelf();
 }

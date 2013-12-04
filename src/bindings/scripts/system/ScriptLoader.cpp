@@ -73,8 +73,11 @@ extern void AddSC_boss_majordomo();
 extern void AddSC_boss_ragnaros();
 extern void AddSC_instance_molten_core();
 extern void AddSC_molten_core();
-extern void AddSC_boss_mr_smite();                          // deadmines
-extern void AddSC_deadmines();
+extern void AddSC_boss_admiral_ripsnarl();                  // deadmines
+extern void AddSC_boss_cookie();
+extern void AddSC_boss_foe_reaper_5000();
+extern void AddSC_boss_glubtok();
+extern void AddSC_boss_helix_gearbreaker();
 extern void AddSC_instance_deadmines();
 extern void AddSC_gnomeregan();                             // gnomeregan
 extern void AddSC_boss_thermaplugg();
