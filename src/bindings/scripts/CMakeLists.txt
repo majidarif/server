@@ -205,8 +205,11 @@ set(sources_instance_ek_brs
 )
 
 set(sources_instance_ek_tdm
-    scripts/eastern_kingdoms/deadmines/boss_mr_smite.cpp
-    scripts/eastern_kingdoms/deadmines/deadmines.cpp
+    scripts/eastern_kingdoms/deadmines/boss_admiral_ripsnarl.cpp
+    scripts/eastern_kingdoms/deadmines/boss_cookie.cpp
+    scripts/eastern_kingdoms/deadmines/boss_foe_reaper_5000.cpp
+    scripts/eastern_kingdoms/deadmines/boss_glubtok.cpp
+    scripts/eastern_kingdoms/deadmines/boss_helix_gearbreaker.cpp
     scripts/eastern_kingdoms/deadmines/instance_deadmines.cpp
     scripts/eastern_kingdoms/deadmines/deadmines.h
 )

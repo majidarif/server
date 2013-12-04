@@ -126,8 +126,7 @@ option(WITH_GIT_ID          "Build git database update helper"                  
 mark_as_advanced(WITH_GIT_ID)
 
 # dont want people disabling this unless they really know what they are doing.
-option(WITH_MAP_TOOLS       "Build map extractors and generators"                                           ON)
-mark_as_advanced(WITH_MAP_TOOLS)
+option(WITH_MAP_TOOLS       "Build map extractors and generators"                                           OFF)
 
 # mangos-three database bindings
 option(WITH_MYSQL           "Enable MySQL database backend"                                                 ON)

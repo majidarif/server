@@ -1082,6 +1082,15 @@ INSERT INTO script_texts (entry,content_default,sound,type,language,emote,commen
 -- -1 034 000 STOCKADES
 
 -- -1 036 000 DEADMINES
+INSERT INTO script_texts (entry,content_default,sound,type,language,emote,comment) VALUES
+(-1036000,'Glubtok show you da power of de Arcane.',21151,6,0,0,'Glubtok - SAY_AGROO'),
+(-1036001,'Ha..Ha..Ha..Ha..Ah!',21152,6,0,0,'Glubtok - SAY_KILL'),
+(-1036002,'Fists of Flame!',21153,6,0,0,'Glubtok - SAY_FLAME_FIST'),
+(-1036003,'Fists of Frost!',21156,6,0,0,'Glubtok - SAY_FLAME_FROST'),
+(-1036004,'Glubtok ready?',21154,6,0,0,'Glubtok - SAY_READY1'),
+(-1036005,'Let\'s do it!',21157,6,0,0,'Glubtok - SAY_READY2'),
+(-1036006,'ARCANE POWER',21146,6,0,0,'Glubtok - SAY_ARCANE_POWER'),
+(-1036007,'TOO... MUCH... POWER',21145,6,0,0,'Glubtok - SAY_DEATH');
 
 -- -1 043 000 WAILING CAVERNS
 INSERT INTO script_texts (entry,content_default,sound,type,language,emote,comment) VALUES

@@ -500,6 +500,7 @@ UPDATE creature_template SET ScriptName='npc_rabid_bear' WHERE entry=2164;
 /* DARNASSUS */
 
 /* DEADMINES */
+UPDATE creature_template SET ScriptName='boss_glubtok' WHERE entry=47162;
 UPDATE instance_template SET ScriptName='instance_deadmines' WHERE map=36;
 
 /* DEADWIND PASS */
